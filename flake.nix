@@ -20,28 +20,30 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
+    mkSystem = config: nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs outputs;};
+      # path to host specific config modules
+      modules = [
+        config
+      ];
+    };
+    mkHome = arch: config: home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${arch}; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = {inherit inputs outputs;};
+        # specific config file
+        modules = [config];
+      };
   in {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
-      psy-fw13 = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        # > Our main nixos configuration file <
-        modules = [
-          ./nixos/configuration.nix
-        ];
-      };
+      psy-fw13 = mkSystem ./nixos/configuration.nix;
     };
 
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
-      "psy@psy-fw13" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs;};
-        # > Our main home-manager configuration file <
-        modules = [./home-manager/home.nix];
-      };
+      "psy@psy-fw13" = mkHome "x86_64-linux" ./home-manager/home.nix;
     };
   };
 }
