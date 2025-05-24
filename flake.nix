@@ -11,6 +11,10 @@
 
     # hardware
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    # disko
+    disko.url = "github:nix-community/disko/latest";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -37,7 +41,8 @@
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
-      psy-fw13 = mkSystem ./nixos/configuration.nix;
+      psy-fw13 = mkSystem ./hosts/psy-fw13/configuration.nix;
+      qemu = mkSystem ./hosts/qemu/configuration.nix;
     };
 
     # Standalone home-manager configuration entrypoint
