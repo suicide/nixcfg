@@ -12,6 +12,7 @@
       ./disk-config.nix
       inputs.impermanence.nixosModules.impermanence
       ../../nixos/impermanence.nix
+      inputs.home-manager.nixosModules.home-manager
     ];
 
   # Bootloader.
@@ -83,6 +84,12 @@
     packages = with pkgs; [
     ];
     shell = pkgs.zsh;
+  };
+
+  home-manager.users.psy = {
+    imports = [
+      ../../home-manager/home.nix
+    ];
   };
 
   # Install firefox.

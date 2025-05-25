@@ -19,6 +19,9 @@
     ./modules/kitty.nix
     ./modules/neovim.nix
     ./modules/zsh.nix
+
+    inputs.impermanence.homeManagerModules.impermanence
+    ./modules/impermanence.nix
   ];
 
   nixpkgs = {
