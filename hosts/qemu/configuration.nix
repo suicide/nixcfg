@@ -10,8 +10,7 @@
       ./hardware-configuration.nix
       inputs.disko.nixosModules.default
       ./disk-config.nix
-      inputs.impermanence.nixosModules.impermanence
-      ../../nixos/impermanence.nix
+      ../../nixos/impermanence
       inputs.home-manager.nixosModules.home-manager
     ];
 

@@ -6,6 +6,12 @@ run disko install from flake with efi write on a disk
 sudo nix --experimental-features 'nix-command flakes' run 'github:nix-community/disko/latest#disko-install' -- --write-efi-boot-entries --flake 'github:suicide/nixcfg#qemu' --disk main /dev/sda
 ```
 
+rebuild system from flake
+
+```shell
+sudo nixos-rebuild switch --flake .#psy-fw13
+```
+
 Clean cache / nix-store
 ```shell
 nix-store --gc

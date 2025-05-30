@@ -20,8 +20,9 @@
     ./modules/neovim.nix
     ./modules/zsh.nix
 
-    inputs.impermanence.homeManagerModules.impermanence
-    ./modules/impermanence.nix
+    # causes weird infinite resucsion error, but using home manager might not be useful due to bindfs performance
+    # inputs.impermanence.homeManagerModules.impermanence
+    # ./modules/impermanence.nix
   ];
 
   nixpkgs = {
