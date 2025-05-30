@@ -1,11 +1,13 @@
 {pkgs, lib, inputs, config, ...}: let
 
+cfg = config.__cfg.impermanence;
+
 in
 {
 
 
   config = {
-    environment.persistence."/persist" = {
+    environment.persistence.${cfg.persistDir} = {
       users.psy = {
         directories = [
           "Downloads"
@@ -13,14 +15,16 @@ in
           "Pictures"
           "Documents"
           "Videos"
-          "VirtualBox VMs"
+          "vms"
           "projects"
           "tmp"
+          ".vault"
           { directory = ".gnupg"; mode = "0700"; }
           { directory = ".ssh"; mode = "0700"; }
           { directory = ".nixops"; mode = "0700"; }
           { directory = ".local/share/keyrings"; mode = "0700"; }
           ".local/share/direnv"
+          ".vim/undodir"
         ];
         files = [
           ".screenrc"

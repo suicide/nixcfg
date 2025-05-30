@@ -8,6 +8,17 @@ in
       inputs.impermanence.nixosModules.impermanence
   ];
 
+  options = {
+    __cfg = {
+      impermanence = {
+        persistDir = lib.mkOption {
+          description = "Persistence directory";
+          default = "/persist";
+        };
+      };
+    };
+  };
+
   config = {
     boot.initrd.postResumeCommands = lib.mkAfter ''
       mkdir /btrfs_tmp
@@ -34,7 +45,7 @@ in
       umount /btrfs_tmp
     '';
 
-    environment.persistence."/persist" = {
+    environment.persistence.${config.__cfg.impermanence.persistDir} = {
       enable = true;  # NB: Defaults to true, not needed
       hideMounts = true;
       directories = [
