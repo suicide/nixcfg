@@ -21,3 +21,7 @@ nix-store --gc
 ```shell
 nix run 'github:nix-community/home-manager' -- swith --flake .#psy@psy-fw13
 ```
+
+### SOPS
+
+60 11 12

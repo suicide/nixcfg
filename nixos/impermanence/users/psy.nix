@@ -23,7 +23,11 @@ in
           { directory = ".ssh"; mode = "0700"; }
           { directory = ".nixops"; mode = "0700"; }
           { directory = ".local/share/keyrings"; mode = "0700"; }
+          { directory = ".config/sops"; mode = "0700"; }
           ".local/share/direnv"
+
+          ## neovim stuff
+          ".local/share/nvim"
           ".vim/undodir"
         ];
         files = [
