@@ -13,6 +13,8 @@
       inputs.disko.nixosModules.default
       ./disk-config.nix
 
+      inputs.sops-nix.nixosModules.sops
+
       ../../nixos/impermanence
 
       ../../nixos/base.nix
