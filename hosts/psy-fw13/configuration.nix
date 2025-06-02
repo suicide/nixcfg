@@ -18,6 +18,7 @@
       ../../nixos/impermanence
 
       ../../nixos/base.nix
+      ../../nixos/gc.nix
 
       ../../nixos/audio.nix
       ../../nixos/firewall.nix

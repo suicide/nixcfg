@@ -1,7 +1,8 @@
 # Nix config
 
 
-run disko install from flake with efi write on a disk
+To install a new system run `disko-install` from flake with efi write on a disk
+
 ```shell
 sudo nix --experimental-features 'nix-command flakes' run 'github:nix-community/disko/latest#disko-install' -- --write-efi-boot-entries --flake 'github:suicide/nixcfg#qemu' --disk main /dev/sda
 ```
@@ -24,4 +25,5 @@ nix run 'github:nix-community/home-manager' -- swith --flake .#psy@psy-fw13
 
 ### SOPS
 
-60 11 12
+Place `age` key in `${HOME}/.config/sops/age/keys.txt` and enable
+`enableSecrets` `input` in flake. Secret decryption will fail otherwise.

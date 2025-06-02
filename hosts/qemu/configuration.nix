@@ -17,6 +17,7 @@
       ../../nixos/impermanence
 
       ../../nixos/base.nix
+      ../../nixos/gc.nix
 
       ../../nixos/firewall.nix
       ../../nixos/xserver.nix
