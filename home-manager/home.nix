@@ -49,12 +49,6 @@
     };
   };
 
-  # TODO: Set your username
-  home = {
-    username = "psy";
-    homeDirectory = "/home/psy";
-  };
-
   # home.file."${config.home.homeDirectory}/.config/nvim" = {
   #   source = pkgs.fetchgit {
   #     url = "https://github.com/suicide/nvim-conf";

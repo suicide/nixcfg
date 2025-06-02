@@ -16,6 +16,7 @@
     home-manager.users.psy = {
       imports = [
         ../../home-manager/home.nix
+        ../../home-manager/users/psy
       ];
     };
 
