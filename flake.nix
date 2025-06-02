@@ -18,11 +18,11 @@
 
     # impermanence
     impermanence.url = "github:nix-community/impermanence";
-    impermanence.inputs.nixpkgs.follows = "nixpkgs";
 
     # sops
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    enableSecrets.url = "github:boolean-option/true";
   };
 
   outputs = {

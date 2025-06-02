@@ -1,9 +1,11 @@
-{ lib, pkgs, config, ... }:
-
+{ lib, pkgs, config, inputs, ... }:
+let
+  keyFile = "${config.home.homeDirectory}/.config/sops/keys/age/psy.txt";
+in
 {
   config = {
-    sops = {
-      age.keyFile = "${config.home.homeDirectory}/.config/sops/keys/psy.txt"; # must have no password!
+    sops = lib.mkIf (inputs.enableSecrets.value) {
+      age.keyFile = keyFile; # must have no password!
       defaultSopsFile = ../secrets.yaml;
       secrets."my_secret/key1" = {
         # sopsFile = ./secrets.yml.enc; # optionally define per-secret files

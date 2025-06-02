@@ -11,7 +11,6 @@
   imports = [
     # If you want to use home-manager modules from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModule
-    inputs.sops-nix.homeManagerModules.sops
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
@@ -20,6 +19,8 @@
     ./modules/kitty.nix
     ./modules/neovim.nix
     ./modules/zsh.nix
+
+    ./modules/sops.nix
 
     # causes weird infinite resucsion error, but using home manager might not be useful due to bindfs performance
     # inputs.impermanence.homeManagerModules.impermanence
