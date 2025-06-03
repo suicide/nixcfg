@@ -40,8 +40,8 @@
                         "noatime"
                       ];
                     };
-                    "/home" = {
-                      mountpoint = "/home";
+                    "/persist" = {
+                      mountpoint = "/persist";
                       mountOptions = [
                         "compress=zstd"
                         "noatime"
@@ -67,4 +67,6 @@
       };
     };
   };
+
+  fileSystems."/persist".neededForBoot = true;
 }
