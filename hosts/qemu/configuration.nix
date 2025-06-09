@@ -10,7 +10,7 @@
       ./hardware-configuration.nix
 
       inputs.disko.nixosModules.default
-      ./disk-config.nix
+      # ./disk-config.nix
 
       inputs.sops-nix.nixosModules.sops
 

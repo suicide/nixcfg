@@ -1,11 +1,12 @@
 {pkgs, lib, inputs, config, ...}: let
 
-volumeGrp = "mapper/crypted";
-
+volumeGrp = "mapper/${config.__cfg.impermanence.disko.luksName}";
+cfg = config.__cfg.impermanence;
 in
 {
   imports = [
       inputs.impermanence.nixosModules.impermanence
+      ./disko.nix
   ];
 
   options = {
@@ -45,7 +46,7 @@ in
       umount /btrfs_tmp
     '';
 
-    environment.persistence.${config.__cfg.impermanence.persistDir} = {
+    environment.persistence.${cfg.persistDir} = {
       enable = true;  # NB: Defaults to true, not needed
       hideMounts = true;
       directories = [

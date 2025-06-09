@@ -32,18 +32,18 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    mkSystem = config: nixpkgs.lib.nixosSystem {
+    mkSystem = cfg: nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs outputs;};
       # path to host specific config modules
       modules = [
-        config
+        cfg
       ];
     };
-    mkHome = arch: config: home-manager.lib.homeManagerConfiguration {
+    mkHome = arch: cfg: home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${arch}; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         # specific config file
-        modules = [config];
+        modules = [cfg];
       };
   in {
     # NixOS configuration entrypoint
