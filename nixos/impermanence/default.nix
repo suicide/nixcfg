@@ -4,7 +4,6 @@ in
 {
   imports = [
     ./base.nix
-    ./users/psy.nix
   ];
 }
 

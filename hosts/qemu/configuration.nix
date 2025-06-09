@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, hostname , ... }:
 
 {
   imports =
@@ -15,6 +15,7 @@
       inputs.sops-nix.nixosModules.sops
 
       ../../nixos/impermanence
+      ../../nixos/impermanence/users/psy.nix
 
       ../../nixos/base.nix
       ../../nixos/gc.nix
@@ -24,7 +25,7 @@
 
       inputs.home-manager.nixosModules.home-manager
       ../../nixos/home-manager.nix
-      ../../nixos/users/psy.nix
+      ../../nixos/users.nix
     ];
 
   config = {
@@ -36,7 +37,9 @@
     # Use latest kernel.
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
-    networking.hostName = "nixos"; # Define your hostname.
+    networking.hostName = hostname; # Define your hostname.
+
+    __cfg.mainUser = "psy";
 
     # Configure network proxy if necessary
     # networking.proxy.default = "http://user:password@proxy:port/";

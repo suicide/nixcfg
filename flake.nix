@@ -32,8 +32,8 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    mkSystem = cfg: nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs outputs;};
+    mkSystem = hostname: cfg: nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs outputs hostname;};
       # path to host specific config modules
       modules = [
         cfg
@@ -49,8 +49,8 @@
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
-      psy-fw13 = mkSystem ./hosts/psy-fw13/configuration.nix;
-      qemu = mkSystem ./hosts/qemu/configuration.nix;
+      psy-fw13 = mkSystem "psy-fw13" ./hosts/psy-fw13/configuration.nix;
+      qemu = mkSystem "qemu" ./hosts/qemu/configuration.nix;
     };
 
     # Standalone home-manager configuration entrypoint
