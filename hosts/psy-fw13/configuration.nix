@@ -27,7 +27,7 @@
 
       inputs.home-manager.nixosModules.home-manager
       ../../nixos/home-manager.nix
-      ../../nixos/users/psy.nix
+      ../../nixos/users.nix
     ];
 
   config = {
@@ -44,6 +44,8 @@
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
     networking.hostName = "psy-fw13"; # Define your hostname.
+
+    __cfg.mainUser = "psy";
 
     # Configure network proxy if necessary
     # networking.proxy.default = "http://user:password@proxy:port/";

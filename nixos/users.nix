@@ -8,7 +8,7 @@ in
     __cfg.mainUser = lib.mkOption {
       type = lib.types.str;
       default = "psy";
-      description = "Main user to provision"
+      description = "Main user to provision";
     };
   };
 

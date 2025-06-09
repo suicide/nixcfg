@@ -2,10 +2,11 @@
 { lib, pkgs, config, inputs, ... }:
 let
 
+  cfg = config.__cfg.sops;
 in
 {
   config = {
-    sops = lib.mkIf (inputs.enableSecrets.value) {
+    sops = lib.mkIf (cfg.enable) {
       defaultSopsFile = ./secrets.yaml;
       secrets."my_secret/key1" = {
         # sopsFile = ./secrets.yml.enc; # optionally define per-secret files
