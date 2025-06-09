@@ -11,7 +11,7 @@
       inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
 
       inputs.disko.nixosModules.default
-      ./disk-config.nix
+      # ./disk-config.nix
 
       inputs.sops-nix.nixosModules.sops
 
@@ -30,32 +30,39 @@
       ../../nixos/users/psy.nix
     ];
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  config = {
 
-  # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+    # Bootloader.
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+    __cfg.impermanence.disko = {
+      device = "/dev/nvme0n1";
+      swapSize = "100G";
+    };
 
-  networking.hostName = "psy-fw13"; # Define your hostname.
+    # Use latest kernel.
+    boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+    networking.hostName = "psy-fw13"; # Define your hostname.
 
-  # Set your time zone.
-  time.timeZone = "Europe/Berlin";
+    # Configure network proxy if necessary
+    # networking.proxy.default = "http://user:password@proxy:port/";
+    # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
+    # Set your time zone.
+    time.timeZone = "Europe/Berlin";
 
 
-  # framework hardware
-  services.fwupd.enable = true;
+    # framework hardware
+    services.fwupd.enable = true;
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.05"; # Did you read the comment?
+    # This value determines the NixOS release from which the default
+    # settings for stateful data, like file locations and database versions
+    # on your system were taken. It‘s perfectly fine and recommended to leave
+    # this value at the release version of the first install of this system.
+    # Before changing this value read the documentation for this option
+    # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+    system.stateVersion = "25.05"; # Did you read the comment?
+  };
 
 }

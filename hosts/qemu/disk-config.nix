@@ -1,3 +1,4 @@
+## unused, instead uses impermanence disko setup
 {
   disko.devices = {
     disk = {
