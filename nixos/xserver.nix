@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 {
   config = {
@@ -22,6 +22,11 @@
     programs.hyprland = {
     #   enable = true;
       xwayland.enable = true;
+    };
+
+    environment.sessionVariables = lib.mkIf (config.programs.hyprland.enable) {
+      # hint chromium based apps to use wayland
+      NIXOS_OZONE_WL = "1";
     };
 
     # Configure keymap in X11
