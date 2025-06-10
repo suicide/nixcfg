@@ -1,3 +1,5 @@
+# config adapted from https://github.com/woioeow/hyprland-dotfiles/blob/main/hypr_style1/waybar/config.jsonc
+
 { lib, pkgs, config, ... }:
 let
 in 
@@ -33,40 +35,40 @@ in
             "network"
             "battery"
             "bluetooth"
-            "pulseaudio"
+            "wireplumber"
             "backlight"
-            "custom/temperature"
+            "temperature"
             "memory"
             "cpu"
             "clock"
           ];
 
           "hyprland/workspaces" = {
-            disable-scroll= false;
-            all-outputs= true;
-            format= "{icon}";
-            on-click= "activate";
-            persistent-workspaces = {
-              "*" =[1 2 3 4 5 6 7 8 9];
-            };
-            format-icons = {
-              "1" = "󰣇";
-              "2" = "󰈹";
-              "3" = "󰇮";
-              "4" = "";
-              "5" = "";
-              "6" = "";
-              "7" = "";
-              "8" = "";
-              "9" = "󰖳";
-              "default" = "";
-            };
+            disable-scroll = false;
+            all-outputs = true;
+            format = "{icon}";
+            on-click = "activate";
+            # persistent-workspaces = {
+            #   "*" = [1 2 3 4 5 6 7 8 9];
+            # };
+            # format-icons = {
+            #   "1" = "󰣇";
+            #   "2" = "󰈹";
+            #   "3" = "󰇮";
+            #   "4" = "";
+            #   "5" = "";
+            #   "6" = "";
+            #   "7" = "";
+            #   "8" = "";
+            #   "9" = "󰖳";
+            #   "default" = "";
+            # };
           };
           "custom/lock" = {
-          format = "<span color='#00FFFF'>  </span>";
-          on-click = "hyprlock";
-          tooltip = true;
-          tooltip-format = "lock";
+            format = "<span color='#00FFFF'>  </span>";
+            on-click = "hyprlock";
+            tooltip = true;
+            tooltip-format = "lock";
           };
           "custom/reboot" = {
             format = "<span color='#FFD700'>  </span>";
@@ -116,22 +118,18 @@ in
                 "<span color='#00FF7F'>  </span>"
               ];
             };
-            on-click-right = "pavucontrol -t 3";
-            on-click = "pactl -- set-sink-mute 0 toggle";
             tooltip = true;
-            tooltip-format = "当前系统声音 = {volume}%";
+            tooltip-format = "Volume = {volume}%";
           };
-          "custom/temperature" = {
-            exec = "sensors | awk '/^Package id 0 =/ {print int($4)}'";
+          temperature = {
             format = "<span color='#FFA500'> </span>{}°C ";
             interval = 5;
             tooltip = true;
-            tooltip-format = "当前 CPU 温度 = {}°C";
           };
           memory = {
-            format = "<span color='#8A2BE2'>  </span>{used =0.1f}G/{total =0.1f}G ";
+            format = "<span color='#8A2BE2'>  </span>{used:0.1f}G ";
             tooltip = true;
-            tooltip-format = "当前内存占比 = {used =0.2f}G/{total =0.2f}G";
+            tooltip-format = "Memory {used:0.2f}G/{total:0.2f}G";
           };
           cpu = {
             format = "<span color='#FF9F0A'>  </span>{usage}% ";
@@ -140,9 +138,9 @@ in
           clock = {
             interval = 1;
             timezone = "Europe/Berlin";
-            format = "<span color='#BF00FF'>  </span>{ =%H =%M} ";
+            format = "<span color='#BF00FF'>  </span>{:%I:%M %p} ";
             tooltip = true;
-            tooltip-format = "{ =L%Y 年 %m 月 %d 日; %A}";
+            tooltip-format = "{:%a %d %b %Y}";
           };
           tray = {
             icon-size = 17;
@@ -152,7 +150,7 @@ in
             device = "intel_backlight";
             format = "<span color='#FFD700'>{icon}</span>{percent}% ";
             tooltip = true;
-            tooltip-format = "当前屏幕亮度 = {percent}%";
+            tooltip-format = "Backlight = {percent}%";
             format-icons = [
               "<span color='#696969'> 󰃞 </span>"
               "<span color='#A9A9A9'> 󰃝 </span>"

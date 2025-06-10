@@ -17,6 +17,8 @@ in
       enable = true;
       settings = {
 
+        monitor = ", preferred, auto, 1.5";
+
         "$mod" = "SUPER";
         "$shiftMod" = "SHIFT_SUPER";
 

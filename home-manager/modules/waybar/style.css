@@ -1,8 +1,8 @@
 /* 全局设置 */
 * {
-  font-family: "CaskaydiaCove Nerd Font", "Font Awesome 6 Free", "Font Awesome 6 Free Solid";
+  font-family: "Noto Nerd Font", "Font Awesome 6 Free", "Font Awesome 6 Free Solid";
   font-weight: bold;
-  font-size: 16px;
+  font-size: 12px;
   color: #dcdfe1;
 }
 
@@ -52,9 +52,9 @@
 #custom-reboot,
 #bluetooth,
 #battery,
-#pulseaudio,
+#wireplumber,
 #backlight,
-#custom-temperature,
+#temperature,
 #memory,
 #cpu{
   background-color: rgba(15,27,53,0.9);
@@ -64,8 +64,8 @@
   border-width: 0px;
 }
 
-#custpm-temperature.critical,
-#pulseaudio.muted {
+#temperature.critical,
+#wireplumber.muted {
   color: #FF0000;
   padding-top: 0;
 }
@@ -76,8 +76,8 @@
 /*#tray:hover,*/
 #backlight:hover,
 #battery:hover,
-#pulseaudio:hover,
-#custom-temperature:hover,
+#wireplumber:hover,
+#temperature:hover,
 #memory:hover,
 #cpu:hover,
 #clock:hover,
