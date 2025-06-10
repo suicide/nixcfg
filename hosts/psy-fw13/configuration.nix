@@ -16,6 +16,7 @@
       inputs.sops-nix.nixosModules.sops
 
       ../../nixos/impermanence
+      ../../nixos/impermanence/users/psy.nix
 
       ../../nixos/base.nix
       ../../nixos/gc.nix
