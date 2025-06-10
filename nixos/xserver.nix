@@ -13,16 +13,16 @@
       enable = true;
       wayland = true;
     };
-    services.xserver.desktopManager.gnome.enable = true;
+    # services.xserver.desktopManager.gnome.enable = true;
     # services.xserver.windowManager.awesome = {
     #   enable = true;
     # };
 
     # Enable Hyprland
-    # programs.hyprland = {
+    programs.hyprland = {
     #   enable = true;
-    #   xwayland.enable = true;
-    # };
+      xwayland.enable = true;
+    };
 
     # Configure keymap in X11
     services.xserver.xkb = {

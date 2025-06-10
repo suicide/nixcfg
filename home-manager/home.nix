@@ -15,6 +15,7 @@
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
     # ./modules/awesomewm/default.nix
+    ./modules/hyprland
     ./modules/fonts.nix
     ./modules/kitty.nix
     ./modules/neovim.nix
@@ -75,16 +76,6 @@
   programs.chromium = {
     enable = true;
     package = pkgs.brave;
-  };
-
-  wayland.windowManager.hyprland = {
-    enable = false;
-    settings = {
-      "$mod" = "SUPER";
-      bind = [
-        "$mod, F, exec, firefox"
-      ];
-    };
   };
 
   home.packages = with pkgs; [ ];
