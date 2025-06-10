@@ -10,6 +10,7 @@ in
     programs.waybar = {
       enable = true;
       systemd.enable = true;
+      style = ./style.css;
 
       settings = {
         mainBar = {
@@ -45,7 +46,7 @@ in
             all-outputs= true;
             format= "{icon}";
             on-click= "activate";
-            persistent-workspaces" = {
+            persistent-workspaces = {
               "*" =[1 2 3 4 5 6 7 8 9];
             };
             format-icons = {
@@ -110,10 +111,10 @@ in
               portable = "<span color='#00FFFF'>  </span>";
               car = "<span color='#FFA500'>  </span>";
               default = [
-                "<span color='#808080'>  </span>";
-                "<span color='#FFFF66'>  </span>";
-                "<span color='#00FF7F'>  </span>";
-              ]
+                "<span color='#808080'>  </span>"
+                "<span color='#FFFF66'>  </span>"
+                "<span color='#00FF7F'>  </span>"
+              ];
             };
             on-click-right = "pavucontrol -t 3";
             on-click = "pactl -- set-sink-mute 0 toggle";
