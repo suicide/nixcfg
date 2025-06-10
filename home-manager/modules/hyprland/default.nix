@@ -36,8 +36,23 @@ in
           "$shiftMod, Q, exit,"
           "$shiftMod, C, killactive,"
 
+          "$mod CTRL, Space, togglefloating,"
+          "$mod, F, fullscreen,"
+          "$mod, T, pin,"
+
+          "$mod, h, movefocus, l"
+          "$mod, l, movefocus, r"
+          "$mod, k, movefocus, u"
+          "$mod, j, movefocus, d"
+
+          "$shiftMod, h, movewindow, l"
+          "$shiftMod, l, movewindow, r"
+          "$shiftMod, k, movewindow, u"
+          "$shiftMod, j, movewindow, d"
+
           "$mod, Return, exec, kitty"
           "$mod, Q, exec, brave"
+          "$mod, E, exec, brave --incognito"
         ]
         ++ goworkspaces
         ++ moveworkspaces;
