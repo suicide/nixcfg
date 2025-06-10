@@ -16,15 +16,41 @@ in
     wayland.windowManager.hyprland = lib.mkIf (cfg.enable) {
       enable = true;
       settings = {
+
         "$mod" = "SUPER";
         "$shiftMod" = "SHIFT_SUPER";
-        bind = [
+
+        bind = let
+          toWSNumber = n: (toString (
+            if n == 0
+            then 10
+            else n
+          ));
+
+          moveworkspace-command = "movetoworkspace";
+          moveworkspaces = map (n: "$shiftMod, ${toString n}, ${moveworkspace-command}, ${toWSNumber n}") [1 2 3 4 5 6 7 8 9 0];
+
+          workspace-command = "workspace";
+          goworkspaces = map (n: "$mod, ${toString n}, ${workspace-command}, ${toWSNumber n}") [1 2 3 4 5 6 7 8 9 0];
+        in  [
           "$shiftMod, Q, exit,"
           "$shiftMod, C, killactive,"
 
           "$mod, Return, exec, kitty"
           "$mod, Q, exec, brave"
+        ]
+        ++ goworkspaces
+        ++ moveworkspaces;
+
+        bindl = [
+          ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ];
+
+        bindel = [
+          ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+          ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        ];
+
         input = {
           kb_options = "caps:swapescape";
         };
