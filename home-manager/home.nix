@@ -16,6 +16,7 @@
     # ./nvim.nix
     # ./modules/awesomewm/default.nix
     ./modules/hyprland
+    ./modules/waybar
     ./modules/fonts.nix
     ./modules/kitty.nix
     ./modules/neovim.nix
