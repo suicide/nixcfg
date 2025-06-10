@@ -27,7 +27,7 @@ in
         ];
         input = {
           kb_options = "caps:swapescape";
-        }
+        };
       };
     };
   };
