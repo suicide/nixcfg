@@ -26,9 +26,6 @@
           plugin = tmuxPlugins.pain-control;
         }
       ];
-
-      extraConfig = [
-      ];
     };
   };
 }
