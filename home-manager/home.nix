@@ -24,6 +24,7 @@
     ./modules/zsh.nix
     ./modules/git.nix
     ./modules/tmux.nix
+    ./modules/gpg.nix
 
     ./modules/sops.nix
 
