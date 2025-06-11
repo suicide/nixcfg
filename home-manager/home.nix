@@ -23,6 +23,7 @@
     ./modules/neovim.nix
     ./modules/zsh.nix
     ./modules/git.nix
+    ./modules/tmux.nix
 
     ./modules/sops.nix
 

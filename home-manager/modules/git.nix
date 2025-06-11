@@ -18,7 +18,7 @@
           algorithm = "histogram";
           colorMoved = "plain";
           mnemonicPrefix = true;
-          renames = true
+          renames = true;
         };
         push = {
           autoSetupRemote = true;
