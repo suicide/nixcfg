@@ -17,6 +17,7 @@
     # ./modules/awesomewm/default.nix
     ./modules/hyprland
     ./modules/waybar
+    ./modules/dunst.nix
     ./modules/fonts.nix
     ./modules/kitty.nix
     ./modules/neovim.nix
