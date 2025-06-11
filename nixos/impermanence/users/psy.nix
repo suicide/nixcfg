@@ -29,9 +29,19 @@ in
           ## neovim stuff
           ".local/share/nvim"
           ".vim/undodir"
+
+          ## Brave
+          ".cache/BraveSoftware"
+          ".config/BraveSoftware"
+
+          ".cache/chromium"
+          ".config/chromium"
+
+          ".mozilla"
+
+          ".librewolf"
         ];
         files = [
-          ".screenrc"
           ".zsh_history"
         ];
       };

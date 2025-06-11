@@ -28,6 +28,8 @@
 
     ./modules/sops.nix
 
+    ./modules/browsers.nix
+
     # causes weird infinite resucsion error, but using home manager might not be useful due to bindfs performance
     # inputs.impermanence.homeManagerModules.impermanence
     # ./modules/impermanence.nix
@@ -70,18 +72,6 @@
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
-  programs.git = {
-    enable = true;
-    userName = "psy";
-    userEmail = "psy@test1.test";
-  };
-
-  programs.firefox.enable = true;
-
-  programs.chromium = {
-    enable = true;
-    package = pkgs.brave;
-  };
 
   home.packages = with pkgs; [ ];
 
