@@ -22,6 +22,7 @@
     ./modules/kitty.nix
     ./modules/neovim.nix
     ./modules/zsh.nix
+    ./modules/git.nix
 
     ./modules/sops.nix
 
