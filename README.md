@@ -1,6 +1,5 @@
 # Nix config
 
-
 To install a new system run `disko-install` from flake with efi write on a disk
 
 ```shell
@@ -14,10 +13,10 @@ sudo nixos-rebuild switch --flake .#psy-fw13
 ```
 
 Clean cache / nix-store
+
 ```shell
 nix-store --gc
 ```
-
 
 ```shell
 nix run 'github:nix-community/home-manager' -- swith --flake .#psy@psy-fw13
@@ -26,25 +25,93 @@ nix run 'github:nix-community/home-manager' -- swith --flake .#psy@psy-fw13
 ### SOPS
 
 Place `age` key in `${HOME}/.config/sops/age/keys.txt` and enable
-`enableSecrets` `input` in flake. Secret decryption will fail otherwise.
+`__cfg.sops.enable = true;` in home manager config.
+Secret decryption will fail otherwise.
 
 ### Secure boot
 
-Check status
+Starting out, secure boot should be disabled in the firmware and the nixos
+setup, `__cfg.secureboot.enable = false;`.
+This setup uses lanzaboote for secure boot.
+
+1. Check status
 
 ```shell
-bootctl status
+$ bootctl status
+
+System:
+     Firmware: UEFI 2.70 (Lenovo 0.4720)
+  Secure Boot: disabled (disabled)
+ TPM2 Support: yes
+ Boot into FW: supported
 ```
 
-Create new keys
+2. Create new keys
 
 ```shell
-sudo sbctl create-keys
+$ sudo sbctl create-keys
+
+Created Owner UUID 8ec4b2c3-dc7f-4362-b9a3-0cc17e5a34cd
+Creating secure boot keys...✓
+Secure boot keys created!
 ```
 
+Keys are stored in `/var/lib/sbctl`, so it must be included in impermancence!
 
-Enroll keys
+3. Enable `__cfg.secureboot.enable = false;` and rebuild system.
+
+lanzaboote will sign the necessary boot files.
+
+Verify signatures:
+
 ```shell
-sudo sbctl enroll-keys -m -f
+$ sudo sbctl verify
+
+Verifying file database and EFI images in /boot...
+✓ /boot/EFI/BOOT/BOOTX64.EFI is signed
+✓ /boot/EFI/Linux/nixos-generation-355.efi is signed
+✓ /boot/EFI/Linux/nixos-generation-356.efi is signed
+✗ /boot/EFI/nixos/0n01vj3mq06pc31i2yhxndvhv4kwl2vp-linux-6.1.3-bzImage.efi is not signed
+✓ /boot/EFI/systemd/systemd-bootx64.efi is signed
 ```
 
+4. Clear the existing secure boot keys so we can add our own
+
+Reboot into the UEFI and clear the keys in the secure boot settings.
+
+On framework, "Administer Secure Boot" -> "Erase all Secure Boot Settings"
+
+Reboot, while secure boot is still disabled.
+
+5. Enroll keys
+
+Add our own, new keys, microsoft (`-m`) keys and the platform (`-f`) keys
+(framework's own keys) to enable firmware updates
+
+```shell
+$ sudo sbctl enroll-keys -m -f
+
+Enrolling keys to EFI variables...
+With vendor keys from microsoft...✓
+Enrolled keys to the EFI variables!
+```
+
+This should enable secure boot on its own. On framework, secure boot has to be
+enabled manually:
+"Administer Secure Boot" -> "Enforce Secure Boot"
+
+Reboot
+
+6. Secure boot is enabled and working
+
+Verify
+
+```shell
+$ bootctl status
+System:
+      Firmware: UEFI 2.70 (Lenovo 0.4720)
+ Firmware Arch: x64
+   Secure Boot: enabled (user)
+  TPM2 Support: yes
+  Boot into FW: supported
+```
