@@ -13,6 +13,9 @@
       inputs.disko.nixosModules.default
       # ./disk-config.nix
 
+      inputs.lanzaboote.nixosModules.lanzaboote
+      ../../nixos/secureboot.nix
+
       inputs.sops-nix.nixosModules.sops
 
       ../../nixos/impermanence
@@ -41,6 +44,7 @@
       device = "/dev/nvme0n1";
       swapSize = "100G";
     };
+    __cfg.secureboot.enable = false;
 
     # Use latest kernel.
     boot.kernelPackages = pkgs.linuxPackages_latest;

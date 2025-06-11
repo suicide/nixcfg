@@ -56,6 +56,7 @@ in
         "/var/lib/systemd/coredump"
         "/etc/NetworkManager/system-connections"
         { directory = "/var/lib/colord"; user = "colord"; group = "colord"; mode = "u=rwx,g=rx,o="; }
+        "/var/lib/sbctl" # secure boot keys
       ];
       files = [
         "/etc/machine-id"

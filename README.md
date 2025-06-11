@@ -27,3 +27,24 @@ nix run 'github:nix-community/home-manager' -- swith --flake .#psy@psy-fw13
 
 Place `age` key in `${HOME}/.config/sops/age/keys.txt` and enable
 `enableSecrets` `input` in flake. Secret decryption will fail otherwise.
+
+### Secure boot
+
+Check status
+
+```shell
+bootctl status
+```
+
+Create new keys
+
+```shell
+sudo sbctl create-keys
+```
+
+
+Enroll keys
+```shell
+sudo sbctl enroll-keys -m -f
+```
+
