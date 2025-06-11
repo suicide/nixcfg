@@ -22,6 +22,7 @@
       ../../nixos/gc.nix
 
       ../../nixos/audio.nix
+      ../../nixos/bluetooth.nix
       ../../nixos/firewall.nix
       ../../nixos/wifi.nix
       ../../nixos/xserver.nix
