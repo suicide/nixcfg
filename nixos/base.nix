@@ -7,6 +7,10 @@
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
 
+    # to enable hibernate from a swapfile on btrfs
+    # see https://github.com/nix-community/disko/issues/651
+    boot.initrd.systemd.enable = true;
+
     # Enable networking
     networking.networkmanager.enable = true;
 
