@@ -4,6 +4,10 @@ let
 in 
 
 {
+  imports = [
+    ./cursor.nix
+  ];
+
   options = {
     __cfg.hyprland.enable = lib.mkOption {
       type = lib.types.bool;
