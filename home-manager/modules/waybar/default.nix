@@ -25,8 +25,8 @@ in
             "hyprland/workspaces"
             "tray"
             "custom/lock"
-            "custom/reboot"
-            "custom/power"
+            # "custom/reboot"
+            # "custom/power"
           ];
 
           modules-center = ["hyprland/window"];

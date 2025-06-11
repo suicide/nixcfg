@@ -19,6 +19,10 @@ in
 
         monitor = ", preferred, auto, 1.5";
 
+        general = {
+          gaps_out = "0";
+        };
+
         "$mod" = "SUPER";
         "$shiftMod" = "SHIFT_SUPER";
 
