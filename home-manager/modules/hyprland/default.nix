@@ -6,6 +6,8 @@ in
 {
   imports = [
     ./cursor.nix
+    ./hyprlock.nix
+    ./hypridle.nix
   ];
 
   options = {
@@ -24,6 +26,11 @@ in
 
     wayland.windowManager.hyprland = lib.mkIf (cfg.enable) {
       enable = true;
+
+      # start with uwsm
+      # https://wiki.hypr.land/Useful-Utilities/Systemd-start/#installation
+      systemd.enable = false;
+
       settings = {
 
         monitor = ", preferred, auto, 1.5";

@@ -5,6 +5,8 @@
     __cfg.hyprland.enable = true;
 
 
+    __cfg.hypridle.keyboardBacklight = "framework_laptop::kbd_backlight";
+
     programs.git = {
       userName = "suiiii";
       userEmail = "suiiii@suiiii.rip";
