@@ -11,6 +11,15 @@
     # see https://github.com/nix-community/disko/issues/651
     boot.initrd.systemd.enable = true;
 
+    # enable suspend and hibernate
+    services.logind = {
+      lidSwitch = "suspend-then-hibernate";
+
+      # power key handling
+      powerKey = "hibernate";
+      powerKeyLongPress = "poweroff";
+    };
+
     # Enable networking
     networking.networkmanager.enable = true;
 
