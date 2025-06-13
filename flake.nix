@@ -49,8 +49,8 @@
         cfg
       ];
     };
-    mkDarwin = cfg: nix-darwin.lib.darwinSystem {
-      specialArgs = {inherit inputs outputs;};
+    mkDarwin = hostname: cfg: nix-darwin.lib.darwinSystem {
+      specialArgs = {inherit inputs outputs hostname;};
       system = "aarch64-darwin";
       # path to host specific config modules
       modules = [
@@ -72,7 +72,7 @@
     };
 
     darwinConfigurations = {
-      psy-mac = mkDarwin ./hosts/psy-mac/configuration.nix;
+      psy-mac = mkDarwin "psy-mac" ./hosts/psy-mac/configuration.nix;
     };
 
     # Standalone home-manager configuration entrypoint

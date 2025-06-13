@@ -13,12 +13,6 @@
     # inputs.nix-colors.homeManagerModule
 
     # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
-    # ./modules/awesomewm/default.nix
-    ./modules/hyprland
-    ./modules/waybar
-    ./modules/dunst.nix
-    ./modules/fonts.nix
     ./modules/kitty.nix
     ./modules/neovim.nix
     ./modules/zsh.nix
@@ -26,13 +20,8 @@
     ./modules/tmux.nix
     ./modules/gpg.nix
 
-    ./modules/sops.nix
+    # ./modules/browsers.nix
 
-    ./modules/browsers.nix
-
-    # causes weird infinite resucsion error, but using home manager might not be useful due to bindfs performance
-    # inputs.impermanence.homeManagerModules.impermanence
-    # ./modules/impermanence.nix
   ];
 
   nixpkgs = {
@@ -59,11 +48,6 @@
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
-
-  home.packages = with pkgs; [ ];
-
-  # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "25.05";
