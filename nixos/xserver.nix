@@ -9,7 +9,7 @@
     # services.xserver.libinput.enable = true;
 
     # Enable the GNOME Desktop Environment.
-    services.xserver.displayManager.gdm = {
+    services.displayManager.gdm = {
       enable = true;
       wayland = true;
     };
