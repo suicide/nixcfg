@@ -9,6 +9,10 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # darwin
+    nix-darwin.url = "github:nix-darwin/nix-darwin/master";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
     # hardware
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
@@ -44,6 +48,14 @@
         cfg
       ];
     };
+    mkDarwin = cfg: nix-darwin.lib.darwinSystem {
+      specialArgs = {inherit inputs outputs;};
+      system = "aarch64-darwin";
+      # path to host specific config modules
+      modules = [
+        cfg
+      ];
+    };
     mkHome = arch: cfg: home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${arch}; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
@@ -56,6 +68,10 @@
     nixosConfigurations = {
       psy-fw13 = mkSystem "psy-fw13" ./hosts/psy-fw13/configuration.nix;
       qemu = mkSystem "qemu" ./hosts/qemu/configuration.nix;
+    };
+
+    darwinConfigurations = {
+      psy-mac = mkDarwin ./hosts/psy-mac/configuration.nix;
     };
 
     # Standalone home-manager configuration entrypoint
