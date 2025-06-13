@@ -10,6 +10,7 @@
       withNodeJs = true;
       extraPackages = with pkgs; [
         ripgrep
+        fzf
         gcc
         cargo
         nixd
