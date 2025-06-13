@@ -37,6 +37,7 @@
   outputs = {
     self,
     nixpkgs,
+    nix-darwin,
     home-manager,
     ...
   } @ inputs: let

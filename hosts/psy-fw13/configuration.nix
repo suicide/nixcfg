@@ -18,7 +18,12 @@
       ../../nixos/impermanence/users/psy.nix
 
       ../../nixos/base.nix
+      ../../nixos/linux-base.nix
+      ../../nixos/boot.nix
       ../../nixos/gc.nix
+      ../../nixos/nix.nix
+
+      ../../nixos/laptop.nix
 
       ../../nixos/audio.nix
       ../../nixos/bluetooth.nix
