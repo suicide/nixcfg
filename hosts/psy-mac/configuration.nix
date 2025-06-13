@@ -20,6 +20,8 @@
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
 
+    system.primaryUser = "psy";
+
     system.defaults.finder.AppleShowAllExtensions = true;
     system.defaults.dock.autohide = true;
 
