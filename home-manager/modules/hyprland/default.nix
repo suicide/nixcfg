@@ -1,3 +1,6 @@
+# TODO screenshots
+# TODO screenshare
+# TODO minimize
 { lib, pkgs, config, ... }:
 let
   cfg = config.__cfg.hyprland;
@@ -90,6 +93,10 @@ in
 
         input = {
           kb_options = "caps:swapescape";
+        };
+
+        gestures = {
+          workspace_swipe = true;
         };
       };
     };
