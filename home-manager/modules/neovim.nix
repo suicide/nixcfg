@@ -8,16 +8,16 @@
       viAlias = true;
       vimAlias = true;
       withNodeJs = true;
+      extraPackages = with pkgs; [
+        ripgrep
+        gcc
+        cargo
+        nixd
+      ];
 
     };
-    home.packages = with pkgs; [ 
-    # nodejs
-    ripgrep
-    gcc
-    nixd
-    ];
 
-## Get old neovim config
+    ## Get old neovim config
     home.file."${config.home.homeDirectory}/.config/nvim" = {
       source = pkgs.fetchFromGitHub {
         owner = "suicide";
