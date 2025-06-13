@@ -66,7 +66,7 @@ in
           };
           "custom/lock" = {
             format = "<span color='#00FFFF'>  </span>";
-            on-click = "hyprlock";
+            on-click = "loginctl lock-session";
             tooltip = true;
             tooltip-format = "lock";
           };
