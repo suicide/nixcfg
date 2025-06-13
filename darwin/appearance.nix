@@ -8,7 +8,7 @@
     system.defaults.dock.autohide = true;
 
     # dark mode
-    system.defaults.apple.InterfaceStyle = "Dark";
+    system.defaults.NSGlobalDomain.AppleInterfaceStyle = "Dark";
 
   };
 
