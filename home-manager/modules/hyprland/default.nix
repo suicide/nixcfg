@@ -76,6 +76,7 @@ in
           "$shiftMod, j, movewindow, d"
 
           "$mod, Return, exec, kitty"
+          "$mod, D, exec, rofi -show drun -show-icons"
           "$mod, Q, exec, brave"
           "$mod, E, exec, brave --incognito"
         ]
