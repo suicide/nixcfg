@@ -17,7 +17,7 @@ in
     users.users.${cfg.mainUser} = {
       isNormalUser = true;
       description = "${cfg.mainUser}";
-      initialPassword = "testtest";
+      hashedPassword = "$6$Y147CW7B3CWybgq7$VDfH7eOp4YaYLAP6QWAX.KEZ2YYwzoFkzvOLpzMUifFZBwluIBtmjdf7hHLBbyRsg.c6WT5qMTTITit2pc2Xt/";
       extraGroups = [ "networkmanager" "wheel" ];
       packages = with pkgs; [
       ];
