@@ -22,8 +22,8 @@
       source = pkgs.fetchFromGitHub {
         owner = "suicide";
         repo = "nvim-conf";
-        rev = "656158c689d956ffcd90dda6bfe3c64118c7f104";
-        hash = "sha256-d81O23g0aTUSHKwj2Yoi6pqfSQtRrMbZzbl6zr2IyzM=";
+        rev = "0f2ba608ce1ad814672f80a893d47ef3870fa547";
+        hash = "sha256-jMvij0OnbzSzREWBiMz3ccKKome8fxRmyPF+v/Nbl0E=";
       };
       recursive = true;
     };
