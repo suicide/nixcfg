@@ -115,3 +115,11 @@ System:
   TPM2 Support: yes
   Boot into FW: supported
 ```
+
+### GPG
+
+#### export Subkeys from separate store
+
+```bash`
+gpg --homedir <pathToGpgStore> --pinentry-mode loopback --output <somePath> --export-secret-subkeys <keyID>
+``
