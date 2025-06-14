@@ -45,7 +45,7 @@
       device = "/dev/nvme0n1";
       swapSize = "100G";
     };
-    __cfg.secureboot.enable = false;
+    __cfg.secureboot.enable = true;
 
     # Use latest kernel.
     boot.kernelPackages = pkgs.linuxPackages_latest;

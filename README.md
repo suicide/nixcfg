@@ -58,7 +58,7 @@ Secure boot keys created!
 
 Keys are stored in `/var/lib/sbctl`, so it must be included in impermancence!
 
-3. Enable `__cfg.secureboot.enable = false;` and rebuild system.
+3. Enable `__cfg.secureboot.enable = true;` and rebuild system.
 
 lanzaboote will sign the necessary boot files.
 
