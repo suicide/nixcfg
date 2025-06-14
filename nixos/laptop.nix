@@ -11,6 +11,12 @@
       powerKeyLongPress = "poweroff";
     };
 
+    # should switch to hibernate after said time
+    # automatic estimation is the default value otherwise
+    systemd.sleep.extraConfig = ''
+      HibernateDelaySec=1h
+    '';
+
   };
 }
 
