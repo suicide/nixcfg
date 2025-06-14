@@ -19,6 +19,8 @@
     ./modules/waybar
     ./modules/dunst.nix
     ./modules/fonts.nix
+    ./modules/gtk.nix
+
     ./modules/kitty.nix
     ./modules/neovim.nix
     ./modules/zsh.nix
