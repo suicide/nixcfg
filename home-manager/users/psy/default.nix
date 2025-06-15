@@ -7,6 +7,7 @@
 }: {
   imports = [
     ./sops.nix
+    ./ssh.nix
   ];
 
   home = {

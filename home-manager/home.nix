@@ -28,6 +28,7 @@
     ./modules/git.nix
     ./modules/tmux.nix
     ./modules/gpg.nix
+    ./modules/ssh.nix
     ./modules/direnv.nix
 
     ./modules/network.nix
