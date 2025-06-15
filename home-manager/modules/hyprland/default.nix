@@ -99,6 +99,10 @@ in
         gestures = {
           workspace_swipe = true;
         };
+
+        ecosystem = {
+          no_update_news = true;
+        };
       };
     };
   };
