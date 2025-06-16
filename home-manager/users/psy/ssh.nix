@@ -6,7 +6,19 @@ in
 {
   config = {
     programs.ssh = {
-      extraConfig = ''
+      extraConfig = let
+        hosts = ["unikorn" "homegate2" "thering" "luna" "deimos" "ganymede" "ceres" "auberon"];
+
+        simpleIdentity = name: ''
+          host ${name}.homenet2.hastybox.com
+           HostName ${name}.homenet2.hastybox.com
+           IdentityFile ${secrets}/${name}/privateKey
+           User psy
+        '';
+
+        blocks = lib.concatStringsSep "\n\n" (map simpleIdentity hosts);
+      in 
+      ''
         host homebase.get-it.us 
          HostName homebase.get-it.us 
          IdentityFile ${secrets}/homebase/privateKey
@@ -44,47 +56,8 @@ in
          ServerAliveInterval=10
          Compression yes
 
-        host unikorn.homenet2.hastybox.com
-         HostName unikorn.homenet2.hastybox.com
-         IdentityFile ${secrets}/unikorn/privateKey
-         User psy
-
-        host homegate2.homenet2.hastybox.com
-         HostName homegate2.homenet2.hastybox.com
-         IdentityFile ${secrets}/homegate2/privateKey
-         User psy
-
-        host thering.homenet2.hastybox.com
-         HostName thering.homenet2.hastybox.com
-         IdentityFile ${secrets}/thering/privateKey
-         User psy
-
-
-        host luna.homenet2.hastybox.com
-         HostName luna.homenet2.hastybox.com
-         IdentityFile ${secrets}/luna/privateKey
-         User psy
-
-        host deimos.homenet2.hastybox.com
-         HostName deimos.homenet2.hastybox.com
-         IdentityFile ${secrets}/deimos/privateKey
-         User psy
-
-        host ganymede.homenet2.hastybox.com
-         HostName ganymede.homenet2.hastybox.com
-         IdentityFile ${secrets}/ganymede/privateKey
-         User psy
-
-        host ceres.homenet2.hastybox.com
-         HostName ceres.homenet2.hastybox.com
-         IdentityFile ${secrets}/ceres/privateKey
-         User psy
-
-        host auberon.homenet2.hastybox.com
-         HostName auberon.homenet2.hastybox.com
-         IdentityFile ${secrets}/auberon/privateKey
-         User psy
-      '';
+      ${blocks}
+      '' ;
     };
   };
 }
