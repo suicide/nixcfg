@@ -13,6 +13,8 @@
       ../../nixos/secureboot.nix
 
       inputs.sops-nix.nixosModules.sops
+      ../../nixos/sops.nix
+      ./sops.nix
 
       ../../nixos/impermanence
       ../../nixos/impermanence/users/psy.nix
@@ -46,11 +48,18 @@
       swapSize = "100G";
     };
     __cfg.secureboot.enable = true;
+    __cfg.sops.enable = true;
 
     # Use latest kernel.
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
     networking.hostName = "psy-fw13"; # Define your hostname.
+
+    # wireguard home
+    networking.wg-quick.interfaces.wg0 = {
+      configFile = "/run/secrets/wireguard/homenet2/configFile";
+      autostart = false;
+    };
 
     __cfg.mainUser = "psy";
 
