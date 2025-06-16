@@ -20,7 +20,9 @@
     ./modules/tmux.nix
     ./modules/gpg.nix
 
-    # ./modules/browsers.nix
+    ./modules/browsers/brave.nix
+    ./modules/browsers/firefox.nix
+    ./modules/browsers/librewolf.nix
 
   ];
 

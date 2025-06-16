@@ -35,7 +35,7 @@
 
     ./modules/sops.nix
 
-    ./modules/browsers.nix
+    ./modules/browsers
 
     # causes weird infinite resucsion error, but using home manager might not be useful due to bindfs performance
     # inputs.impermanence.homeManagerModules.impermanence
