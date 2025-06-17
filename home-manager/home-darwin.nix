@@ -31,6 +31,10 @@
 
     ./modules/yazi.nix
     ./modules/mpv.nix
+
+
+
+    ./modules/utm.nix
   ];
 
   nixpkgs = {
