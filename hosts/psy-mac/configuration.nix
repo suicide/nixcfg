@@ -12,6 +12,8 @@
       ../../darwin/appearance.nix
       ../../darwin/finder.nix
 
+      ../../darwin/brew.nix
+
       inputs.home-manager.darwinModules.home-manager
       ../../darwin/home-manager.nix
     ];
