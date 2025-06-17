@@ -11,6 +11,7 @@
   imports = [
     # If you want to use home-manager modules from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModule
+    ./modules/common.nix
 
     # You can also split up your configuration and import pieces of it here:
     ./modules/kitty.nix
@@ -28,6 +29,8 @@
     ./modules/browsers/firefox.nix
     ./modules/browsers/librewolf.nix
 
+    ./modules/yazi.nix
+    ./modules/mpv.nix
   ];
 
   nixpkgs = {
