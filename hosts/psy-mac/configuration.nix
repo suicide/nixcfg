@@ -14,7 +14,6 @@
 
       inputs.home-manager.darwinModules.home-manager
       ../../darwin/home-manager.nix
-      # ../../nixos/users.nix
     ];
 
   config = {
