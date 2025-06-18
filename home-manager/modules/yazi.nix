@@ -2,12 +2,9 @@
 
 {
   config = {
-    programs.mpv = {
+    programs.yazi = {
       enable = true;
-
-      config = {
-        volume-max = 300;
-      };
+      enableZshIntegration = true;
     };
 
     home.packages = with pkgs; [ 
