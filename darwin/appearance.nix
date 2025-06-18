@@ -10,6 +10,9 @@
     # dark mode
     system.defaults.NSGlobalDomain.AppleInterfaceStyle = "Dark";
 
+    # natural scrolling off
+    system.defaults.NSGlobalDomain."com.apple.swipescrolldirection" = false;
+
   };
 
 }
