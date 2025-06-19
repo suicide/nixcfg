@@ -14,6 +14,8 @@
 
       ../../darwin/brew.nix
 
+      ../../darwin/colima.nix
+
       inputs.home-manager.darwinModules.home-manager
       ../../darwin/home-manager.nix
     ];
