@@ -34,6 +34,9 @@
 
     ./modules/network.nix
 
+    # ./modules/virtualization/container-tools.nix
+    # ./modules/virtualization/podman.nix
+
     ./modules/sops.nix
 
     ./modules/browsers

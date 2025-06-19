@@ -3,10 +3,9 @@
 {
   config = {
     home.packages = with pkgs; [ 
-      btop
-      htop
-
-      yt-dlp
+      dive
+      ctop
     ];
   };
 }
+
