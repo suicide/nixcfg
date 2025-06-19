@@ -28,7 +28,10 @@
 
 
     home.activation.ensureFirefoxPrivateExtensions = let
-      profileDir = ".mozilla/firefox/default/";
+      configDir = if pkgs.stdenv.isDarwin then
+        lib.escapeShellArg "Library/Application Support/Firefox/Profiles"
+        else ".mozilla/firefox";
+      profileDir = "${configDir}/default/";
       targetFile = "${profileDir}/extension-preferences.json";
       addonIds = [
         "addon@darkreader.org"

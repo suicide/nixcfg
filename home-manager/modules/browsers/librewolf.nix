@@ -26,7 +26,10 @@
 
 
     home.activation.ensureLibrewolfPrivateExtensions = let
-      profileDir = ".librewolf/default/";
+      configDir = if pkgs.stdenv.isDarwin then
+        lib.escapeShellArg "Library/Application Support/Librewolf/Profiles"
+        else ".librewolf";
+      profileDir = "${configDir}/default/";
       targetFile = "${profileDir}/extension-preferences.json";
       addonIds = [
         "addon@darkreader.org"
