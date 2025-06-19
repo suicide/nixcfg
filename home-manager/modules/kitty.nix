@@ -8,6 +8,7 @@
       font.name = "NotoMono Nerd Font";
       settings = {
         enable_audio_bell = "no";
+        copy_on_select = "yes";
       };
       extraConfig = ''
         # EXTRA config
