@@ -77,8 +77,12 @@ in
 
           "$mod, Return, exec, kitty"
           "$mod, D, exec, rofi -show drun -show-icons"
+
           "$mod, Q, exec, brave"
           "$mod, E, exec, brave --incognito"
+          "$shiftMod, E, exec, brave --tor"
+          "$mod ALT, E, exec, librewolf"
+          "$shiftMod ALT, E, exec, librewolf --private-window"
         ]
         ++ goworkspaces
         ++ moveworkspaces;
