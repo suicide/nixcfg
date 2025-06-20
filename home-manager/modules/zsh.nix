@@ -31,12 +31,40 @@
           # "zsh-syntax-highlighting"
         ];
       };
+
+      history = {
+        ignoreSpace = true;
+        ignoreDups = true;
+        expireDuplicatesFirst = true;
+
+        share = true;
+
+        size = 100000;
+      };
+
+      autocd = true;
+
+      shellAliases = {
+        "ls" = "eza";
+        "l" = "ls -lahg";
+
+        "cat" = "bat";
+      };
     };
 
     programs.fzf = {
       enable = true;
       enableZshIntegration = true;
       defaultCommand = "fd --type f --hidden --follow --exclude .git";
+    };
+
+    programs.eza = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    programs.bat = {
+      enable = true;
     };
 
     home.packages = with pkgs; [ 
