@@ -33,6 +33,9 @@
       ../../nixos/wifi.nix
       ../../nixos/xserver.nix
 
+      ../../nixos/network/shares.nix
+
+
       inputs.home-manager.nixosModules.home-manager
       ../../nixos/home-manager.nix
       ../../nixos/users.nix
