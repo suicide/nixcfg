@@ -1,0 +1,7 @@
+keys:
+  - &psy age1t5s6sww06lq63fsv4kgd7mmf3eh9t9mmn9unaun3ue3awecljuaqm2jc82
+creation_rules:
+  - path_regex: (hosts(/[a-zA-Z0-9\-]+)?|home-manager/users/[a-zA-Z0-9]+)/secrets.yaml$
+    key_groups:
+    - age:
+      - *psy
