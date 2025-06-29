@@ -33,6 +33,21 @@ On mac:
 sudo darwin-rebuild switch --flake .#psy-mac
 ```
 
+## Testing
+
+To test config changes, use `nixos-rebuild test`
+
+```shell
+sudo nixos-rebuild test --flake .#psy-fw13
+```
+
+On mac:
+
+```shell
+sudo darwin-rebuild test --flake .#psy-mac
+```
+
+Running `switch` afterwards will persist the changes.
 
 ## SOPS
 
