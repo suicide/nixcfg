@@ -29,7 +29,7 @@
     ./modules/browsers/firefox.nix
     ./modules/browsers/librewolf.nix
 
-    ./modules/yazi.nix
+    ./modules/yazi
     ./modules/mpv.nix
 
     ./modules/virtualization/container-tools.nix

@@ -43,7 +43,7 @@
 
     ./modules/browsers
 
-    ./modules/yazi.nix
+    ./modules/yazi
     ./modules/mpv.nix
     ./modules/feh.nix
     ./modules/zathura.nix
