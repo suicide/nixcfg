@@ -9,6 +9,8 @@
       btop
       htop
 
+      dust
+
       yt-dlp
     ];
   };
