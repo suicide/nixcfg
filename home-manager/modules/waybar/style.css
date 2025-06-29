@@ -19,8 +19,8 @@
 #tray{
   /*background-color: rgba(29,31,46, 0.95);*/
   background-color: rgba(15,27,53,0.9);
-  padding: 4px 6px; /* 保持内部间距 */
-  margin-top: 6px; /* 外部间距增加 */
+  padding: 2px 6px; /* 保持内部间距 */
+  margin-top: 2px; /* 外部间距增加 */
   margin-left: 6px; /* 外部间距增加 */
   margin-right: 6px; /* 外部间距增加 */
   border-radius: 10px;
@@ -30,30 +30,30 @@
 #clock,
 #custom-power{
   background-color: rgba(15,27,53,0.9);
-  margin-top: 6px; /* 与屏幕顶部留出距离 */
+  margin-top: 2px; /* 与屏幕顶部留出距离 */
   margin-right: 6px;
   /*margin-bottom: 4px;*/
-  padding: 4px 2px; /* 保持内部间距 */
+  padding: 2px 2px; /* 保持内部间距 */
   border-radius: 0 10px 10px 0;
   border-width: 0px;
 }
 
 #network{
   background-color: rgba(15,27,53,0.9);
-  margin-top: 6px; /* 与屏幕顶部留出距离 */
+  margin-top: 2px; /* 与屏幕顶部留出距离 */
   margin-left: 6px;
   /*margin-bottom: 4px;*/
-  padding: 4px 2px; /* 保持内部间距 */
+  padding: 2px 2px; /* 保持内部间距 */
   border-radius: 10px 0 0 10px;
   border-width: 0px;
 }
 
 #custom-lock{
   background-color: rgba(15,27,53,0.9);
-  margin-top: 6px; /* 与屏幕顶部留出距离 */
+  margin-top: 2px; /* 与屏幕顶部留出距离 */
   margin-left: 6px;
   /*margin-bottom: 4px;*/
-  padding: 4px 2px; /* 保持内部间距 */
+  padding: 2px 4px; /* 保持内部间距 */
   border-radius: 10px;
   border-width: 0px;
 }
@@ -67,9 +67,9 @@
 #memory,
 #cpu{
   background-color: rgba(15,27,53,0.9);
-  margin-top: 6px; /* 与屏幕顶部留出距离 */
+  margin-top: 2px; /* 与屏幕顶部留出距离 */
   /*margin-bottom: 4px;*/
-  padding: 4px 2px; /* 保持内部间距 */
+  padding: 2px 2px; /* 保持内部间距 */
   border-width: 0px;
 }
 

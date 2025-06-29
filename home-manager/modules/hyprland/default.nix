@@ -42,7 +42,7 @@ in {
         windowrulev2 = "noborder, onworkspace:w[t1]";
 
         general = {
-          gaps_out = "10,0,0,0";
+          gaps_out = "5,0,0,0";
         };
 
         "$mod" = "SUPER";
