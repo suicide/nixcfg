@@ -11,9 +11,9 @@ also exist.
 
 ## Install
 
-To install a new system run `disko-install` from flake with efi write on a
-disk. Be aware to diable features like sops and secureboot at first as they
-will not work without key files.
+To install a new system run `disko-install` from flake with efi write on a disk.
+Be aware to diable features like sops and secureboot at first as they will not
+work without key files.
 
 ```shell
 sudo nix --experimental-features 'nix-command flakes' run 'github:nix-community/disko/latest#disko-install' -- --write-efi-boot-entries --flake 'github:suicide/nixcfg#qemu' --disk main /dev/sda
@@ -52,14 +52,14 @@ Running `switch` afterwards will persist the changes.
 ## SOPS
 
 Place `age` key in `${HOME}/.config/sops/age/keys.txt` and enable
-`__cfg.sops.enable = true;` in home manager config.
-Secret decryption will fail otherwise.
+`__cfg.sops.enable = true;` in home manager config. Secret decryption will fail
+otherwise.
 
 ## Secure boot
 
 Starting out, secure boot should be disabled in the firmware and the nixos
-setup, `__cfg.secureboot.enable = false;`.
-This setup uses lanzaboote for secure boot.
+setup, `__cfg.secureboot.enable = false;`. This setup uses lanzaboote for secure
+boot.
 
 1. Check status
 
@@ -124,8 +124,7 @@ Enrolled keys to the EFI variables!
 ```
 
 This should enable secure boot on its own. On framework, secure boot has to be
-enabled manually:
-"Administer Secure Boot" -> "Enforce Secure Boot"
+enabled manually: "Administer Secure Boot" -> "Enforce Secure Boot"
 
 Reboot
 
@@ -150,7 +149,6 @@ System:
 ```bash
 gpg --homedir <pathToGpgStore> --pinentry-mode loopback --output <somePath> --export-secret-subkeys <keyID>
 ```
-
 
 ## MISC
 

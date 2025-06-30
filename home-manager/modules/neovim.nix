@@ -18,6 +18,7 @@
         cargo
         nixd
         python3
+        marksman
       ];
     };
 
@@ -26,8 +27,8 @@
       source = pkgs.fetchFromGitHub {
         owner = "suicide";
         repo = "nvim-conf";
-        rev = "84d387983a8db8aefc0cfad10f03bb034ddb31d9";
-        hash = "sha256-Js7+ANGVPdu9UAGJpAwIbdBm343IgbQkPsZCePj6uyw=";
+        rev = "74858fe587821e91ceea7077a2cf77fcae5ad178";
+        hash = "sha256-JMZZWpEA3J1md+O1FmGkL5PigdJsf/E0IkPd1pgRrBw=";
       };
       recursive = true;
     };
