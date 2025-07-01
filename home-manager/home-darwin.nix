@@ -26,8 +26,8 @@
     ./modules/network.nix
 
     ./modules/browsers/brave.nix
-    ./modules/browsers/firefox.nix
-    ./modules/browsers/librewolf.nix
+    ./modules/browsers/firefox
+    ./modules/browsers/librewolf
 
     ./modules/yazi
     ./modules/mpv.nix
