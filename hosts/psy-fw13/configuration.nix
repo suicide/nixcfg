@@ -28,6 +28,7 @@
     ../../nixos/gc.nix
     ../../nixos/nix.nix
 
+    ../../nixos/powermanagement.nix
     ../../nixos/laptop.nix
 
     ../../nixos/audio.nix
