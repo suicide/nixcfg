@@ -38,6 +38,7 @@ in {
 
       settings = let
         brightnessctl = lib.getExe pkgs.brightnessctl;
+        playerctl = lib.getExe pkgs.playerctl;
         wpctl = lib.getExe' pkgs.wireplumber "wpctl";
       in  {
         monitor = ", preferred, auto, 1.5";
@@ -98,6 +99,9 @@ in {
 
         bindl = [
           ", XF86AudioMute, exec, ${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle"
+          ", XF86AudioPlay, exec, ${playerctl} play-pause"
+          ", XF86AudioNext, exec, ${playerctl} next"
+          ", XF86AudioPrev, exec, ${playerctl} previous"
         ];
 
         bindel = [

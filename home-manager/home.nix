@@ -44,6 +44,7 @@
     ./modules/browsers
 
     ./modules/yazi
+    ./modules/playerctl.nix
     ./modules/mpv.nix
     ./modules/feh.nix
     ./modules/zathura.nix
