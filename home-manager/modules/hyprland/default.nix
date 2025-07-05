@@ -38,6 +38,7 @@ in {
 
       settings = let
         brightnessctl = lib.getExe pkgs.brightnessctl;
+        wpctl = lib.getExe' pkgs.wireplumber "wpctl";
       in  {
         monitor = ", preferred, auto, 1.5";
 
@@ -96,12 +97,12 @@ in {
           ++ moveworkspaces;
 
         bindl = [
-          ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+          ", XF86AudioMute, exec, ${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ];
 
         bindel = [
-          ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
-          ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+          ", XF86AudioRaiseVolume, exec, ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+          ", XF86AudioLowerVolume, exec, ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-"
           ", XF86MonBrightnessUp, exec, ${brightnessctl} s 5%+"
           ", XF86MonBrightnessDown, exec, ${brightnessctl} s 5%-"
         ];
