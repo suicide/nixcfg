@@ -36,7 +36,9 @@ in {
       # https://wiki.hypr.land/Useful-Utilities/Systemd-start/#installation
       systemd.enable = false;
 
-      settings = {
+      settings = let
+        brightnessctl = lib.getExe pkgs.brightnessctl;
+      in  {
         monitor = ", preferred, auto, 1.5";
 
         windowrulev2 = "noborder, onworkspace:w[t1]";
@@ -100,6 +102,8 @@ in {
         bindel = [
           ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
           ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+          ", XF86MonBrightnessUp, exec, ${brightnessctl} s 5%+"
+          ", XF86MonBrightnessDown, exec, ${brightnessctl} s 5%-"
         ];
 
         input = {
