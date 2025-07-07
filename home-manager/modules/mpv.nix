@@ -5,7 +5,11 @@
   ...
 }: {
   config = {
-    programs.mpv = {
+    programs.mpv = let
+      linuxPlugins = [
+        pkgs.mpvScripts.mpris # integration with playerctld
+      ];
+    in {
       enable = true;
 
       config = {
@@ -13,8 +17,8 @@
       };
 
       scripts = [
-        pkgs.mpvScripts.mpris # integration with playerctld
-      ];
+      ]
+      ++ (if !pkgs.stdenv.isDarwin then linuxPlugins else []);
     };
 
     home.packages = with pkgs; [
