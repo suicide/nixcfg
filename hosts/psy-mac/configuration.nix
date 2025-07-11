@@ -5,7 +5,8 @@
   ...
 }: {
   imports = [
-    # inputs.sops-nix.nixosModules.sops
+    inputs.sops-nix.darwinModules.sops
+    ../../nixos/sops.nix
 
     # ../../nixos/base.nix
     ../../nixos/nix.nix
@@ -30,6 +31,8 @@
       home = "/Users/psy";
       shell = pkgs.zsh;
     };
+
+    __cfg.sops.enable = true;
 
     system.stateVersion = 6;
   };

@@ -20,10 +20,13 @@
     ./modules/git.nix
     ./modules/tmux.nix
     ./modules/gpg.nix
+    ./modules/ssh.nix
 
     ./modules/direnv.nix
 
     ./modules/network.nix
+
+    ./modules/sops.nix
 
     ./modules/browsers/brave.nix
     ./modules/browsers/firefox

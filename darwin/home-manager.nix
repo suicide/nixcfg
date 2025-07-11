@@ -8,7 +8,9 @@
 }: {
   config = {
     home-manager = {
-      sharedModules = [];
+      sharedModules = [
+        inputs.sops-nix.homeManagerModules.sops
+      ];
       extraSpecialArgs = {inherit inputs;};
     };
 

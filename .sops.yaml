@@ -1,6 +1,13 @@
 keys:
   - &psy age1t5s6sww06lq63fsv4kgd7mmf3eh9t9mmn9unaun3ue3awecljuaqm2jc82
+  - &psy-mms age1fyh8reyks259t7k5kcvns0mm8n6vq0qm4eexyljv7m05ju6ztdmsud8c9d
 creation_rules:
+  # ordering is important here
+  - path_regex: hosts/psy-mac/secrets.yaml$
+    key_groups:
+    - age:
+      - *psy
+      - *psy-mms
   - path_regex: (hosts(/[a-zA-Z0-9\-]+)?|home-manager/users/[a-zA-Z0-9]+)/secrets.yaml$
     key_groups:
     - age:
