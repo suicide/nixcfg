@@ -16,7 +16,10 @@
 
       extraConfig = {
         commit.verbose = true;
-        tag.sort = "version:refname";
+        tag = {
+          gpgSign = false;
+          sort = "version:refname";
+        };
         diff = {
           algorithm = "histogram";
           colorMoved = "plain";
