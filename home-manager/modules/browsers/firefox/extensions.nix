@@ -140,4 +140,24 @@
       "file:///*/"
     ];
   };
+  bitwarden = {
+    id = "{446900e4-71c2-419f-a6a7-df9c091e268b}";
+    privateAllowed = true;
+    permissions = [
+      "<all_urls>"
+      "*://*/*"
+      "alarms"
+      "clipboardRead"
+      "clipboardWrite"
+      "contextMenus"
+      "idle"
+      "storage"
+      "tabs"
+      "unlimitedStorage"
+      "webNavigation"
+      "webRequest"
+      "webRequestBlocking"
+      "file:///*"
+    ];
+  };
 }
