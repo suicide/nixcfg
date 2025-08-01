@@ -1,6 +1,7 @@
 # TODO screenshots
 # TODO screenshare
 # TODO minimize
+# TODO settngs.exec-once -> brightness on startup
 {
   lib,
   pkgs,
