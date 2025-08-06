@@ -10,6 +10,7 @@
       historyLimit = 1000000;
       keyMode = "vi";
       mouse = true;
+      baseIndex = 1;
 
       # TODO clipboard
 
