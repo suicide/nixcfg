@@ -64,3 +64,5 @@ in {
     };
   };
 }
+
+# wireplumber audio levels: .local/state/wireplumber/default-routes
