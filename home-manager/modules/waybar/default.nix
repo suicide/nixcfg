@@ -140,6 +140,7 @@ in {
             interval = 1;
             timezone = "Europe/Berlin";
             format = "<span color='#BF00FF'>  </span>{:%I:%M %p} ";
+            format-alt = "<span color='#BF00FF'>  </span>{:%d %b %Y %I:%M %p} ";
             tooltip = true;
             tooltip-format = "{:%a %d %b %Y}";
           };
