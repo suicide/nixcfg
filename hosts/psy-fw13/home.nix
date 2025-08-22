@@ -1,12 +1,23 @@
 {
   config,
   pkgs,
+  lib,
   inputs,
   ...
 }: {
   config = {
     __cfg.sops.enable = true;
-    __cfg.hyprland.enable = true;
+
+    __cfg.hyprland = {
+      enable = true;
+      onStartup = let
+        brightnessctl = lib.getExe pkgs.brightnessctl;
+        wpctl = lib.getExe' pkgs.wireplumber "wpctl";
+      in [
+        "${brightnessctl} set 15%"
+        "${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 10%"
+      ];
+    };
 
     __cfg.hypridle.keyboardBacklight = "framework_laptop::kbd_backlight";
 

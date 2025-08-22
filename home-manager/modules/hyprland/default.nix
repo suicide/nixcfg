@@ -1,7 +1,6 @@
 # TODO screenshots
 # TODO screenshare
 # TODO minimize
-# TODO settngs.exec-once -> brightness on startup
 {
   lib,
   pkgs,
@@ -18,10 +17,17 @@ in {
   ];
 
   options = {
-    __cfg.hyprland.enable = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Enable hyprland config in homemanager";
+    __cfg.hyprland = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Enable hyprland config in homemanager";
+      };
+      onStartup = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [];
+        description = "Commands to run on hyprland startup";
+      };
     };
   };
 
@@ -45,6 +51,9 @@ in {
         monitor = ", preferred, auto, 1.5";
 
         windowrulev2 = "noborder, onworkspace:w[t1]";
+
+        exec-once = [
+        ] ++ cfg.onStartup;
 
         general = {
           gaps_out = "5,0,0,0";
