@@ -7,11 +7,15 @@
   config = {
     # enable suspend and hibernate
     services.logind = {
-      lidSwitch = "suspend-then-hibernate";
 
-      # power key handling
-      powerKey = "hibernate";
-      powerKeyLongPress = "poweroff";
+      settings.Login = {
+        HandleLidSwitch = "suspend-then-hibernate";
+
+        # power key handling
+        HandlePowerKey = "hibernate";
+        HandlePowerKeyLongPress = "poweroff";
+      };
+
     };
 
     # should switch to hibernate after said time
