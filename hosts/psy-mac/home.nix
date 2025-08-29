@@ -26,18 +26,18 @@ in {
 
     programs.ssh = let
       secrets = "~/.config/sops-nix/secrets/ssh";
-      sopsConfig = if enableSops then ''
-        host edp.buildth.ing
-         HostName edp.buildth.ing
-         IdentityFile ${secrets}/buildthing/privateKey
-         User git
-      '' else "";
     in {
       extraConfig = ''
         Include ${config.home.homeDirectory}/.colima//ssh_config
-
-        ${sopsConfig}
       '';
+
+      matchBlocks = lib.mkIf enableSops {
+        "edp.buildth.ing" = {
+          hostname = "edp.buildth.ing";
+          identityFile = "${secrets}/buildthing/privateKey";
+          user = "git";
+        };
+      };
     };
 
     # secrets

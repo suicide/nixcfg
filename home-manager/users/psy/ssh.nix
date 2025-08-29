@@ -5,60 +5,77 @@
   ...
 }: let
   secrets = "~/.config/sops-nix/secrets/ssh";
+  hosts = ["unikorn" "homegate2" "thering" "luna" "deimos" "ganymede" "ceres" "auberon"];
+  simpleIdentity = name: {
+     host = "${name}.homenet2.hastybox.com";
+     hostname = "${name}.homenet2.hastybox.com";
+     identityFile = "${secrets}/${name}/privateKey";
+     user = "psy";
+  };
 in {
   config = {
     programs.ssh = {
-      extraConfig = let
-        hosts = ["unikorn" "homegate2" "thering" "luna" "deimos" "ganymede" "ceres" "auberon"];
+      matchBlocks = {
+        "homebase.get-it.us" = {
+          hostname = "homebase.get-it.us";
+          identityFile = "${secrets}/homebase/privateKey";
+          user = "psy";
+        };
 
-        simpleIdentity = name: ''
-          host ${name}.homenet2.hastybox.com
-           HostName ${name}.homenet2.hastybox.com
-           IdentityFile ${secrets}/${name}/privateKey
-           User psy
-        '';
+        "github.com" = {
+          hostname = "github.com";
+          identityFile = "${secrets}/github/privateKey";
+          user = "git";
+        };
 
-        blocks = lib.concatStringsSep "\n\n" (map simpleIdentity hosts);
-      in ''
-          host homebase.get-it.us
-           HostName homebase.get-it.us
-           IdentityFile ${secrets}/homebase/privateKey
-           User psy
+        "bitbucket.org" = {
+          hostname = "bitbucket.org";
+          identityFile = "${secrets}/bitbucket/privateKey";
+          user = "git";
+          extraOptions = {
+            "HostKeyAlgorithms" = "ssh-rsa";
+            "PubkeyAcceptedKeyTypes" = "ssh-rsa";
+          };
+        };
 
-          host github.com
-           HostName github.com
-           IdentityFile ${secrets}/github/privateKey
-           User git
+        "remote_hop" = {
+          hostname = "somewhere";
+          identityFile = "${secrets}/remote_hop/privateKey";
+          port = 50044;
+          user = "psyremote";
+          localForwards = [
+            {
+              bind.port = 2224;
+              host.address = "localhost";
+              host.port = 2224;
+            }
+            {
+              bind.port = 2280;
+              host.address = "localhost";
+              host.port = 2280;
+            }
+            {
+              bind.port = 3128;
+              host.address = "localhost";
+              host.port = 3128;
+            }
+          ];
+          serverAliveInterval = 10;
+          extraOptions = {
+            "StrictHostKeyChecking" = "no";
+            "UserKnownHostsFile" = "/dev/null";
+          };
+        };
 
-          host bitbucket.org
-           HostName bitbucket.org
-           IdentityFile ${secrets}/bitbucket/privatekey
-           User git
-           HostKeyAlgorithms ssh-rsa
-           PubkeyAcceptedKeyTypes ssh-rsa
-
-          host remote_hop
-           HostName somewhere
-           Port 50044
-           IdentityFile ${secrets}/remote_hop/privatekey
-           User psyremote
-           LocalForward 2224 localhost:2224
-           LocalForward 2280 localhost:2280
-           LocalForward 3128 localhost:3128
-           StrictHostKeyChecking no
-           UserKnownHostsFile=/dev/null
-           ServerAliveInterval=10
-
-          host macarco
-           HostName localhost
-           Port 2224
-           IdentityFile ${secrets}/remote_macarco/privatekey
-           User psy
-           ServerAliveInterval=10
-           Compression yes
-
-        ${blocks}
-      '';
+        "macarco" = {
+          hostname = "localhost";
+          identityFile = "${secrets}/remote_macarco/privateKey";
+          port = 2224;
+          user = "psy";
+          serverAliveInterval = 10;
+          compression = true;
+        };
+      } // lib.genAttrs hosts simpleIdentity;
     };
   };
 }
