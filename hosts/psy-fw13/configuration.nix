@@ -56,9 +56,9 @@
     __cfg.sops.enable = true;
 
     # Use latest kernel.
-    # boot.kernelPackages = pkgs.linuxPackages_latest;
+    boot.kernelPackages = pkgs.linuxPackages_latest;
     # stick with 6.15
-    boot.kernelPackages = pkgs.linuxPackages_6_15;
+    # boot.kernelPackages = pkgs.linuxPackages_6_15;
 
     networking.hostName = "psy-fw13"; # Define your hostname.
 
