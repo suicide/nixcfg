@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  inputs,
   ...
 }: {
   config = {
@@ -32,5 +33,21 @@
       };
       recursive = true;
     };
+
+    # home = {
+    #   # defaultEditor
+    #   sessionVariables = { EDITOR = "nvim"; };
+    #
+    #   # aliases
+    #   shellAliases = {
+    #     vi = "nvim";
+    #     vim = "nvim";
+    #     vimdiff = "nvim -d";
+    #   };
+    #
+    #   packages = with pkgs; [
+    #     inputs.neovim.packages.${system}.default
+    #   ];
+    # };
   };
 }

@@ -60,6 +60,12 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+
+    # my nvf neovim
+    neovim = {
+      url = "github:suicide/nvim-nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
