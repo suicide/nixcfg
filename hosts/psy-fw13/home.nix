@@ -12,10 +12,8 @@
       enable = true;
       onStartup = let
         brightnessctl = lib.getExe pkgs.brightnessctl;
-        wpctl = lib.getExe' pkgs.wireplumber "wpctl";
       in [
         "${brightnessctl} set 15%"
-        "${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 10%"
       ];
     };
 
