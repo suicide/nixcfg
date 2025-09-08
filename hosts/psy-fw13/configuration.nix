@@ -39,6 +39,8 @@
 
     ../../nixos/network/shares.nix
 
+    ../../nixos/virtualization/containers.nix
+
     inputs.home-manager.nixosModules.home-manager
     ../../nixos/home-manager.nix
     ../../nixos/users.nix
