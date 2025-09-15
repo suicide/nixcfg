@@ -14,7 +14,6 @@ in {
   config = {
     programs.rofi = {
       enable = true;
-      package = pkgs.rofi-wayland;
       terminal = "${lib.getExe pkgs.kitty}";
       theme = rofiTheme + "/themes/squared-nord.rasi";
     };
