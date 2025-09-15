@@ -138,9 +138,9 @@ in {
           kb_options = "caps:swapescape";
         };
 
-        gestures = {
-          workspace_swipe = true;
-        };
+        gesture = [
+          "3, horizontal, workspace,"
+        ];
 
         ecosystem = {
           no_update_news = true;
