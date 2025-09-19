@@ -79,7 +79,7 @@ in {
             "$shiftMod, Q, exit,"
             "$shiftMod, C, killactive,"
 
-            "ALT, L, exec, loginctl lock-session"
+            "CTRL ALT, L, exec, loginctl lock-session"
 
             "$mod CTRL, Space, togglefloating,"
             "$mod, F, fullscreen,"
