@@ -50,5 +50,11 @@ in {
         path = "%r/buildthing-public-key";
       };
     };
+
+    __cfg.neovim = {
+      enable = true;
+      useLegacyConfig = false;
+      useNvf = true;
+    };
   };
 }
