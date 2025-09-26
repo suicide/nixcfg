@@ -61,11 +61,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1758798674,
-        "narHash": "sha256-9ocRdyGIr67hgrfG8TWv8M6EuIGYUi3256JVHxXaD6s=",
+        "lastModified": 1758879217,
+        "narHash": "sha256-vWk2iw/i5c0RHc/zLVyB51UYvmbzPq3uB14NN7kaouE=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "810a33a4d21060a52a7babd8af7672485954b3ad",
+        "rev": "58402e09ad48f9f509d9249b8704c1a4f390c434",
         "type": "gitlab"
       },
       "original": {
@@ -179,11 +179,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1758810399,
-        "narHash": "sha256-bpWoE1tiFX5T1tr5EudkpW9Kk02XR+6olkoSkf3nHZU=",
+        "lastModified": 1758899649,
+        "narHash": "sha256-Z6IxPlvIS83lKbTIliP2xFj4hJ699/eM7Ubte4iytgQ=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "39d26c16866260eee6d0487fe9c102ba1c1bf7b2",
+        "rev": "6238bbc0ae04951b64a3ad1b69d3e03b8b329e51",
         "type": "github"
       },
       "original": {
@@ -196,11 +196,11 @@
     "homebrew-cask": {
       "flake": false,
       "locked": {
-        "lastModified": 1758822068,
-        "narHash": "sha256-0MkXF6WUlMLGEPSHGfUakPB+QJ1UkbNM4CsKXihy2mc=",
+        "lastModified": 1758907885,
+        "narHash": "sha256-v8EN8mvAjgUBBngZXJ0ehRSw9B1uIScaDcG5zJ1AYVM=",
         "owner": "homebrew",
         "repo": "homebrew-cask",
-        "rev": "0663aad992830d0a31365bc61659a3541a100094",
+        "rev": "ac012f776cae03cac2f89ac41960c4dcea03b9de",
         "type": "github"
       },
       "original": {
@@ -212,11 +212,11 @@
     "homebrew-core": {
       "flake": false,
       "locked": {
-        "lastModified": 1758822677,
-        "narHash": "sha256-fNxrCSiCwt3trS7mHHzZzOdJSNhvKyvTAJz6f13nyek=",
+        "lastModified": 1758912131,
+        "narHash": "sha256-26dnU067Qt6YJLrSKkihM7HjT8MYlCpXhxw6l+ftivA=",
         "owner": "homebrew",
         "repo": "homebrew-core",
-        "rev": "d0d7d20a1bdcd30e1b2ce258babe6d266702393a",
+        "rev": "55903bcac635120bd7b39ff1b0fd1010399c838d",
         "type": "github"
       },
       "original": {
@@ -289,11 +289,11 @@
         "nvf": "nvf"
       },
       "locked": {
-        "lastModified": 1758822799,
-        "narHash": "sha256-+S/0pkh8LpVgL03nQTheXf2AkZeZoTkJZYjmoqds4Lo=",
+        "lastModified": 1758911429,
+        "narHash": "sha256-r3JEs+tHJZa87K+wE4aFIqCxu2TiHR9fBQEj5ZKfFOM=",
         "owner": "suicide",
         "repo": "nvim-nvf",
-        "rev": "b05b8eae74136874b882fcd721886bb21b93ad92",
+        "rev": "5204db74356f6ef16be2b54297153b050cfb7716",
         "type": "github"
       },
       "original": {
