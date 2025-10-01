@@ -31,6 +31,8 @@
           extraConfig = ''
             # disable date / time
             set -g @tokyo-night-tmux_show_datetime 0
+            # disable git integration due to race condition
+            set -g @tokyo-night-tmux_show_git 0
             # show current path
             set -g @tokyo-night-tmux_show_path 1
           '';
