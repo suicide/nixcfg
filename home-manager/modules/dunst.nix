@@ -5,6 +5,11 @@
   ...
 }: let
   opacity = "E5";
+  base = "#1a1b26";
+  foreground = "#a9b1d6";
+  red = "#f7768e";
+  blue = "#7aa2f7";
+  magenta = "#bb9af7";
 in {
   options = {
   };
@@ -35,21 +40,33 @@ in {
           show_indicators = "no";
         };
 
+        # Base:        #1a1b26 (Editor Background)
+        # Foreground:  #a9b1d6 (Editor Foreground)
+        # Blue:        #7aa2f7 (Function Names / Terminal Blue)
+        # Cyan:        #7dcfff (Object Properties / Terminal Cyan)
+        # Magenta:     #bb9af7 (Control Keywords / Terminal Magenta)
+        # Red:         #f7768e (Terminal Red)
+        # Green:       #9ece6a (Strings / Terminal Green)
+        # Yellow:      #e0af68 (Terminal Yellow)
+
         urgency_critical = {
-          # background = "{{color1}}";
-          # foreground = "{{foreground}}";
+          background = "${base}";
+          foreground = "${red}";
+          frame_color = "${red}";
           timeout = 0;
         };
 
         urgency_low = {
-          # background = "{{background}}${opacity}";
-          # foreground = "{{foreground}}";
+          background = "${base}${opacity}";
+          foreground = "${foreground}";
+          frame_color = "${blue}";
           timeout = 10;
         };
 
         urgency_normal = {
-          # background = "{{background}}${opacity}";
-          # foreground = "{{foreground}}";
+          background = "${base}${opacity}";
+          foreground = "${magenta}";
+          frame_color = "${blue}";
           timeout = 10;
         };
       };
