@@ -46,6 +46,7 @@ in {
         brightnessctl = lib.getExe pkgs.brightnessctl;
         playerctl = lib.getExe pkgs.playerctl;
         wpctl = lib.getExe' pkgs.wireplumber "wpctl";
+        dunstctl = lib.getExe' pkgs.dunst "dunstctl";
         hyprshot = lib.getExe pkgs.hyprshot;
       in  {
         monitor = ", preferred, auto, 1.5";
@@ -103,6 +104,9 @@ in {
             "$shiftMod, E, exec, brave --tor"
             "$mod ALT, E, exec, librewolf"
             "$shiftMod ALT, E, exec, librewolf --private-window"
+
+            # Dismisses ALL currently displayed notifications via dunstctl
+            "$mod, Delete, exec, ${dunstctl} close-all"
 
             # screenshot
             ", PRINT, exec, ${hyprshot} -m active -m output"
