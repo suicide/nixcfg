@@ -12,6 +12,8 @@
       mouse = true;
       baseIndex = 1;
 
+      terminal = "xterm-kitty";
+
       # TODO clipboard
 
       sensibleOnTop = true;
