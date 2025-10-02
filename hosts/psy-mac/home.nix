@@ -43,18 +43,26 @@ in {
     # secrets
     sops = lib.mkIf enableSops {
       defaultSopsFile = ./secrets.yaml;
-      secrets."ssh/buildthing/privateKey" = {
-        path = "%r/buildthing-private-key";
-      };
-      secrets."ssh/buildthing/publicKey" = {
-        path = "%r/buildthing-public-key";
+      secrets = {
+        "ssh/buildthing/privateKey" = {
+          path = "%r/buildthing-private-key";
+        };
+        "ssh/buildthing/publicKey" = {
+          path = "%r/buildthing-public-key";
+        };
+        "ai/gemini/api_key" = {
+          path = "%r/ai-gemini-api-key";
+        };
       };
     };
 
-    __cfg.neovim = {
+    __cfg.neovim = let
+      secrets = "${config.home.homeDirectory}/.config/sops-nix/secrets";
+    in {
       enable = true;
       useLegacyConfig = false;
       useNvf = true;
+      geminiApiKey = "${secrets}/ai/gemini/api_key";
     };
   };
 }

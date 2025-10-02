@@ -24,6 +24,11 @@ in {
         default = false;
         description = "Use NVF based neovim config";
       };
+      geminiApiKey = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        default = null;
+        description = "Gemini API key file for neovim plugin";
+      };
     };
   };
   config = lib.mkIf cfg.enable {
@@ -51,9 +56,9 @@ in {
       ];
     };
 
-    ## Get old neovim config
     home =
       {
+        ## Get old neovim config
         file = lib.mkIf cfg.useLegacyConfig {
           "${config.home.homeDirectory}/.config/nvim" = {
             source = pkgs.fetchFromGitHub {
@@ -66,7 +71,19 @@ in {
           };
         };
       }
-      // lib.optionalAttrs cfg.useNvf {
+      // lib.optionalAttrs cfg.useNvf (let
+        nvimOverridden = pkgs.symlinkJoin {
+          name = "neovim-vars-wrapped";
+          paths = [inputs.neovim.packages.${pkgs.system}.default];
+          buildInputs = [pkgs.makeWrapper];
+          postBuild = ''
+            wrapProgram $out/bin/nvim \
+              --set GEMINI_API_KEY_FILE "${cfg.geminiApiKey or ""}"
+          '';
+        };
+      in {
+        # nvf based config
+
         # defaultEditor
         sessionVariables = {EDITOR = "nvim";};
 
@@ -77,9 +94,9 @@ in {
           vimdiff = "nvim -d";
         };
 
-        packages = with pkgs; [
-          inputs.neovim.packages.${system}.default
+        packages = [
+          nvimOverridden
         ];
-      };
+      });
   };
 }
