@@ -88,9 +88,6 @@
       ## power management, recommended by framework
       power-profiles-daemon.enable = true;
       tlp.enable = false;
-
-      # framework hardware
-      fwupd.enable = true;
     };
 
     # This value determines the NixOS release from which the default
