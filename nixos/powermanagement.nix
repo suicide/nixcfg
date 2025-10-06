@@ -9,10 +9,10 @@
       enable = true;
     };
 
-    services.power-profiles-daemon.enable = false;
+    services.power-profiles-daemon.enable = true;
 
     services.tlp = {
-      enable = true;
+      enable = false;
       settings = {
         CPU_SCALING_GOVERNOR_ON_AC = "ondemand";
         CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
