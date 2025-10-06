@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   config = {
@@ -9,10 +10,10 @@
       enable = true;
     };
 
-    services.power-profiles-daemon.enable = true;
+    services.power-profiles-daemon.enable = lib.mkDefault false;
 
     services.tlp = {
-      enable = false;
+      enable = lib.mkDefault true;
       settings = {
         CPU_SCALING_GOVERNOR_ON_AC = "ondemand";
         CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
