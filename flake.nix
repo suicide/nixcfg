@@ -105,6 +105,7 @@
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       psy-fw13 = mkSystem "psy-fw13" ./hosts/psy-fw13/configuration.nix;
+      psy-work1 = mkSystem "psy-work1" ./hosts/psy-work1/configuration.nix;
       qemu = mkSystem "qemu" ./hosts/qemu/configuration.nix;
     };
 
