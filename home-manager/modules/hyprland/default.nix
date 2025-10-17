@@ -27,6 +27,11 @@ in {
         default = [];
         description = "Commands to run on hyprland startup";
       };
+      swapEsc = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Swap Caps Lock and Escape keys";
+      };
     };
   };
 
@@ -138,7 +143,7 @@ in {
           ", XF86MonBrightnessDown, exec, ${brightnessctl} s 5%-"
         ];
 
-        input = {
+        input = lib.mkIf cfg.swapEsc {
           kb_options = "caps:swapescape";
         };
 

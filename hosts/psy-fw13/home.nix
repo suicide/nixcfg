@@ -18,6 +18,8 @@
         in [
           "${brightnessctl} set 15%"
         ];
+
+        swapEsc = true;
       };
 
       hypridle.keyboardBacklight = "framework_laptop::kbd_backlight";
