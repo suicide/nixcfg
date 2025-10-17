@@ -20,6 +20,10 @@
         ];
 
         swapEsc = true;
+
+        monitors = [
+          ", preferred, auto, 1.5"
+        ];
       };
 
       hypridle.keyboardBacklight = "framework_laptop::kbd_backlight";

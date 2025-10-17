@@ -32,6 +32,11 @@ in {
         default = false;
         description = "Swap Caps Lock and Escape keys";
       };
+      monitors = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [];
+        description = "Display settings";
+      };
     };
   };
 
@@ -53,13 +58,12 @@ in {
         wpctl = lib.getExe' pkgs.wireplumber "wpctl";
         dunstctl = lib.getExe' pkgs.dunst "dunstctl";
         hyprshot = lib.getExe pkgs.hyprshot;
-      in  {
-        monitor = ", preferred, auto, 1.5";
+      in {
+        monitor = cfg.monitors;
 
         windowrulev2 = "noborder, onworkspace:w[t1]";
 
-        exec-once = [
-        ] ++ cfg.onStartup;
+        exec-once = cfg.onStartup;
 
         general = {
           gaps_out = "5,0,0,0";
