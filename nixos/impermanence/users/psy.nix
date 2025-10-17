@@ -57,6 +57,10 @@ in {
           ".mozilla"
 
           ".librewolf"
+
+          ".electrum" # legacy
+          ".bitmonero"
+          ".monero"
         ];
         files = [
           ".zsh_history"
