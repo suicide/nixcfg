@@ -15,6 +15,14 @@ To install a new system run `disko-install` from flake with efi write on a disk.
 Be aware to diable features like sops and secureboot at first as they will not
 work without key files.
 
+Generate hardware config:
+
+```shell
+nixos-generate-config --show-hardware-config --no-filesystems
+```
+
+Install from flake:
+
 ```shell
 sudo nix --experimental-features 'nix-command flakes' run 'github:nix-community/disko/latest#disko-install' -- --write-efi-boot-entries --flake 'github:suicide/nixcfg#qemu' --disk main /dev/sda
 ```
