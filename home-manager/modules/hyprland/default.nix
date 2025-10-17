@@ -1,6 +1,7 @@
 # TODO screenshare
 # TODO minimize
 {
+  inputs,
   lib,
   pkgs,
   config,
@@ -45,8 +46,12 @@ in {
       pkgs.wl-clipboard
     ];
 
-    wayland.windowManager.hyprland = lib.mkIf (cfg.enable) {
+    wayland.windowManager.hyprland = lib.mkIf cfg.enable {
       enable = true;
+
+      plugins = [
+        inputs.hyprland-split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+      ];
 
       # start with uwsm
       # https://wiki.hypr.land/Useful-Utilities/Systemd-start/#installation
@@ -79,10 +84,10 @@ in {
             else n
           ));
 
-          moveworkspace-command = "movetoworkspace";
+          moveworkspace-command = "split-movetoworkspace";
           moveworkspaces = map (n: "$shiftMod, ${toString n}, ${moveworkspace-command}, ${toWSNumber n}") [1 2 3 4 5 6 7 8 9 0];
 
-          workspace-command = "workspace";
+          workspace-command = "split-workspace";
           goworkspaces = map (n: "$mod, ${toString n}, ${workspace-command}, ${toWSNumber n}") [1 2 3 4 5 6 7 8 9 0];
         in
           [
@@ -157,6 +162,13 @@ in {
 
         ecosystem = {
           no_update_news = true;
+        };
+
+        plugin = {
+          split-monitor-workspaces = {
+            # disabled, otherwise waybar all predefined workspaces even if empty
+            enable_persistent_workspaces = 0;
+          };
         };
       };
     };

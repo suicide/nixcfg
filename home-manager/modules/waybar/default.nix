@@ -44,7 +44,21 @@ in {
             "clock"
           ];
 
-          "hyprland/workspaces" = {
+          "hyprland/workspaces" = let
+            numbers = lib.genList (n: n + 1) 100;
+            generateAttr = k: let
+              mod = a: b: a - (b * (a / b));
+              key = builtins.toString k;
+              remainder = mod k 10;
+              value =
+                if remainder == 0
+                then 10
+                else remainder;
+            in {
+              inherit value;
+              name = key;
+            };
+          in {
             disable-scroll = false;
             all-outputs = true;
             format = "{icon}";
@@ -64,6 +78,10 @@ in {
             #   "9" = "󰖳";
             #   "default" = "";
             # };
+
+            # "rename" workspaces as the split plugin just batches up 10 workspaces per display
+            # just repeating 1-10 for each display
+            format-icons = lib.listToAttrs (lib.map generateAttr numbers);
           };
           "custom/lock" = {
             format = "<span color='#00FFFF'>  </span>";
