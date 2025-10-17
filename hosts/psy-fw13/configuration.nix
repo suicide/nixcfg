@@ -10,7 +10,6 @@
     inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
 
     inputs.disko.nixosModules.default
-    # ./disk-config.nix
 
     inputs.lanzaboote.nixosModules.lanzaboote
     ../../nixos/secureboot.nix
