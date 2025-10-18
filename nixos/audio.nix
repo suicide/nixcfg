@@ -24,7 +24,7 @@
         enable = true;
 
         extraConfig = {
-          "01-set-dafault-sink-volume" = {
+          "01-set-default-sink-volume" = {
             "wireplumber.settings" = {
               "device.routes.default-sink-volume" = 0.001;  # Set default output volume to 10% on cubic scale 0.0 ^ 3
             };
