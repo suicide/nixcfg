@@ -33,6 +33,11 @@ in {
         default = false;
         description = "Swap Caps Lock and Escape keys";
       };
+      displayWorkspaces = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Enable handling workspaces per display";
+      };
       monitors = lib.mkOption {
         type = lib.types.listOf lib.types.str;
         default = [];
@@ -49,7 +54,7 @@ in {
     wayland.windowManager.hyprland = lib.mkIf cfg.enable {
       enable = true;
 
-      plugins = [
+      plugins = lib.optionals cfg.displayWorkspaces [
         inputs.hyprland-split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
       ];
 
@@ -84,10 +89,16 @@ in {
             else n
           ));
 
-          moveworkspace-command = "split-movetoworkspace";
+          moveworkspace-command =
+            if cfg.displayWorkspaces
+            then "split-movetoworkspace"
+            else "movetoworkspace";
           moveworkspaces = map (n: "$shiftMod, ${toString n}, ${moveworkspace-command}, ${toWSNumber n}") [1 2 3 4 5 6 7 8 9 0];
 
-          workspace-command = "split-workspace";
+          workspace-command =
+            if cfg.displayWorkspaces
+            then "split-workspace"
+            else "workspace";
           goworkspaces = map (n: "$mod, ${toString n}, ${workspace-command}, ${toWSNumber n}") [1 2 3 4 5 6 7 8 9 0];
         in
           [
@@ -109,8 +120,6 @@ in {
             "$shiftMod, l, movewindow, r"
             "$shiftMod, k, movewindow, u"
             "$shiftMod, j, movewindow, d"
-
-            "$mod, O, split-changemonitor, next"
 
             "$mod, Return, exec, kitty"
             "$mod, D, exec, rofi -show drun -show-icons"
@@ -136,7 +145,10 @@ in {
             # ", XF86AudioMedia, exec, ${playerctl} previous"
           ]
           ++ goworkspaces
-          ++ moveworkspaces;
+          ++ moveworkspaces
+          ++ lib.optionals cfg.displayWorkspaces [
+            "$mod, O, split-changemonitor, next"
+          ];
 
         bindl = [
           # Media keys

@@ -18,6 +18,7 @@
         in [
           "${brightnessctl} set 15%"
         ];
+        displayWorkspaces = true;
         monitors = [
           "DP-1, 1920x1080, 0x0, 1"
           "DVI-D-1, 1920x1080, 1920x0, 1"
