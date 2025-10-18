@@ -110,6 +110,8 @@ in {
             "$shiftMod, k, movewindow, u"
             "$shiftMod, j, movewindow, d"
 
+            "$mod, O, split-changemonitor, next"
+
             "$mod, Return, exec, kitty"
             "$mod, D, exec, rofi -show drun -show-icons"
 
