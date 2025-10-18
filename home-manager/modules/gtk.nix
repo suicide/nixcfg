@@ -30,7 +30,7 @@ in {
 
       font = {
         name = "Sans";
-        size = 11;
+        size = 10;
       };
     };
   };
