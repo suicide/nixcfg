@@ -29,7 +29,7 @@
     ../../nixos/nix.nix
 
     ../../nixos/powermanagement.nix
-    ../../nixos/laptop.nix
+    ../../nixos/desktop.nix
 
     ../../nixos/audio.nix
     ../../nixos/bluetooth.nix
