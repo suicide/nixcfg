@@ -60,7 +60,7 @@ in {
             };
           in {
             disable-scroll = false;
-            all-outputs = true;
+            all-outputs = false;
             format = "{icon}";
             on-click = "activate";
             # persistent-workspaces = {
