@@ -178,6 +178,10 @@ in {
           no_update_news = true;
         };
 
+        misc = {
+          vrr = 1;
+        };
+
         plugin = {
           split-monitor-workspaces = {
             # disabled, otherwise waybar all predefined workspaces even if empty
