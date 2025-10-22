@@ -44,6 +44,10 @@ in {
             "clock"
           ];
 
+          "hyprland/window" = {
+            separate-outputs = true;
+          };
+
           "hyprland/workspaces" = let
             numbers = lib.genList (n: n + 1) 100;
             generateAttr = k: let
