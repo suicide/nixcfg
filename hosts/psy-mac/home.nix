@@ -14,10 +14,12 @@ in {
     };
 
     programs.git = {
-      userName = "Patrick Sy";
-      userEmail = "patrick.sy@telekom.de";
+      settings = {
+        user = {
+          name = "Patrick Sy";
+          email = "patrick.sy@telekom.de";
+        };
 
-      extraConfig = {
         user.signingkey = "DDDC8EC51823195E";
       };
     };

@@ -37,10 +37,12 @@
     };
 
     programs.git = {
-      userName = "suiiii";
-      userEmail = "suiiii@suiiii.rip";
+      settings = {
+        user = {
+          name = "suiiii";
+          email = "suiiii@suiiii.rip";
+        };
 
-      extraConfig = {
         user.signingkey = "2F1ACB1232E35B05";
       };
     };

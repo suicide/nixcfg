@@ -14,7 +14,7 @@
         signByDefault = true;
       };
 
-      extraConfig = {
+      settings = {
         commit.verbose = true;
         tag = {
           gpgSign = false;
