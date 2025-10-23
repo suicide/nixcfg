@@ -35,6 +35,7 @@
     ../../nixos/firewall.nix
     ../../nixos/wifi.nix
     ../../nixos/xserver.nix
+    ../../nixos/hyprland.nix
 
     ../../nixos/network/shares.nix
 
