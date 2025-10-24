@@ -24,6 +24,16 @@ in {
         default = false;
         description = "Use NVF based neovim config";
       };
+      extraConfig = lib.mkOption {
+        type = lib.types.attrs;
+        default = {};
+        description = "Extra NVF vim config to apply, overrides may be necessary";
+        example = {
+          utility.oil-nvim = {
+            enable = lib.mkForce false;
+          };
+        };
+      };
       geminiApiKey = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
         default = null;
@@ -72,9 +82,15 @@ in {
         };
       }
       // lib.optionalAttrs cfg.useNvf (let
+        nvim = inputs.neovim.packages.${pkgs.system}.neovimCustom {
+          inherit
+            (cfg)
+            extraConfig
+            ;
+        };
         nvimOverridden = pkgs.symlinkJoin {
           name = "neovim-vars-wrapped";
-          paths = [inputs.neovim.packages.${pkgs.system}.default];
+          paths = [nvim];
           buildInputs = [pkgs.makeWrapper];
           postBuild = ''
             wrapProgram $out/bin/nvim \
@@ -85,7 +101,9 @@ in {
         # nvf based config
 
         # defaultEditor
-        sessionVariables = {EDITOR = "nvim";};
+        sessionVariables = {
+          EDITOR = "nvim";
+        };
 
         # aliases
         shellAliases = {
