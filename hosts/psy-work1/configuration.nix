@@ -89,6 +89,11 @@
       ## power management, recommended by framework
       power-profiles-daemon.enable = true;
       tlp.enable = false;
+
+      ## disable wakeup from usb peripherals
+      udev.extraRules = ''
+        ACTION=="add" SUBSYSTEM=="pci" ATTR{vendor}=="0x1022" ATTR{device}=="0x149c" ATTR{power/wakeup}="disabled"
+      '';
     };
 
     # This value determines the NixOS release from which the default
