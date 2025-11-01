@@ -1,9 +1,17 @@
 {
   config,
   pkgs,
+  lib,
   inputs,
   ...
 }: {
+  options = {
+    __cfg.audio.defaultVolume = lib.mkOption {
+      type = lib.types.float;
+      default = 0.1;
+      description = "Default volume on default output";
+    };
+  };
   config = {
     # Enable sound with pipewire.
     services.pulseaudio.enable = false;
@@ -23,10 +31,13 @@
       wireplumber = {
         enable = true;
 
-        extraConfig = {
+        extraConfig = let
+          volume = config.__cfg.audio.defaultVolume;
+          cubicVolume = volume * volume * volume;
+        in {
           "01-set-default-sink-volume" = {
             "wireplumber.settings" = {
-              "device.routes.default-sink-volume" = 0.001;  # Set default output volume to 10% on cubic scale 0.0 ^ 3
+              "device.routes.default-sink-volume" = cubicVolume; # Set default output volume to 10% on cubic scale 0.1 ^ 3
             };
           };
         };
