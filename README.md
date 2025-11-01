@@ -63,6 +63,12 @@ Place `age` key in `${HOME}/.config/sops/age/keys.txt` and enable
 `__cfg.sops.enable = true;` in home manager config. Secret decryption will fail
 otherwise.
 
+Editing secrets:
+
+```shell
+nix run nixpkgs#sops -- home-manager/users/psy/secrets.yaml
+```
+
 ## Secure boot
 
 Starting out, secure boot should be disabled in the firmware and the nixos
