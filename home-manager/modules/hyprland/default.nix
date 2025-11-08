@@ -107,9 +107,10 @@ in {
 
             "CTRL ALT, L, exec, loginctl lock-session"
 
-            "$mod CTRL, Space, togglefloating,"
-            "$mod, F, fullscreen,"
+            "$shiftMod, F, togglefloating,"
             "$mod, T, pin,"
+
+            "$mod, F, fullscreen,"
 
             "$mod, h, movefocus, l"
             "$mod, l, movefocus, r"
@@ -149,6 +150,11 @@ in {
           ++ lib.optionals cfg.displayWorkspaces [
             "$mod, O, split-changemonitor, next"
           ];
+
+        bindm = [
+            "$mod, mouse:272, movewindow"
+            "$mod, mouse:273, resizewindow"
+        ];
 
         bindl = [
           # Media keys
