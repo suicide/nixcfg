@@ -71,7 +71,7 @@ in {
       in {
         monitor = cfg.monitors;
 
-        windowrulev2 = "noborder, onworkspace:w[t1]";
+        windowrule = "match:workspace w[tv1], border_size 0";
 
         exec-once = cfg.onStartup;
 
