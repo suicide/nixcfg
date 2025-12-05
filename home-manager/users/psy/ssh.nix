@@ -28,6 +28,18 @@ in {
           user = "git";
         };
 
+        "codeberg.org" = {
+          hostname = "codeberg.org";
+          identityFile = "${secrets}/codeberg/privateKey";
+          user = "git";
+        };
+
+        "codeberg-ler" = {
+          hostname = "codeberg.org";
+          identityFile = "${secrets}/codeberg-ler/privateKey";
+          user = "git";
+        };
+
         "bitbucket.org" = {
           hostname = "bitbucket.org";
           identityFile = "${secrets}/bitbucket/privateKey";

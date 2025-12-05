@@ -37,6 +37,20 @@ in {
           path = "%r/github-public-key";
         };
 
+        "ssh/codeberg/privateKey" = {
+          path = "%r/codeberg-private-key";
+        };
+        "ssh/codeberg/publicKey" = {
+          path = "%r/codeberg-public-key";
+        };
+
+        "ssh/codeberg-ler/privateKey" = {
+          path = "%r/codeberg-ler-private-key";
+        };
+        "ssh/codeberg-ler/publicKey" = {
+          path = "%r/codeberg-ler-public-key";
+        };
+
         "ssh/bitbucket/privateKey" = {
           path = "%r/bitbucket-private-key";
         };
