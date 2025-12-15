@@ -117,6 +117,60 @@
           exclude = [];
           tabProxy = [];
         }
+        {
+          active = true;
+          title = "boston 102";
+          type = "socks5";
+          hostname = "us-bos-wg-socks5-102.relays.mullvad.net";
+          port = "1080";
+          username = "";
+          password = "";
+          cc = "";
+          city = "";
+          color = "#0a3c89";
+          pac = "";
+          pacString = "";
+          proxyDNS = true;
+          include = [];
+          exclude = [];
+          tabProxy = [];
+        }
+        {
+          active = true;
+          title = "zurich 003";
+          type = "socks5";
+          hostname = "ch-zrh-wg-socks5-003.relays.mullvad.net:1080";
+          port = "1080";
+          username = "";
+          password = "";
+          cc = "";
+          city = "";
+          color = "#9400d3";
+          pac = "";
+          pacString = "";
+          proxyDNS = true;
+          include = [];
+          exclude = [];
+          tabProxy = [];
+        }
+        {
+          active = true;
+          title = "zurich 004";
+          type = "socks5";
+          hostname = "ch-zrh-wg-socks5-004.relays.mullvad.net:1080";
+          port = "1080";
+          username = "";
+          password = "";
+          cc = "";
+          city = "";
+          color = "#4c0a55";
+          pac = "";
+          pacString = "";
+          proxyDNS = true;
+          include = [];
+          exclude = [];
+          tabProxy = [];
+        }
       ];
     };
   };
