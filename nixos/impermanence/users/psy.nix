@@ -46,6 +46,7 @@ in {
           ".local/share/nvim"
           ".vim/undodir"
           ".config/github-copilot" # copilot auth
+          ".config/.copilot" # copilot-cli
 
           ## Brave
           ".cache/BraveSoftware"
