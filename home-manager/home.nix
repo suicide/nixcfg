@@ -32,6 +32,8 @@
     ./modules/ssh.nix
     ./modules/direnv.nix
 
+    ./modules/ai/copilot-cli.nix
+
     ./modules/network.nix
 
     # ./modules/virtualization/container-tools.nix

@@ -23,6 +23,9 @@ in {
         "ai/gemini/api_key" = {
           path = "%r/ai-gemini-api-key";
         };
+        "ai/github_copilot/token" = {
+          path = "%r/ai-github-copilot-token";
+        };
         "ssh/homebase/privateKey" = {
           path = "%r/homebase-private-key";
         };
