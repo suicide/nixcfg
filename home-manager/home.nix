@@ -24,13 +24,15 @@
     ./modules/gtk.nix
 
     ./modules/kitty.nix
-    ./modules/neovim.nix
     ./modules/zsh.nix
     ./modules/git.nix
     ./modules/tmux.nix
     ./modules/gpg.nix
     ./modules/ssh.nix
     ./modules/direnv.nix
+
+    ./modules/neovim/neovim.nix
+    ./modules/neovim/mcphub.nix
 
     ./modules/ai/copilot-cli.nix
 

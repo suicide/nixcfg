@@ -15,12 +15,14 @@
 
     # You can also split up your configuration and import pieces of it here:
     ./modules/kitty.nix
-    ./modules/neovim.nix
     ./modules/zsh.nix
     ./modules/git.nix
     ./modules/tmux.nix
     ./modules/gpg.nix
     ./modules/ssh.nix
+
+    ./modules/neovim/neovim.nix
+    # ./modules/neovim/mcphub.nix
 
     ./modules/direnv.nix
 
