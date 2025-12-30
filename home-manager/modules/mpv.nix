@@ -14,6 +14,9 @@
 
       config = {
         volume-max = 300;
+
+        # temporary workaround for https://github.com/mpv-player/mpv/issues/17170
+        target-colorspace-hint = "no";
       };
 
       scripts = [
