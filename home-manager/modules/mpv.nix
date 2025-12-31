@@ -16,12 +16,25 @@
         volume-max = 300;
 
         # temporary workaround for https://github.com/mpv-player/mpv/issues/17170
-        target-colorspace-hint = "no";
+        # target-colorspace-hint = "no";
       };
 
-      scripts = [
-      ]
-      ++ (if !pkgs.stdenv.isDarwin then linuxPlugins else []);
+      profiles = {
+        # temporary workaround for https://github.com/mpv-player/mpv/issues/17170
+        libplacebo-workaround = {
+          profile-cond = "p['current-vo'] == 'gpu-next' and p['video-params/gamma'] == 'bt.1886'";
+          profile-restore = "copy";
+          target-trc = "bt.1886";
+        };
+      };
+
+      scripts =
+        []
+        ++ (
+          if !pkgs.stdenv.isDarwin
+          then linuxPlugins
+          else []
+        );
     };
 
     home.packages = with pkgs; [
