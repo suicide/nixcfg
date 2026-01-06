@@ -9,17 +9,20 @@ in {
   config = let
     wallpaperPath = ".config/hypr/wallpaper.jpeg";
   in {
-    services.hyprpaper = lib.mkIf (cfg.enable) {
+    services.hyprpaper = lib.mkIf cfg.enable {
       enable = true;
       settings = let
         absoluteWallpaperPath = "${config.home.homeDirectory}/${wallpaperPath}";
       in {
-        preload = [absoluteWallpaperPath];
-        wallpaper = [", ${absoluteWallpaperPath}"];
+        wallpaper = {
+          monitor = "";
+          path = "${absoluteWallpaperPath}";
+        };
+        splash = false;
       };
     };
 
-    home.file = lib.mkIf (cfg.enable) {
+    home.file = lib.mkIf cfg.enable {
       "${wallpaperPath}".source = ../../../assets/wallpaper/mountain-range.jpeg;
     };
   };
