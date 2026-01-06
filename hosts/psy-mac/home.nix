@@ -67,7 +67,7 @@ in {
       geminiApiKey = "${secrets}/ai/gemini/api_key";
 
       extraConfig = {
-        assistant.codecompanion-nvim = {
+        vim.assistant.codecompanion-nvim = {
           setupOpts = {
             adapters = lib.mkForce (lib.mkLuaInline ''
               {

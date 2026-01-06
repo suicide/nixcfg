@@ -29,7 +29,7 @@ in {
         default = {};
         description = "Extra NVF vim config to apply, overrides may be necessary";
         example = {
-          utility.oil-nvim = {
+          vim.utility.oil-nvim = {
             enable = lib.mkForce false;
           };
         };
@@ -82,11 +82,16 @@ in {
         };
       }
       // lib.optionalAttrs cfg.useNvf (let
+        defaultConfig = {
+          __cfg = {
+            opencode = {
+              # enforce same opencode package
+              opencodePackage = pkgs.opencode;
+            };
+          };
+        };
         nvim = inputs.neovim.packages.${pkgs.system}.neovimCustom {
-          inherit
-            (cfg)
-            extraConfig
-            ;
+          extraConfig = defaultConfig // cfg.extraConfig;
         };
         nvimOverridden = pkgs.symlinkJoin {
           name = "neovim-vars-wrapped";
