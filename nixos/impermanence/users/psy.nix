@@ -47,6 +47,7 @@ in {
           ".vim/undodir"
           ".config/github-copilot" # copilot auth
           ".config/.copilot" # copilot-cli
+          ".local/share/opencode" # opencode (auth in `auth.json`)
 
           ## Brave
           ".cache/BraveSoftware"
