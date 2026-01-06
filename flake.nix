@@ -75,7 +75,8 @@
     # my nvf neovim
     neovim = {
       url = "github:suicide/nvim-nvf";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # not following nixpkgs currently due to tree-sitter update https://github.com/NotAShelf/nvf/pull/1315
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
