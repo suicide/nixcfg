@@ -1,6 +1,9 @@
 {
   description = "suiiii's nix config";
 
+  # Inputs
+  # Most inputs follow 'nixpkgs' to ensure version consistency across the system.
+  # Exceptions (like hyprland or neovim) are pinned or independent to avoid build issues or leverage caches.
   inputs = {
     # Nixpkgs
     nixpkgs = {

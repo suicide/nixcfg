@@ -11,7 +11,7 @@ in {
     __cfg.secureboot.enable = lib.mkOption {
       type = lib.types.bool;
       default = false;
-      description = "Enable secure boot";
+      description = "Enable secure boot using Lanzaboote. Requires sbctl setup.";
     };
   };
 
