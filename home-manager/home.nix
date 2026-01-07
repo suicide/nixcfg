@@ -35,7 +35,7 @@
     ./modules/neovim/mcphub.nix
 
     ./modules/ai/copilot-cli.nix
-    ./modules/ai/opencode.nix
+    ./modules/ai/opencode
 
     ./modules/network.nix
 
