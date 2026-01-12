@@ -4,7 +4,9 @@
   inputs,
   lib,
   ...
-}: {
+}: let
+  impermanenceCfg = config.__cfg.impermanence;
+in {
   config = {
     # Enable the X11 windowing system.
     services.xserver.enable = true;
@@ -13,10 +15,35 @@
     # services.xserver.libinput.enable = true;
 
     # Enable the GNOME Desktop Environment.
-    services.displayManager.gdm = {
+    # services.displayManager.gdm = {
+    #   enable = true;
+    #   wayland = true;
+    # };
+    services.displayManager.sddm = {
       enable = true;
-      wayland = true;
+      package = pkgs.kdePackages.sddm;
+      # extraPackages = [ pkgs.catppuccin-sddm ];
+      theme = "catppuccin-mocha-mauve";
+
+      settings = {
+        Users = {
+          RememberLastUser = true;
+          RememberLastSession = false;
+        };
+      };
     };
+
+    environment = {
+      systemPackages = with pkgs; [
+        catppuccin-sddm
+      ];
+      persistence.${impermanenceCfg.persistDir} = {
+        files = [
+          "/var/lib/sddm/state.conf"
+        ];
+      };
+    };
+
     # services.xserver.desktopManager.gnome.enable = true;
     # services.xserver.windowManager.awesome = {
     #   enable = true;
