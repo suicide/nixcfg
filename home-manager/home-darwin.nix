@@ -24,6 +24,8 @@
     ./modules/neovim/neovim.nix
     # ./modules/neovim/mcphub.nix
 
+    ./modules/ai/opencode
+
     ./modules/direnv.nix
 
     ./modules/network.nix
