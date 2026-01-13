@@ -26,6 +26,9 @@ in {
         "ai/github_copilot/token" = {
           path = "%r/ai-github-copilot-token";
         };
+        "mcp/docfork/api_key" = {
+          path = "%r/mcp-docfork-api-key";
+        };
         "ssh/homebase/privateKey" = {
           path = "%r/homebase-private-key";
         };

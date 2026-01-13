@@ -8,6 +8,8 @@
   imports = [
     ./sops.nix
     ./ssh.nix
+
+    ./opencode.nix
   ];
 
   home = {

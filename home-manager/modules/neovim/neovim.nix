@@ -39,6 +39,11 @@ in {
         default = null;
         description = "Gemini API key file for neovim plugin";
       };
+      opencodePackage = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.opencode;
+        description = "The opencode package to use";
+      };
     };
   };
   config = lib.mkIf cfg.enable {
@@ -86,7 +91,7 @@ in {
           __cfg = {
             opencode = {
               # enforce same opencode package
-              opencodePackage = pkgs.opencode;
+              inherit (cfg) opencodePackage;
             };
           };
         };
