@@ -80,7 +80,7 @@ in {
             type = "remote";
             url = "https://mcp.docfork.com/mcp";
             enabled = true;
-            headers = {
+            headers = lib.mkIf (cfg.mcp.docfork.apiKeyFile != null) {
               "DOCFORK_CABINET" = "general";
               "DOCFORK_API_KEY" = "{env:DOCFORK_API_KEY}";
             };
