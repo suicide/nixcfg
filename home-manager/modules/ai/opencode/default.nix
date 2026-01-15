@@ -72,7 +72,7 @@ in {
 
       settings = {
         plugin = [
-          "opencode-gemini-auth@1.3.7" # allow auth with gemini oauth
+          "opencode-antigravity-auth@1.2.8" # allow auth with google antigravity oauth
         ];
 
         mcp = {
@@ -106,6 +106,10 @@ in {
             "git log" = "allow";
             "git diff" = "allow";
           };
+        };
+
+        provider = {
+          google = import ./providers/google.nix;
         };
       };
     };
