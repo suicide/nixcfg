@@ -812,11 +812,11 @@
         "nvf": "nvf"
       },
       "locked": {
-        "lastModified": 1768493251,
-        "narHash": "sha256-lM5a5TnScdQGyX0mcW+b2Y6neZra+r65S5prB/wjjo8=",
+        "lastModified": 1768514009,
+        "narHash": "sha256-5g8KMiBj2Kd/z8BfABMV+SnnIF7VqIiIkj10tWdpLG8=",
         "owner": "suicide",
         "repo": "nvim-nvf",
-        "rev": "bf08f656263e7e056264c6150adc11d5fd8024ea",
+        "rev": "e635d617f8fc93cb00d795ac370384dc50ea3d99",
         "type": "github"
       },
       "original": {
