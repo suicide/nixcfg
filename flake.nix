@@ -75,6 +75,12 @@
       flake = false;
     };
 
+    # OpenAgentsControl config
+    OpenAgentsControl = {
+      url = "github:darrenhinde/OpenAgentsControl/main";
+      flake = false;
+    };
+
     # my nvf neovim
     neovim = {
       url = "github:suicide/nvim-nvf";
@@ -133,5 +139,19 @@
     homeConfigurations = {
       "psy@psy-fw13" = mkHome "x86_64-linux" ./home-manager/home.nix;
     };
+
+    # packages
+    packages = let
+      systems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
+      forAllSystems = nixpkgs.lib.genAttrs systems;
+    in
+      forAllSystems (system: let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in {
+        openagents-opencode = pkgs.callPackage ./packages/openagents-opencode {
+          openAgentsControlSrc = inputs.OpenAgentsControl;
+        };
+      });
+
   };
 }

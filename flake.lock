@@ -1,5 +1,22 @@
 {
   "nodes": {
+    "OpenAgentsControl": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1769467727,
+        "narHash": "sha256-hhqW0BQYOTz3Dv/syVcIkFpU6qxYjy9Nw6utyqO9Ah8=",
+        "owner": "darrenhinde",
+        "repo": "OpenAgentsControl",
+        "rev": "279d63cb89c60c1cd32030238903cf67bce4d75b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "darrenhinde",
+        "ref": "main",
+        "repo": "OpenAgentsControl",
+        "type": "github"
+      }
+    },
     "aquamarine": {
       "inputs": {
         "hyprutils": [
@@ -1033,6 +1050,7 @@
     },
     "root": {
       "inputs": {
+        "OpenAgentsControl": "OpenAgentsControl",
         "disko": "disko",
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
