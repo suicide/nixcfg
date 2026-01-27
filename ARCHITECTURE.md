@@ -14,6 +14,8 @@ custom module system, and the secrets management workflow.
   - **`modules/`**: Atomic Home Manager modules (e.g., `git.nix`, `hyprland/`,
     `neovim/`).
   - **`users/`**: User definitions (e.g., `psy/`).
+- **`packages/`**: Contains custom package definitions that are exposed via the
+  flake overlay.
 
 ## The `__cfg` Module Pattern
 

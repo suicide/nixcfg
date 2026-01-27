@@ -22,6 +22,7 @@ Manager as a module.
 - `home-manager/`: Shared user-level modules (shell, editors, GUI apps).
   - `modules/`: Atomic configuration units.
   - `users/`: User profiles.
+- `packages/`: Custom package definitions (e.g., `openagents-opencode`).
 - `docs/`: detailed documentation.
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for details on the module system and

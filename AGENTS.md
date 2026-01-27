@@ -21,5 +21,6 @@ ChatGPT, etc.) interacting with this repository.
 ## Tooling
 
 - **Flakes**: This is a pure flake setup. All commands should use `--flake .`.
+- **Custom Packages**: Defined in `packages/` and overlaid onto `pkgs`. Check `packages/<package-name>/default.nix`.
 - **Disko**: Used for disk partitioning.
 - **Home Manager**: Used as a NixOS module.
