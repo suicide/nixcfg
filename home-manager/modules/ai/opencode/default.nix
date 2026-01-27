@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  inputs,
   ...
 }: let
   cfg = config.__cfg.opencode;
@@ -19,6 +20,20 @@
       }
     '';
   };
+
+  wrappedOpenagentsPackage = pkgs.symlinkJoin {
+    name = "openagents-opencode-wrapped";
+    paths = [inputs.self.packages.${pkgs.system}.openagents-opencode];
+    buildInputs = [pkgs.makeWrapper];
+    postBuild = ''
+      wrapProgram $out/bin/openagents-opencode \
+        ${
+        if cfg.mcp.docfork.enable && cfg.mcp.docfork.apiKeyFile != null
+        then ''--run 'export DOCFORK_API_KEY="$(cat ${cfg.mcp.docfork.apiKeyFile})"' ''
+        else ""
+      }
+    '';
+  };
 in {
   options = {
     __cfg.opencode = {
@@ -26,6 +41,13 @@ in {
         type = lib.types.bool;
         default = true;
         description = "Enable opencode";
+      };
+      openagents = {
+        enable = lib.mkOption {
+          type = lib.types.bool;
+          default = true;
+          description = "Enable openagents-opencode parallel installation";
+        };
       };
       package = lib.mkOption {
         type = lib.types.package;
@@ -114,6 +136,8 @@ in {
         };
       };
     };
+
+    home.packages = lib.mkIf cfg.openagents.enable [wrappedOpenagentsPackage];
 
     # use the same opencode package in neovim
     __cfg.neovim.opencodePackage = cfg.package;
