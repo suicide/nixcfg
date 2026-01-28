@@ -94,7 +94,7 @@ in {
 
       settings = {
         plugin = [
-          "opencode-antigravity-auth@1.3.1" # allow auth with google antigravity oauth
+          "opencode-antigravity-auth@1.3.2" # allow auth with google antigravity oauth
         ];
 
         mcp = {
