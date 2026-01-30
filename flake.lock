@@ -1002,6 +1002,23 @@
         "type": "github"
       }
     },
+    "opencode-antigravity-auth": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1769765704,
+        "narHash": "sha256-WATemB1kx8dtnQQrU4SOqLjsesDMEiZh7e7mMDGT+xI=",
+        "owner": "NoeFabris",
+        "repo": "opencode-antigravity-auth",
+        "rev": "ffa560ccd1588bf1ff493c3c7d6201f2d0ad4918",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NoeFabris",
+        "ref": "main",
+        "repo": "opencode-antigravity-auth",
+        "type": "github"
+      }
+    },
     "pre-commit": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -1065,6 +1082,7 @@
         "nix-homebrew": "nix-homebrew",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_4",
+        "opencode-antigravity-auth": "opencode-antigravity-auth",
         "sops-nix": "sops-nix"
       }
     },

@@ -34,6 +34,9 @@
       }
     '';
   };
+  antigravityAuthPackageJson = builtins.fromJSON (
+    builtins.readFile "${inputs.opencode-antigravity-auth}/package.json"
+  );
 in {
   options = {
     __cfg.opencode = {
@@ -94,7 +97,7 @@ in {
 
       settings = {
         plugin = [
-          "opencode-antigravity-auth@1.4.2" # allow auth with google antigravity oauth
+          "${antigravityAuthPackageJson.name}@${antigravityAuthPackageJson.version}" # allow auth with google antigravity oauth
         ];
 
         mcp = {
