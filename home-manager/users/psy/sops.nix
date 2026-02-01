@@ -133,6 +133,14 @@ in {
         "ssh/auberon/publicKey" = {
           path = "%r/auberon-public-key";
         };
+
+        "ssh/outterworld/host" = {};
+        "ssh/outterworld/privateKey" = {
+          path = "%r/outterworld-private-key";
+        };
+        "ssh/outterworld/publicKey" = {
+          path = "%r/outterworld-public-key";
+        };
       };
     };
   };
