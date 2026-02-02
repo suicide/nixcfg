@@ -102,6 +102,7 @@ in {
           HostName ${config.sops.placeholder."ssh/outterworld/host"}
           User ubuntu
           IdentityFile ${secrets}/outterworld/privateKey
+          LocalForward 6443 localhost:6443
       '';
       mode = "0600"; # Secure perms
       path = "${config.home.homeDirectory}/.ssh/config.d/outterworld.conf";
