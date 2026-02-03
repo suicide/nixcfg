@@ -20,6 +20,7 @@ in {
     # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.${cfg.mainUser} = {
       isNormalUser = true;
+      uid = 1000;
       description = "${cfg.mainUser}";
       hashedPassword = "$6$Y147CW7B3CWybgq7$VDfH7eOp4YaYLAP6QWAX.KEZ2YYwzoFkzvOLpzMUifFZBwluIBtmjdf7hHLBbyRsg.c6WT5qMTTITit2pc2Xt/";
       extraGroups = ["networkmanager" "wheel"];

@@ -89,7 +89,7 @@ in {
         {
           type = "cifs";
           mountConfig = {
-            Options = "noatime,credentials=${cfg.luna.credentials},uid=${mainUserId},gid=${mainUserGroupId}";
+            Options = "noatime,credentials=${cfg.luna.credentials},uid=${mainUserId},gid=${mainUserGroupId},dir_mode=0775,file_mode=0664";
           };
           what = "//luna.homenet2.hastybox.com/storage";
           where = "/net/luna/storage";
