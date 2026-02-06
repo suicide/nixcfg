@@ -1005,11 +1005,11 @@
     "opencode-antigravity-auth": {
       "flake": false,
       "locked": {
-        "lastModified": 1770316355,
-        "narHash": "sha256-BkLGwYgJG2mfr4NsQNSy1vv7qwVZxTU3r+tdooP9yM4=",
+        "lastModified": 1770414196,
+        "narHash": "sha256-MYsZHervd8r6Bxcdl/Z2V3QsiekDFSFc8bUdna4hDS8=",
         "owner": "NoeFabris",
         "repo": "opencode-antigravity-auth",
-        "rev": "21d32e8ef8bb58a2a9b285994f25881622c2e44f",
+        "rev": "28f46c2e62e7d5e13d3e956d55bd9c306b93bc9e",
         "type": "github"
       },
       "original": {
