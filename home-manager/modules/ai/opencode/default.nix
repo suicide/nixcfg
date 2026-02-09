@@ -52,6 +52,13 @@ in {
           description = "Enable openagents-opencode parallel installation";
         };
       };
+      oh-my-opencode = {
+        enable = lib.mkOption {
+          type = lib.types.bool;
+          default = true;
+          description = "Enable oh-my-opencode plugin";
+        };
+      };
       package = lib.mkOption {
         type = lib.types.package;
         default = wrappedOpencode;
@@ -96,9 +103,11 @@ in {
       };
 
       settings = {
-        plugin = [
-          "${antigravityAuthPackageJson.name}@${antigravityAuthPackageJson.version}" # allow auth with google antigravity oauth
-        ];
+        plugin =
+          [
+            "${antigravityAuthPackageJson.name}@${antigravityAuthPackageJson.version}" # allow auth with google antigravity oauth
+          ]
+          ++ lib.optional cfg.oh-my-opencode.enable "oh-my-opencode@3.4.0";
 
         mcp = {
           docfork = lib.mkIf cfg.mcp.docfork.enable {
@@ -141,6 +150,10 @@ in {
     };
 
     home.packages = lib.mkIf cfg.openagents.enable [wrappedOpenagentsPackage];
+
+    home.file.".config/opencode/oh-my-opencode.json" = lib.mkIf cfg.oh-my-opencode.enable {
+      source = ./oh-my-opencode/oh-my-opencode.json;
+    };
 
     # use the same opencode package in neovim
     __cfg.neovim.opencodePackage = cfg.package;
