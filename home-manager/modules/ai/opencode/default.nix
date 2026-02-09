@@ -23,7 +23,7 @@
 
   wrappedOpenagentsPackage = pkgs.symlinkJoin {
     name = "openagents-opencode-wrapped";
-    paths = [inputs.self.packages.${pkgs.system}.openagents-opencode];
+    paths = [inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.openagents-opencode];
     buildInputs = [pkgs.makeWrapper];
     postBuild = ''
       wrapProgram $out/bin/openagents-opencode \

@@ -95,7 +95,7 @@ in {
             };
           };
         };
-        nvim = inputs.neovim.packages.${pkgs.system}.neovimCustom {
+        nvim = inputs.neovim.packages.${pkgs.stdenv.hostPlatform.system}.neovimCustom {
           extraConfig = defaultConfig // cfg.extraConfig;
         };
         nvimOverridden = pkgs.symlinkJoin {

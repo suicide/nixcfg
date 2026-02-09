@@ -19,7 +19,7 @@
           "extensions.autoDisableScopes" = 0;
         };
         extensions = {
-          packages = builtins.map (ext: inputs.firefox-addons.packages.${pkgs.system}.${ext}) (
+          packages = builtins.map (ext: inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}.${ext}) (
             builtins.attrNames extensions
           );
           force = true;

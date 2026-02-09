@@ -55,7 +55,7 @@ in {
       enable = true;
 
       plugins = lib.optionals cfg.displayWorkspaces [
-        inputs.hyprland-split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+        inputs.hyprland-split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system}.split-monitor-workspaces
       ];
 
       # start with uwsm
