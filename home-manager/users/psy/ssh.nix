@@ -107,5 +107,18 @@ in {
       mode = "0600"; # Secure perms
       path = "${config.home.homeDirectory}/.ssh/config.d/outterworld.conf";
     };
+
+    sops.templates."ssh-config-outterworld2" = {
+      content = ''
+        Host outterworld2
+          HostName ${config.sops.placeholder."ssh/outterworld2/host"}
+          Port 41233
+          User ubuntu
+          IdentityFile ${secrets}/outterworld2/privateKey
+          LocalForward 6443 localhost:6443
+      '';
+      mode = "0600"; # Secure perms
+      path = "${config.home.homeDirectory}/.ssh/config.d/outterworld2.conf";
+    };
   };
 }

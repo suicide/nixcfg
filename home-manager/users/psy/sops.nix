@@ -141,6 +141,14 @@ in {
         "ssh/outterworld/publicKey" = {
           path = "%r/outterworld-public-key";
         };
+
+        "ssh/outterworld2/host" = {};
+        "ssh/outterworld2/privateKey" = {
+          path = "%r/outterworld2-private-key";
+        };
+        "ssh/outterworld2/publicKey" = {
+          path = "%r/outterworld2-public-key";
+        };
       };
     };
   };
