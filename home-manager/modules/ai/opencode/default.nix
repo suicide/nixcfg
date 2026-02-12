@@ -82,6 +82,18 @@ in {
             description = "Searxng mcp url";
           };
         };
+        grepApp = {
+          enable = lib.mkOption {
+            type = lib.types.bool;
+            default = true;
+            description = "Enable grep_app mcp";
+          };
+          url = lib.mkOption {
+            type = lib.types.str;
+            default = "https://mcp.grep.app";
+            description = "grep_app mcp url";
+          };
+        };
       };
     };
   };
@@ -113,6 +125,11 @@ in {
           searxng = lib.mkIf cfg.mcp.searxng.enable {
             type = "remote";
             url = cfg.mcp.searxng.url;
+            enabled = true;
+          };
+          grep_app = lib.mkIf cfg.mcp.grepApp.enable {
+            type = "remote";
+            url = cfg.mcp.grepApp.url;
             enabled = true;
           };
         };
