@@ -36,6 +36,7 @@
 
     ./modules/ai/copilot-cli.nix
     ./modules/ai/opencode
+    ./modules/ai/gemini-cli
 
     ./modules/network.nix
 

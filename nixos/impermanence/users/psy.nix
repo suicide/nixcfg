@@ -48,6 +48,7 @@ in {
           ".config/github-copilot" # copilot auth
           ".config/.copilot" # copilot-cli
           ".local/share/opencode" # opencode (auth in `auth.json`)
+          ".gemini" # gemini-cli auth
 
           ## Brave
           ".cache/BraveSoftware"
