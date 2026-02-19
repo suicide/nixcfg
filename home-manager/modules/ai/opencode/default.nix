@@ -57,6 +57,15 @@ in {
         default = wrappedOpencode;
         description = "The opencode package to use";
       };
+      provider = {
+        google-antigravity = {
+          enable = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+            description = "Enable google antigravity oauth provider";
+          };
+        };
+      };
       mcp = {
         docfork = {
           enable = lib.mkOption {
@@ -108,9 +117,12 @@ in {
       };
 
       settings = {
-        plugin = [
-          "${antigravityAuthPackageJson.name}@${antigravityAuthPackageJson.version}" # allow auth with google antigravity oauth
-        ];
+        plugin =
+          []
+          ++ lib.optionals cfg.provider.google-antigravity.enable
+          [
+            "${antigravityAuthPackageJson.name}@${antigravityAuthPackageJson.version}" # allow auth with google antigravity oauth
+          ];
 
         mcp = {
           docfork = lib.mkIf cfg.mcp.docfork.enable {
@@ -152,7 +164,7 @@ in {
         };
 
         provider = {
-          google = import ./providers/google.nix;
+          google = lib.mkIf cfg.provider.google-antigravity.enable (import ./providers/google.nix);
         };
       };
     };
