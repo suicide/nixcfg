@@ -8,6 +8,7 @@
     programs.yazi = {
       enable = true;
       enableZshIntegration = true;
+      shellWrapperName = "y";
 
       plugins = {
         "relative-motions" = pkgs.yaziPlugins.relative-motions;
