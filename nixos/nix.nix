@@ -1,4 +1,5 @@
 {
+  self,
   config,
   pkgs,
   inputs,
@@ -9,5 +10,8 @@
 
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
+
+    # revision
+    system.configurationRevision = builtins.toString (self.shortRev or self.dirtyShortRev or "unknown");
   };
 }

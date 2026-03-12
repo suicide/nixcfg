@@ -106,7 +106,7 @@
     inherit (self) outputs;
     mkSystem = hostname: cfg:
       nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs hostname;};
+        specialArgs = {inherit self inputs outputs hostname;};
         # path to host specific config modules
         modules = [
           cfg
@@ -114,7 +114,7 @@
       };
     mkDarwin = hostname: cfg:
       nix-darwin.lib.darwinSystem {
-        specialArgs = {inherit inputs outputs hostname;};
+        specialArgs = {inherit self inputs outputs hostname;};
         system = "aarch64-darwin";
         # path to host specific config modules
         modules = [
@@ -124,7 +124,7 @@
     mkHome = arch: cfg:
       home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${arch}; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs;};
+        extraSpecialArgs = {inherit self inputs outputs;};
         # specific config file
         modules = [cfg];
       };
