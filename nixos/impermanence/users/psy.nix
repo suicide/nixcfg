@@ -67,6 +67,8 @@ in {
         ];
         files = [
           ".zsh_history"
+
+          ".config/gh/hosts.yml" # github cli authentication
         ];
       };
     };
