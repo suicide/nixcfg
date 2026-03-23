@@ -23,6 +23,8 @@ in {
         name = "Flat-Remix-GTK-Grey-Dark";
       };
 
+      gtk4.theme = null;
+
       iconTheme = {
         package = pkgs.adwaita-icon-theme;
         name = "Adwaita";
