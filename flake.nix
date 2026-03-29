@@ -48,12 +48,13 @@
 
     # hyprland
     hyprland = {
-      url = "github:hyprwm/Hyprland/v0.54.2";
+      url = "github:hyprwm/Hyprland/v0.54.3";
       # do not change hyprland's nixpkgs to take advantage of cache and not to mess with build
       # inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland-split-monitor-workspaces = {
-      url = "github:Duckonaut/split-monitor-workspaces/v0.54.2";
+      # url = "github:Duckonaut/split-monitor-workspaces/v0.54.3";
+      url = "github:suicide/split-monitor-workspaces/fix-nix-0.54.3";
       inputs.hyprland.follows = "hyprland";
     };
 
