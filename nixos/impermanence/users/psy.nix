@@ -64,6 +64,10 @@ in {
           ".electrum" # legacy
           ".bitmonero"
           ".monero"
+
+          # Uncomment after validating the combined PipeWire sink setup on
+          # psy-work1 so WirePlumber can remember the default sink and routes.
+          # ".local/state/wireplumber"
         ];
         files = [
           ".zsh_history"
@@ -74,5 +78,3 @@ in {
     };
   };
 }
-
-# wireplumber audio levels: .local/state/wireplumber/default-routes

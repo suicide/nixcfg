@@ -32,6 +32,7 @@
     ../../nixos/desktop.nix
 
     ../../nixos/audio.nix
+    ./audio.nix
     ../../nixos/bluetooth.nix
     ../../nixos/firewall.nix
     ../../nixos/wifi.nix
@@ -77,8 +78,6 @@
 
     # services.xserver.desktopManager.gnome.enable = true;
     programs.hyprland.enable = true;
-
-    __cfg.audio.defaultVolume = 0.3;
 
     # Configure network proxy if necessary
     # networking.proxy.default = "http://user:password@proxy:port/";
