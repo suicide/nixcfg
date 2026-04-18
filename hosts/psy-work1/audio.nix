@@ -51,8 +51,8 @@
     "$wpctl" set-mute "$combined_id" 0
     "$wpctl" set-mute "$display_id" 1
     "$wpctl" set-mute "$headphones_id" 0
-    "$wpctl" set-volume "$combined_id" 1
-    "$wpctl" set-volume "$headphones_id" 0.3
+    "$wpctl" set-volume "$combined_id" 0.3
+    "$wpctl" set-volume "$headphones_id" 1
   '';
 in {
   config = {
