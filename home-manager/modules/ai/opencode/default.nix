@@ -148,14 +148,14 @@ in {
 
         permission = {
           bash = {
-            "git add*" = "deny";
-            "git commit*" = "deny";
+            # "git add*" = "deny";
+            # "git commit*" = "deny";
             "git push*" = "deny";
-            "git fetch*" = "deny";
-            "git pull*" = "deny";
-            "git reset*" = "deny";
-            "git merge*" = "deny";
-            "git rebase*" = "deny";
+            # "git fetch*" = "deny";
+            # "git pull*" = "deny";
+            # "git reset*" = "deny";
+            # "git merge*" = "deny";
+            # "git rebase*" = "deny";
 
             "git status" = "allow";
             "git log" = "allow";
