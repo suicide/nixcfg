@@ -12,6 +12,9 @@
     programs.firefox = {
       enable = true;
 
+      # explicitly setting new config path, sine we are on home.stateVersion < 26.05
+      configPath = "${config.xdg.configHome}/mozilla/firefox";
+
       policies = import ./policies.nix {inherit lib extensions;};
 
       profiles.default = {

@@ -57,7 +57,7 @@ in {
           ".cache/chromium"
           ".config/chromium"
 
-          ".mozilla"
+          ".config/mozilla"
 
           ".librewolf"
 
