@@ -112,7 +112,7 @@ in {
       content = ''
         Host outterworld2
           HostName ${config.sops.placeholder."ssh/outterworld2/host"}
-          Port 41233
+          Port 22
           User ubuntu
           IdentityFile ${secrets}/outterworld2/privateKey
           LocalForward 6443 localhost:6443
