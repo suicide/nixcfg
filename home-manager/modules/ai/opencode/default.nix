@@ -167,6 +167,15 @@ in {
           google = lib.mkIf cfg.provider.google-antigravity.enable (import ./providers/google.nix);
         };
       };
+
+      context = ''
+        # Host rules
+
+        ## Nix policy
+
+        NixOS / nix-darwin system.
+        Use Nix for any missing tool: `nix run nixpkgs#tool` or add to flake.
+      '';
     };
 
     home.packages = lib.mkIf cfg.openagents.enable [wrappedOpenagentsPackage];
