@@ -13,6 +13,7 @@
     buildInputs = [pkgs.makeWrapper];
     postBuild = ''
       wrapProgram $out/bin/opencode \
+        --prefix PATH : ${lib.makeBinPath [pkgs.gh]} \
         ${
         if cfg.mcp.docfork.enable && cfg.mcp.docfork.apiKeyFile != null
         then ''--run 'export DOCFORK_API_KEY="$(cat ${cfg.mcp.docfork.apiKeyFile})"' ''
@@ -160,6 +161,7 @@ in {
             "git status" = "allow";
             "git log" = "allow";
             "git diff" = "allow";
+            "gh *" = "allow";
           };
         };
 
