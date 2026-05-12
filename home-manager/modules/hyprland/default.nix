@@ -53,6 +53,8 @@ in {
 
     wayland.windowManager.hyprland = lib.mkIf cfg.enable {
       enable = true;
+      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
       plugins = lib.optionals cfg.displayWorkspaces [
         inputs.hyprland-split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system}.split-monitor-workspaces
