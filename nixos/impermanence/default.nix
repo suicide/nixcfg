@@ -7,5 +7,6 @@
 in {
   imports = [
     ./base.nix
+    ./btrfs.nix
   ];
 }
