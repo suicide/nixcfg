@@ -34,4 +34,4 @@ To add a new NixOS machine to this flake:
 ## Conventions
 
 - **Custom Options**: Use the `__cfg` namespace for all custom feature flags.
-- **Formatting**: Run `nix fmt` before committing. This flake uses `alejandra` for Nix formatting.
+- **Formatting**: Run `nix fmt .` before committing. This flake uses `alejandra` for Nix formatting.
