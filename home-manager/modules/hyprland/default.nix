@@ -55,6 +55,12 @@ let
 
   mkPluginBind = key: action: arg:
     mkBind key (lua "function() return smw.${action}(${arg}) end");
+
+  mkFocusBind = key: direction:
+    mkBind key (lua ''hl.dsp.focus({ direction = "${direction}" })'');
+
+  mkMoveBind = key: direction:
+    mkBind key (lua ''hl.dsp.window.move({ direction = "${direction}" })'');
 in
 {
   imports = [
@@ -204,20 +210,20 @@ in
 
           bind =
             [
-              (mkHyprctlDispatchBind (lua ''shiftMod .. " + Q"'') "exit" "")
-              (mkHyprctlDispatchBind (lua ''shiftMod .. " + C"'') "killactive" "")
+              (mkBind (lua ''shiftMod .. " + Q"'') (lua "hl.dsp.exit()"))
+              (mkBind (lua ''shiftMod .. " + C"'') (lua "hl.dsp.window.close()"))
               (mkExecBind "CTRL + ALT + L" "loginctl lock-session")
-              (mkHyprctlDispatchBind (lua ''shiftMod .. " + F"'') "togglefloating" "")
-              (mkHyprctlDispatchBind (lua ''mod .. " + T"'') "pin" "")
-              (mkHyprctlDispatchBind (lua ''mod .. " + F"'') "fullscreen" "")
-              (mkHyprctlDispatchBind (lua ''mod .. " + h"'') "movefocus" "l")
-              (mkHyprctlDispatchBind (lua ''mod .. " + l"'') "movefocus" "r")
-              (mkHyprctlDispatchBind (lua ''mod .. " + k"'') "movefocus" "u")
-              (mkHyprctlDispatchBind (lua ''mod .. " + j"'') "movefocus" "d")
-              (mkHyprctlDispatchBind (lua ''shiftMod .. " + h"'') "movewindow" "l")
-              (mkHyprctlDispatchBind (lua ''shiftMod .. " + l"'') "movewindow" "r")
-              (mkHyprctlDispatchBind (lua ''shiftMod .. " + k"'') "movewindow" "u")
-              (mkHyprctlDispatchBind (lua ''shiftMod .. " + j"'') "movewindow" "d")
+              (mkBind (lua ''shiftMod .. " + F"'') (lua ''hl.dsp.window.float({ action = "toggle" })''))
+              (mkBind (lua ''mod .. " + T"'') (lua ''hl.dsp.window.pin({ action = "toggle" })''))
+              (mkBind (lua ''mod .. " + F"'') (lua "hl.dsp.window.fullscreen()"))
+              (mkFocusBind (lua ''mod .. " + h"'') "left")
+              (mkFocusBind (lua ''mod .. " + l"'') "right")
+              (mkFocusBind (lua ''mod .. " + k"'') "up")
+              (mkFocusBind (lua ''mod .. " + j"'') "down")
+              (mkMoveBind (lua ''shiftMod .. " + h"'') "left")
+              (mkMoveBind (lua ''shiftMod .. " + l"'') "right")
+              (mkMoveBind (lua ''shiftMod .. " + k"'') "up")
+              (mkMoveBind (lua ''shiftMod .. " + j"'') "down")
               (mkExecBind (lua ''mod .. " + RETURN"'') "kitty")
               (mkExecBind (lua ''mod .. " + D"'') "rofi -show drun -show-icons")
               (mkExecBind (lua ''mod .. " + Q"'') "brave")
