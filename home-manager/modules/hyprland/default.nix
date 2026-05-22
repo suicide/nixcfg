@@ -146,7 +146,7 @@ in
           };
 
           shiftMod = {
-            _var = "SHIFT_SUPER";
+            _var = "SUPER + SHIFT";
           };
 
           smw = lib.mkIf cfg.displayWorkspaces {
@@ -162,7 +162,12 @@ in
 
           config = {
             general = {
-              gaps_out = "5,0,0,0";
+              gaps_out = {
+                top = 5;
+                right = 0;
+                bottom = 0;
+                left = 0;
+              };
             };
             ecosystem = {
               no_update_news = true;
