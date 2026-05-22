@@ -1,66 +1,69 @@
-{
-  lib,
-  pkgs,
-  config,
-  ...
-}: let
+{ lib
+, pkgs
+, config
+, ...
+}:
+let
   secrets = "~/.config/sops-nix/secrets/ssh";
-  hosts = ["unikorn" "homegate2" "thering" "luna" "deimos" "ganymede" "ceres" "auberon"];
-  simpleIdentity = name: {
-    host = "${name}.homenet2.hastybox.com";
-    hostname = "${name}.homenet2.hastybox.com";
-    identityFile = "${secrets}/${name}/privateKey";
-    user = "psy";
-  };
-in {
+  hosts = [ "unikorn" "homegate2" "thering" "luna" "deimos" "ganymede" "ceres" "auberon" ];
+  simpleIdentity = name:
+    let
+      fqdn = "${name}.homenet2.hastybox.com";
+    in
+    {
+      header = "Host ${fqdn}";
+      HostName = fqdn;
+      IdentityFile = "${secrets}/${name}/privateKey";
+      User = "psy";
+    };
+in
+{
   config = {
     programs.ssh = {
       extraConfig = ''
         Include ~/.ssh/config.d/*.conf
       '';
 
-      matchBlocks =
+      settings =
         {
           "homebase.get-it.us" = {
-            hostname = "homebase.get-it.us";
-            identityFile = "${secrets}/homebase/privateKey";
-            user = "psy";
+            HostName = "homebase.get-it.us";
+            IdentityFile = "${secrets}/homebase/privateKey";
+            User = "psy";
           };
 
           "github.com" = {
-            hostname = "github.com";
-            identityFile = "${secrets}/github/privateKey";
-            user = "git";
+            HostName = "github.com";
+            IdentityFile = "${secrets}/github/privateKey";
+            User = "git";
           };
 
           "codeberg.org" = {
-            hostname = "codeberg.org";
-            identityFile = "${secrets}/codeberg/privateKey";
-            user = "git";
+            HostName = "codeberg.org";
+            IdentityFile = "${secrets}/codeberg/privateKey";
+            User = "git";
           };
 
           "codeberg-ler" = {
-            hostname = "codeberg.org";
-            identityFile = "${secrets}/codeberg-ler/privateKey";
-            user = "git";
+            HostName = "codeberg.org";
+            IdentityFile = "${secrets}/codeberg-ler/privateKey";
+            User = "git";
           };
 
           "bitbucket.org" = {
-            hostname = "bitbucket.org";
-            identityFile = "${secrets}/bitbucket/privateKey";
-            user = "git";
-            extraOptions = {
-              "HostKeyAlgorithms" = "ssh-rsa";
-              "PubkeyAcceptedKeyTypes" = "ssh-rsa";
-            };
+            HostName = "bitbucket.org";
+            IdentityFile = "${secrets}/bitbucket/privateKey";
+            User = "git";
+            HostKeyAlgorithms = "ssh-rsa";
+            PubkeyAcceptedKeyTypes = "ssh-rsa";
           };
 
           "remote_hop" = {
-            hostname = "somewhere";
-            identityFile = "${secrets}/remote_hop/privateKey";
-            port = 50044;
-            user = "psyremote";
-            localForwards = [
+            HostName = "somewhere";
+            IdentityFile = "${secrets}/remote_hop/privateKey";
+            Port = 50044;
+            User = "psyremote";
+            LocalForward = [
               {
                 bind.port = 2224;
                 host.address = "localhost";
@@ -77,20 +80,18 @@ in {
                 host.port = 3128;
               }
             ];
-            serverAliveInterval = 10;
-            extraOptions = {
-              "StrictHostKeyChecking" = "no";
-              "UserKnownHostsFile" = "/dev/null";
-            };
+            ServerAliveInterval = 10;
+            StrictHostKeyChecking = "no";
+            UserKnownHostsFile = "/dev/null";
           };
 
           "macarco" = {
-            hostname = "localhost";
-            identityFile = "${secrets}/remote_macarco/privateKey";
-            port = 2224;
-            user = "psy";
-            serverAliveInterval = 10;
-            compression = true;
+            HostName = "localhost";
+            IdentityFile = "${secrets}/remote_macarco/privateKey";
+            Port = 2224;
+            User = "psy";
+            ServerAliveInterval = 10;
+            Compression = true;
           };
         }
         // lib.genAttrs hosts simpleIdentity;

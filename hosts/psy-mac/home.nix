@@ -1,12 +1,13 @@
-{
-  config,
-  pkgs,
-  inputs,
-  lib,
-  ...
-}: let
+{ config
+, pkgs
+, inputs
+, lib
+, ...
+}:
+let
   enableSops = true;
-in {
+in
+{
   config = {
     home = {
       username = "psy";
@@ -26,21 +27,23 @@ in {
 
     __cfg.sops.enable = enableSops;
 
-    programs.ssh = let
-      secrets = "~/.config/sops-nix/secrets/ssh";
-    in {
-      extraConfig = ''
-        Include ${config.home.homeDirectory}/.colima//ssh_config
-      '';
+    programs.ssh =
+      let
+        secrets = "~/.config/sops-nix/secrets/ssh";
+      in
+      {
+        extraConfig = ''
+          Include ${config.home.homeDirectory}/.colima//ssh_config
+        '';
 
-      matchBlocks = lib.mkIf enableSops {
-        "edp.buildth.ing" = {
-          hostname = "edp.buildth.ing";
-          identityFile = "${secrets}/buildthing/privateKey";
-          user = "git";
+        settings = lib.mkIf enableSops {
+          "edp.buildth.ing" = {
+            HostName = "edp.buildth.ing";
+            IdentityFile = "${secrets}/buildthing/privateKey";
+            User = "git";
+          };
         };
       };
-    };
 
     # secrets
     sops = lib.mkIf enableSops {
@@ -58,51 +61,53 @@ in {
       };
     };
 
-    __cfg.neovim = let
-      secrets = "${config.home.homeDirectory}/.config/sops-nix/secrets";
-    in {
-      enable = true;
-      useLegacyConfig = false;
-      useNvf = true;
-      geminiApiKey = "${secrets}/ai/gemini/api_key";
+    __cfg.neovim =
+      let
+        secrets = "${config.home.homeDirectory}/.config/sops-nix/secrets";
+      in
+      {
+        enable = true;
+        useLegacyConfig = false;
+        useNvf = true;
+        geminiApiKey = "${secrets}/ai/gemini/api_key";
 
-      extraConfig = {
-        vim.assistant.codecompanion-nvim = {
-          setupOpts = {
-            adapters = lib.mkForce (
-              lib.mkLuaInline ''
-                {
-                  http = {
-                    devai = function()
-                      return require("codecompanion.adapters").extend("openai_compatible", {
-                        schema = {
-                          model = {
-                            default = "llama-3.3-70b",
+        extraConfig = {
+          vim.assistant.codecompanion-nvim = {
+            setupOpts = {
+              adapters = lib.mkForce (
+                lib.mkLuaInline ''
+                  {
+                    http = {
+                      devai = function()
+                        return require("codecompanion.adapters").extend("openai_compatible", {
+                          schema = {
+                            model = {
+                              default = "llama-3.3-70b",
+                            },
                           },
-                        },
-                        env = {
-                          url = "https://openai-api.mms-at-work.de",
-                        },
-                      })
-                    end,
+                          env = {
+                            url = "https://openai-api.mms-at-work.de",
+                          },
+                        })
+                      end,
 
-                  },
-                }
-              ''
-            );
+                    },
+                  }
+                ''
+              );
 
-            strategies = {
-              chat = {
-                adapter = lib.mkForce "devai";
-              };
-              inline = {
-                adapter = lib.mkForce "devai";
+              strategies = {
+                chat = {
+                  adapter = lib.mkForce "devai";
+                };
+                inline = {
+                  adapter = lib.mkForce "devai";
+                };
               };
             };
           };
         };
       };
-    };
 
     __cfg.opencode = {
       mcp = {
