@@ -5,7 +5,7 @@ ChatGPT, etc.) interacting with this repository.
 
 ## Operational Rules
 
-1. **Format Code**: Always run `nix fmt` after modifying `.nix` files.
+1. **Format Code**: Always run `nix fmt` after modifying `.nix` files. This flake's formatter is `alejandra`.
 2. **Verify Changes**:
    - Use `nixos-rebuild test --flake .#<host>` to verify system changes before
      committing (if running in a suitable environment).

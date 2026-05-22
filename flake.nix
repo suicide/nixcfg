@@ -113,6 +113,8 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
+    systems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
+    forAllSystems = nixpkgs.lib.genAttrs systems;
     mkSystem = hostname: cfg:
       nixpkgs.lib.nixosSystem {
         specialArgs = {inherit self inputs outputs hostname;};
@@ -156,17 +158,15 @@
       "psy@psy-fw13" = mkHome "x86_64-linux" ./home-manager/home.nix;
     };
 
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+
     # packages
-    packages = let
-      systems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
-      forAllSystems = nixpkgs.lib.genAttrs systems;
-    in
-      forAllSystems (system: let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in {
-        openagents-opencode = pkgs.callPackage ./packages/openagents-opencode {
-          openAgentsControlSrc = inputs.OpenAgentsControl;
-        };
-      });
+    packages = forAllSystems (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
+    in {
+      openagents-opencode = pkgs.callPackage ./packages/openagents-opencode {
+        openAgentsControlSrc = inputs.OpenAgentsControl;
+      };
+    });
   };
 }
