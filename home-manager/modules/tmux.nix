@@ -18,14 +18,19 @@
 
       sensibleOnTop = true;
 
-      extraConfig = ''
-      ''
-      # override for macos due to sensible plugin
-      # see https://github.com/nix-community/home-manager/issues/5952#issuecomment-2410207554
-      + (if pkgs.stdenv.isDarwin then ''
-        set -g default-command ${pkgs.zsh}/bin/zsh
-      '' else ''
-      '');
+      extraConfig =
+        ''
+        ''
+        # override for macos due to sensible plugin
+        # see https://github.com/nix-community/home-manager/issues/5952#issuecomment-2410207554
+        + (
+          if pkgs.stdenv.isDarwin
+          then ''
+            set -g default-command ${pkgs.zsh}/bin/zsh
+          ''
+          else ''
+          ''
+        );
 
       plugins = with pkgs; [
         {

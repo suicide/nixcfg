@@ -18,6 +18,5 @@
     # disable swipe between pages, page back and forward
     system.defaults.NSGlobalDomain.AppleEnableMouseSwipeNavigateWithScrolls = false;
     system.defaults.NSGlobalDomain.AppleEnableSwipeNavigateWithScrolls = false;
-
   };
 }

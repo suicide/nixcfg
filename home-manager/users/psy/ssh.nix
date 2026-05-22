@@ -1,23 +1,20 @@
-{ lib
-, pkgs
-, config
-, ...
-}:
-let
-  secrets = "~/.config/sops-nix/secrets/ssh";
-  hosts = [ "unikorn" "homegate2" "thering" "luna" "deimos" "ganymede" "ceres" "auberon" ];
-  simpleIdentity = name:
-    let
-      fqdn = "${name}.homenet2.hastybox.com";
-    in
-    {
-      header = "Host ${fqdn}";
-      HostName = fqdn;
-      IdentityFile = "${secrets}/${name}/privateKey";
-      User = "psy";
-    };
-in
 {
+  lib,
+  pkgs,
+  config,
+  ...
+}: let
+  secrets = "~/.config/sops-nix/secrets/ssh";
+  hosts = ["unikorn" "homegate2" "thering" "luna" "deimos" "ganymede" "ceres" "auberon"];
+  simpleIdentity = name: let
+    fqdn = "${name}.homenet2.hastybox.com";
+  in {
+    header = "Host ${fqdn}";
+    HostName = fqdn;
+    IdentityFile = "${secrets}/${name}/privateKey";
+    User = "psy";
+  };
+in {
   config = {
     programs.ssh = {
       extraConfig = ''

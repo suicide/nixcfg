@@ -1,12 +1,12 @@
 # TODO screenshare
 # TODO minimize
-{ inputs
-, lib
-, pkgs
-, config
-, ...
-}:
-let
+{
+  inputs,
+  lib,
+  pkgs,
+  config,
+  ...
+}: let
   cfg = config.__cfg.hyprland;
   lua = lib.generators.mkLuaInline;
 
@@ -25,10 +25,9 @@ let
     then builtins.fromJSON value
     else value;
 
-  parseMonitor = raw:
-    let
-      parts = map lib.strings.trim (lib.splitString "," raw);
-    in
+  parseMonitor = raw: let
+    parts = map lib.strings.trim (lib.splitString "," raw);
+  in
     {
       output = lib.elemAt parts 0;
       mode = lib.elemAt parts 1;
@@ -40,15 +39,19 @@ let
     };
 
   mkBind = key: action: {
-    _args = [ key action ];
+    _args = [key action];
   };
 
   mkBindWithOptions = key: action: options: {
-    _args = [ key action options ];
+    _args = [key action options];
   };
 
   mkHyprctlDispatchBind = key: dispatcher: argument:
-    mkBind key (lua ''hl.dsp.exec_cmd("hyprctl dispatch ${dispatcher}${if argument == "" then "" else " " + argument}")'');
+    mkBind key (lua ''hl.dsp.exec_cmd("hyprctl dispatch ${dispatcher}${
+        if argument == ""
+        then ""
+        else " " + argument
+      }")'');
 
   mkExecBind = key: command:
     mkBind key (lua "hl.dsp.exec_cmd(${builtins.toJSON command})");
@@ -61,8 +64,7 @@ let
 
   mkMoveBind = key: direction:
     mkBind key (lua ''hl.dsp.window.move({ direction = "${direction}" })'');
-in
-{
+in {
   imports = [
     ./cursor.nix
     ./hyprlock.nix
@@ -79,7 +81,7 @@ in
       };
       onStartup = lib.mkOption {
         type = lib.types.listOf lib.types.str;
-        default = [ ];
+        default = [];
         description = "Commands to run on hyprland startup";
       };
       swapEsc = lib.mkOption {
@@ -94,7 +96,7 @@ in
       };
       monitors = lib.mkOption {
         type = lib.types.listOf lib.types.str;
-        default = [ ];
+        default = [];
         description = "Display settings";
       };
     };
@@ -119,54 +121,55 @@ in
       # https://wiki.hypr.land/Useful-Utilities/Systemd-start/#installation
       systemd.enable = false;
 
-      settings =
-        let
-          brightnessctl = lib.getExe pkgs.brightnessctl;
-          playerctl = lib.getExe pkgs.playerctl;
-          wpctl = lib.getExe' pkgs.wireplumber "wpctl";
-          dunstctl = lib.getExe' pkgs.dunst "dunstctl";
-          hyprshot = lib.getExe pkgs.hyprshot;
-          monitors = map parseMonitor cfg.monitors;
-          standardWorkspaceBinds = map
-            (n:
-              mkBind
-                (lua ''mod .. " + ${toWorkspaceKey n}"'')
-                (
-                  if cfg.displayWorkspaces
-                  then lua "function() return smw.workspace(${toString (toWorkspaceNumber n)}) end"
-                  else lua "hl.dsp.focus({ workspace = ${toString (toWorkspaceNumber n)} })"
-                )) [ 1 2 3 4 5 6 7 8 9 0 ];
-          moveWorkspaceBinds = map
-            (n:
-              mkBind
-                (lua ''shiftMod .. " + ${toWorkspaceKey n}"'')
-                (
-                  if cfg.displayWorkspaces
-                  then lua "function() return smw.move_to_workspace(${toString (toWorkspaceNumber n)}) end"
-                  else lua ''hl.dsp.window.move({ workspace = "${toString (toWorkspaceNumber n)}" })''
-                )) [ 1 2 3 4 5 6 7 8 9 0 ];
-        in
-        {
-          mod = {
-            _var = "SUPER";
-          };
+      settings = let
+        brightnessctl = lib.getExe pkgs.brightnessctl;
+        playerctl = lib.getExe pkgs.playerctl;
+        wpctl = lib.getExe' pkgs.wireplumber "wpctl";
+        dunstctl = lib.getExe' pkgs.dunst "dunstctl";
+        hyprshot = lib.getExe pkgs.hyprshot;
+        monitors = map parseMonitor cfg.monitors;
+        standardWorkspaceBinds =
+          map
+          (n:
+            mkBind
+            (lua ''mod .. " + ${toWorkspaceKey n}"'')
+            (
+              if cfg.displayWorkspaces
+              then lua "function() return smw.workspace(${toString (toWorkspaceNumber n)}) end"
+              else lua "hl.dsp.focus({ workspace = ${toString (toWorkspaceNumber n)} })"
+            )) [1 2 3 4 5 6 7 8 9 0];
+        moveWorkspaceBinds =
+          map
+          (n:
+            mkBind
+            (lua ''shiftMod .. " + ${toWorkspaceKey n}"'')
+            (
+              if cfg.displayWorkspaces
+              then lua "function() return smw.move_to_workspace(${toString (toWorkspaceNumber n)}) end"
+              else lua ''hl.dsp.window.move({ workspace = "${toString (toWorkspaceNumber n)}" })''
+            )) [1 2 3 4 5 6 7 8 9 0];
+      in {
+        mod = {
+          _var = "SUPER";
+        };
 
-          shiftMod = {
-            _var = "SUPER + SHIFT";
-          };
+        shiftMod = {
+          _var = "SUPER + SHIFT";
+        };
 
-          smw = lib.mkIf cfg.displayWorkspaces {
-            _var = lua "hl.plugin.split_monitor_workspaces";
-          };
+        smw = lib.mkIf cfg.displayWorkspaces {
+          _var = lua "hl.plugin.split_monitor_workspaces";
+        };
 
-          monitor = monitors;
+        monitor = monitors;
 
-          window_rule = {
-            match.workspace = "w[tv1]";
-            border_size = 0;
-          };
+        window_rule = {
+          match.workspace = "w[tv1]";
+          border_size = 0;
+        };
 
-          config = {
+        config =
+          {
             general = {
               gaps_out = {
                 top = 5;
@@ -194,64 +197,76 @@ in
             };
           };
 
-          gesture = {
-            fingers = 3;
-            direction = "horizontal";
-            action = "workspace";
-          };
-
-          on = lib.optional (cfg.onStartup != [ ]) {
-            _args = [
-              "hyprland.start"
-              (lua ''function()
-              ${lib.concatMapStrings (command: "hl.exec_cmd(${builtins.toJSON command})\n  ") cfg.onStartup}end'')
-            ];
-          };
-
-          bind =
-            [
-              (mkBind (lua ''shiftMod .. " + Q"'') (lua "hl.dsp.exit()"))
-              (mkBind (lua ''shiftMod .. " + C"'') (lua "hl.dsp.window.close()"))
-              (mkExecBind "CTRL + ALT + L" "loginctl lock-session")
-              (mkBind (lua ''shiftMod .. " + F"'') (lua ''hl.dsp.window.float({ action = "toggle" })''))
-              (mkBind (lua ''mod .. " + T"'') (lua ''hl.dsp.window.pin({ action = "toggle" })''))
-              (mkBind (lua ''mod .. " + F"'') (lua "hl.dsp.window.fullscreen()"))
-              (mkFocusBind (lua ''mod .. " + h"'') "left")
-              (mkFocusBind (lua ''mod .. " + l"'') "right")
-              (mkFocusBind (lua ''mod .. " + k"'') "up")
-              (mkFocusBind (lua ''mod .. " + j"'') "down")
-              (mkMoveBind (lua ''shiftMod .. " + h"'') "left")
-              (mkMoveBind (lua ''shiftMod .. " + l"'') "right")
-              (mkMoveBind (lua ''shiftMod .. " + k"'') "up")
-              (mkMoveBind (lua ''shiftMod .. " + j"'') "down")
-              (mkExecBind (lua ''mod .. " + RETURN"'') "kitty")
-              (mkExecBind (lua ''mod .. " + D"'') "rofi -show drun -show-icons")
-              (mkExecBind (lua ''mod .. " + Q"'') "brave")
-              (mkExecBind (lua ''mod .. " + E"'') "brave --incognito")
-              (mkExecBind (lua ''shiftMod .. " + E"'') "brave --tor")
-              (mkExecBind (lua ''mod .. " + ALT + E"'') "librewolf")
-              (mkExecBind (lua ''shiftMod .. " + ALT + E"'') "librewolf --private-window")
-              (mkExecBind (lua ''mod .. " + Delete"'') "${dunstctl} close-all")
-              (mkExecBind "PRINT" "${hyprshot} -m active -m output")
-              (mkExecBind (lua ''mod .. " + PRINT"'') "${hyprshot} -m active -m window")
-              (mkExecBind (lua ''shiftMod .. " + PRINT"'') "${hyprshot} -m region")
-              (mkBindWithOptions (lua ''mod .. " + mouse:272"'') (lua "hl.dsp.window.drag()") { mouse = true; })
-              (mkBindWithOptions (lua ''mod .. " + mouse:273"'') (lua "hl.dsp.window.resize()") { mouse = true; })
-              (mkBindWithOptions "XF86AudioMute" (lua "hl.dsp.exec_cmd(${builtins.toJSON "${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle"})") { locked = true; })
-              (mkBindWithOptions "XF86AudioPlay" (lua "hl.dsp.exec_cmd(${builtins.toJSON "${playerctl} play-pause"})") { locked = true; })
-              (mkBindWithOptions "XF86AudioNext" (lua "hl.dsp.exec_cmd(${builtins.toJSON "${playerctl} next"})") { locked = true; })
-              (mkBindWithOptions "XF86AudioPrev" (lua "hl.dsp.exec_cmd(${builtins.toJSON "${playerctl} previous"})") { locked = true; })
-              (mkBindWithOptions "XF86AudioRaiseVolume" (lua "hl.dsp.exec_cmd(${builtins.toJSON "${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%+"})") { locked = true; repeating = true; })
-              (mkBindWithOptions "XF86AudioLowerVolume" (lua "hl.dsp.exec_cmd(${builtins.toJSON "${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-"})") { locked = true; repeating = true; })
-              (mkBindWithOptions "XF86MonBrightnessUp" (lua "hl.dsp.exec_cmd(${builtins.toJSON "${brightnessctl} s 5%+"})") { locked = true; repeating = true; })
-              (mkBindWithOptions "XF86MonBrightnessDown" (lua "hl.dsp.exec_cmd(${builtins.toJSON "${brightnessctl} s 5%-"})") { locked = true; repeating = true; })
-            ]
-            ++ standardWorkspaceBinds
-            ++ moveWorkspaceBinds
-            ++ lib.optionals cfg.displayWorkspaces [
-              (mkPluginBind (lua ''mod .. " + O"'') "change_monitor" ''"next"'')
-            ];
+        gesture = {
+          fingers = 3;
+          direction = "horizontal";
+          action = "workspace";
         };
+
+        on = lib.optional (cfg.onStartup != []) {
+          _args = [
+            "hyprland.start"
+            (lua ''                function()
+                              ${lib.concatMapStrings (command: "hl.exec_cmd(${builtins.toJSON command})\n  ") cfg.onStartup}end'')
+          ];
+        };
+
+        bind =
+          [
+            (mkBind (lua ''shiftMod .. " + Q"'') (lua "hl.dsp.exit()"))
+            (mkBind (lua ''shiftMod .. " + C"'') (lua "hl.dsp.window.close()"))
+            (mkExecBind "CTRL + ALT + L" "loginctl lock-session")
+            (mkBind (lua ''shiftMod .. " + F"'') (lua ''hl.dsp.window.float({ action = "toggle" })''))
+            (mkBind (lua ''mod .. " + T"'') (lua ''hl.dsp.window.pin({ action = "toggle" })''))
+            (mkBind (lua ''mod .. " + F"'') (lua "hl.dsp.window.fullscreen()"))
+            (mkFocusBind (lua ''mod .. " + h"'') "left")
+            (mkFocusBind (lua ''mod .. " + l"'') "right")
+            (mkFocusBind (lua ''mod .. " + k"'') "up")
+            (mkFocusBind (lua ''mod .. " + j"'') "down")
+            (mkMoveBind (lua ''shiftMod .. " + h"'') "left")
+            (mkMoveBind (lua ''shiftMod .. " + l"'') "right")
+            (mkMoveBind (lua ''shiftMod .. " + k"'') "up")
+            (mkMoveBind (lua ''shiftMod .. " + j"'') "down")
+            (mkExecBind (lua ''mod .. " + RETURN"'') "kitty")
+            (mkExecBind (lua ''mod .. " + D"'') "rofi -show drun -show-icons")
+            (mkExecBind (lua ''mod .. " + Q"'') "brave")
+            (mkExecBind (lua ''mod .. " + E"'') "brave --incognito")
+            (mkExecBind (lua ''shiftMod .. " + E"'') "brave --tor")
+            (mkExecBind (lua ''mod .. " + ALT + E"'') "librewolf")
+            (mkExecBind (lua ''shiftMod .. " + ALT + E"'') "librewolf --private-window")
+            (mkExecBind (lua ''mod .. " + Delete"'') "${dunstctl} close-all")
+            (mkExecBind "PRINT" "${hyprshot} -m active -m output")
+            (mkExecBind (lua ''mod .. " + PRINT"'') "${hyprshot} -m active -m window")
+            (mkExecBind (lua ''shiftMod .. " + PRINT"'') "${hyprshot} -m region")
+            (mkBindWithOptions (lua ''mod .. " + mouse:272"'') (lua "hl.dsp.window.drag()") {mouse = true;})
+            (mkBindWithOptions (lua ''mod .. " + mouse:273"'') (lua "hl.dsp.window.resize()") {mouse = true;})
+            (mkBindWithOptions "XF86AudioMute" (lua "hl.dsp.exec_cmd(${builtins.toJSON "${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle"})") {locked = true;})
+            (mkBindWithOptions "XF86AudioPlay" (lua "hl.dsp.exec_cmd(${builtins.toJSON "${playerctl} play-pause"})") {locked = true;})
+            (mkBindWithOptions "XF86AudioNext" (lua "hl.dsp.exec_cmd(${builtins.toJSON "${playerctl} next"})") {locked = true;})
+            (mkBindWithOptions "XF86AudioPrev" (lua "hl.dsp.exec_cmd(${builtins.toJSON "${playerctl} previous"})") {locked = true;})
+            (mkBindWithOptions "XF86AudioRaiseVolume" (lua "hl.dsp.exec_cmd(${builtins.toJSON "${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%+"})") {
+              locked = true;
+              repeating = true;
+            })
+            (mkBindWithOptions "XF86AudioLowerVolume" (lua "hl.dsp.exec_cmd(${builtins.toJSON "${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-"})") {
+              locked = true;
+              repeating = true;
+            })
+            (mkBindWithOptions "XF86MonBrightnessUp" (lua "hl.dsp.exec_cmd(${builtins.toJSON "${brightnessctl} s 5%+"})") {
+              locked = true;
+              repeating = true;
+            })
+            (mkBindWithOptions "XF86MonBrightnessDown" (lua "hl.dsp.exec_cmd(${builtins.toJSON "${brightnessctl} s 5%-"})") {
+              locked = true;
+              repeating = true;
+            })
+          ]
+          ++ standardWorkspaceBinds
+          ++ moveWorkspaceBinds
+          ++ lib.optionals cfg.displayWorkspaces [
+            (mkPluginBind (lua ''mod .. " + O"'') "change_monitor" ''"next"'')
+          ];
+      };
     };
   };
 }

@@ -14,13 +14,18 @@
         copy_on_select = "yes";
       };
       extraConfig = let
-        darwinExtraConfig = if pkgs.stdenv.isDarwin then ''
-          macos_option_as_alt = left
-        '' else "";
-      in ''
-        # EXTRA config
-        include dracula.conf
-      '' + darwinExtraConfig;
+        darwinExtraConfig =
+          if pkgs.stdenv.isDarwin
+          then ''
+            macos_option_as_alt = left
+          ''
+          else "";
+      in
+        ''
+          # EXTRA config
+          include dracula.conf
+        ''
+        + darwinExtraConfig;
     };
 
     home.file."${config.home.homeDirectory}/.config/kitty/dracula.conf" = {
