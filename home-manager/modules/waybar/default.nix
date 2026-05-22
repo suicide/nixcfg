@@ -1,17 +1,18 @@
 # config adapted from https://github.com/woioeow/hyprland-dotfiles/blob/main/hypr_style1/waybar/config.jsonc
 {
+  inputs,
   lib,
   pkgs,
   config,
   ...
 }: let
 in {
-  options = {
-  };
+  options = {};
 
   config = {
     programs.waybar = {
       enable = true;
+      package = inputs.waybar.packages.${pkgs.stdenv.hostPlatform.system}.default;
       systemd.enable = true;
       style = ./style.css;
 
@@ -67,6 +68,8 @@ in {
             all-outputs = false;
             format = "{icon}";
             on-click = "activate";
+            on-scroll-up = "hyprctl dispatch split-cycleworkspaces -1";
+            on-scroll-down = "hyprctl dispatch split-cycleworkspaces +1";
             # persistent-workspaces = {
             #   "*" = [1 2 3 4 5 6 7 8 9];
             # };

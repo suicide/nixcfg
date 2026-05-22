@@ -58,6 +58,14 @@
       inputs.hyprland.follows = "hyprland";
     };
 
+    # waybar
+    # using upstream to address https://github.com/Alexays/Waybar/issues/5035
+    # may switch back to nixpks or pin to tag in future
+    waybar = {
+      url = "github:Alexays/Waybar/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # firefox addons
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
@@ -160,6 +168,5 @@
           openAgentsControlSrc = inputs.OpenAgentsControl;
         };
       });
-
   };
 }
