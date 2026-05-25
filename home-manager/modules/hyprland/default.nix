@@ -127,7 +127,10 @@ in {
         wpctl = lib.getExe' pkgs.wireplumber "wpctl";
         dunstctl = lib.getExe' pkgs.dunst "dunstctl";
         hyprshot = lib.getExe pkgs.hyprshot;
+        wl-copy = lib.getExe' pkgs.wl-clipboard "wl-copy";
+        wl-paste = lib.getExe' pkgs.wl-clipboard "wl-paste";
         monitors = map parseMonitor cfg.monitors;
+        startupCommands = ["${wl-paste} --watch ${wl-copy} --primary"] ++ cfg.onStartup;
         standardWorkspaceBinds =
           map
           (n:
@@ -183,6 +186,7 @@ in {
             };
             misc = {
               vrr = 1;
+              middle_click_paste = true;
             };
           }
           // lib.optionalAttrs cfg.swapEsc {
@@ -203,11 +207,11 @@ in {
           action = "workspace";
         };
 
-        on = lib.optional (cfg.onStartup != []) {
+        on = lib.optional (startupCommands != []) {
           _args = [
             "hyprland.start"
             (lua ''                function()
-                              ${lib.concatMapStrings (command: "hl.exec_cmd(${builtins.toJSON command})\n  ") cfg.onStartup}end'')
+                                     ${lib.concatMapStrings (command: "hl.exec_cmd(${builtins.toJSON command})\n  ") startupCommands}end'')
           ];
         };
 
