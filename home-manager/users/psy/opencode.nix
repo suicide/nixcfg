@@ -25,9 +25,6 @@ in {
           general = {
             model = lightweightModel;
           };
-          scout = {
-            model = lightweightModel;
-          };
 
           # extras
 
