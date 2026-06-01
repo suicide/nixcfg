@@ -53,7 +53,7 @@
       # inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland-split-monitor-workspaces = {
-      url = "github:zjeffer/split-monitor-workspaces/v0.55.1";
+      url = "github:zjeffer/split-monitor-workspaces/v0.55.2";
       # url = "github:suicide/split-monitor-workspaces/fix-nix-0.54.3";
       inputs.hyprland.follows = "hyprland";
     };
