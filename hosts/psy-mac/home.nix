@@ -107,7 +107,6 @@ in {
     __cfg.opencode = {
       mcp = {
         searxng.enable = false;
-        docfork.apiKeyFile = lib.mkForce null;
       };
     };
 

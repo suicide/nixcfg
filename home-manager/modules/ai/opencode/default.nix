@@ -14,11 +14,7 @@
     postBuild = ''
       wrapProgram $out/bin/opencode \
         --prefix PATH : ${lib.makeBinPath [pkgs.gh]} \
-        ${
-        if cfg.mcp.docfork.enable && cfg.mcp.docfork.apiKeyFile != null
-        then ''--run 'export DOCFORK_API_KEY="$(cat ${cfg.mcp.docfork.apiKeyFile})"' ''
-        else ""
-      }
+        ${""}
     '';
   };
 
@@ -28,11 +24,7 @@
     buildInputs = [pkgs.makeWrapper];
     postBuild = ''
       wrapProgram $out/bin/openagents-opencode \
-        ${
-        if cfg.mcp.docfork.enable && cfg.mcp.docfork.apiKeyFile != null
-        then ''--run 'export DOCFORK_API_KEY="$(cat ${cfg.mcp.docfork.apiKeyFile})"' ''
-        else ""
-      }
+        ${""}
     '';
   };
   antigravityAuthPackageJson = builtins.fromJSON (
@@ -68,18 +60,6 @@ in {
         };
       };
       mcp = {
-        docfork = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-            description = "Enable Docfork mcp";
-          };
-          apiKeyFile = lib.mkOption {
-            type = lib.types.nullOr lib.types.str;
-            default = null;
-            description = "Docfork api key file";
-          };
-        };
         searxng = {
           enable = lib.mkOption {
             type = lib.types.bool;
@@ -126,15 +106,6 @@ in {
           ];
 
         mcp = {
-          docfork = lib.mkIf cfg.mcp.docfork.enable {
-            type = "remote";
-            url = "https://mcp.docfork.com/mcp";
-            enabled = true;
-            headers = lib.mkIf (cfg.mcp.docfork.apiKeyFile != null) {
-              "DOCFORK_CABINET" = "general";
-              "DOCFORK_API_KEY" = "{env:DOCFORK_API_KEY}";
-            };
-          };
           searxng = lib.mkIf cfg.mcp.searxng.enable {
             type = "remote";
             url = cfg.mcp.searxng.url;
