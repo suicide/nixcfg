@@ -12,6 +12,7 @@
       settings = {
         enable_audio_bell = "no";
         copy_on_select = "yes";
+        auto_reload_config = "-1";
       };
       extraConfig = let
         darwinExtraConfig =
