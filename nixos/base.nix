@@ -15,6 +15,8 @@
       wget
       clang
       gnumake
+
+      lsof
     ];
   };
 }
