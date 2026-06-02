@@ -148,6 +148,10 @@ in {
 
         NixOS / nix-darwin system.
         Use Nix for any missing tool: `nix run nixpkgs#tool` or add to flake.
+
+        ## Research
+
+        Use subagents for research tasks.
       '';
     };
 
