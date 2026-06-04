@@ -14,6 +14,7 @@
     ./modules/common.nix
 
     # You can also split up your configuration and import pieces of it here:
+    ./modules/fonts.nix
     ./modules/kitty.nix
     ./modules/zsh.nix
     ./modules/git.nix

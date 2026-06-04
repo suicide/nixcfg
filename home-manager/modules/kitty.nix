@@ -25,6 +25,7 @@
         ''
           # EXTRA config
           include dracula.conf
+          symbol_map U+1FBF0-U+1FBF9 Noto Sans Symbols 2
         ''
         + darwinExtraConfig;
     };
