@@ -95,6 +95,7 @@ in {
 
       agents = {
         documentation = ./agents/documentation.md;
+        codereviewer = ./agents/codereviewer.md;
       };
 
       settings = {
@@ -142,16 +143,22 @@ in {
       };
 
       context = ''
-        # Host rules
+        # General Guidelines
 
         ## Nix policy
 
         NixOS / nix-darwin system.
         Use Nix for any missing tool: `nix run nixpkgs#tool` or add to flake.
 
-        ## Research
+        ## Workflow
 
-        Use subagents for research tasks.
+        IMPORTANT: MUST use subagents in parallel for dedicated tasks:
+          - research, exploration (@explore)
+          - coding (@general)
+
+        IMPORTANT: MUST provide highly detailed instructions and context to subagents if available
+
+        After editing code, use @codereviewer subagent to review changes and surrounding area
       '';
     };
 

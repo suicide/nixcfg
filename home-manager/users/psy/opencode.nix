@@ -13,6 +13,7 @@ in {
       settings = {
         agent = let
           lightweightModel = "opencode-go/deepseek-v4-flash";
+          mediumModel = "opencode-go/deepseek-v4-pro";
         in {
           # Built in
           explore = {
@@ -26,6 +27,12 @@ in {
 
           documentation = {
             model = lightweightModel;
+          };
+          codereviewer = {
+            model = mediumModel;
+            permission = {
+              edit = "deny";
+            };
           };
         };
       };
