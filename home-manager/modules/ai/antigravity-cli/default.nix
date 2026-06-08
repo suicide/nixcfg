@@ -5,20 +5,20 @@
   inputs,
   ...
 }: let
-  cfg = config.__cfg.gemini-cli;
+  cfg = config.__cfg.antigravity-cli;
 in {
   options = {
-    __cfg.gemini-cli = {
+    __cfg.antigravity-cli = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
-        description = "Enable gemini-cli";
+        description = "Enable antigravity-cli, a Gemini client for the terminal.";
       };
     };
   };
 
   config = lib.mkIf cfg.enable {
-    programs.gemini-cli = {
+    programs.antigravity-cli = {
       enable = cfg.enable;
 
       settings = {
