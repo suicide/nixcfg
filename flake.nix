@@ -48,7 +48,7 @@
 
     # hyprland
     hyprland = {
-      url = "github:hyprwm/Hyprland/v0.55.3";
+      url = "github:hyprwm/Hyprland/v0.55.4";
       # do not change hyprland's nixpkgs to take advantage of cache and not to mess with build
       # inputs.nixpkgs.follows = "nixpkgs";
     };
