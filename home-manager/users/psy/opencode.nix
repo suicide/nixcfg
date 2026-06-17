@@ -34,6 +34,9 @@ in {
               edit = "deny";
             };
           };
+          implementer = {
+            model = lightweightModel;
+          };
         };
       };
     };

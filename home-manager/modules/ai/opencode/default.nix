@@ -94,17 +94,33 @@ in {
       package = cfg.package;
 
       agents = {
-        documentation = ./agents/documentation.md;
         codereviewer = ./agents/codereviewer.md;
+        documentation = ./agents/documentation.md;
+        implementer = ./agents/implementer.md;
+        orchestrator-build = ./agents/orchestrator-build.md;
       };
 
       settings = {
         plugin =
-          []
+          [
+            "./plugins/builtin-agent-append.ts"
+          ]
           ++ lib.optionals cfg.provider.google-antigravity.enable
           [
             "${antigravityAuthPackageJson.name}@${antigravityAuthPackageJson.version}" # allow auth with google antigravity oauth
           ];
+
+        agent = {
+          plan = {
+            color = "primary";
+          };
+          build = {
+            color = "secondary";
+          };
+          orchestrator-build = {
+            color = "accent";
+          };
+        };
 
         mcp = {
           searxng = lib.mkIf cfg.mcp.searxng.enable {
@@ -149,20 +165,14 @@ in {
 
         NixOS / nix-darwin system.
         Use Nix for any missing tool: `nix run nixpkgs#tool` or add to flake.
-
-        ## Workflow
-
-        IMPORTANT: MUST use subagents in parallel for dedicated tasks:
-          - research, exploration (@explore)
-          - coding (@general)
-
-        IMPORTANT: MUST provide highly detailed instructions and context to subagents if available
-
-        After editing code, use @codereviewer subagent to review changes and surrounding area
       '';
     };
 
     home.packages = lib.mkIf cfg.openagents.enable [wrappedOpenagentsPackage];
+
+    xdg.configFile."opencode/plugins/builtin-agent-append.ts" = {
+      source = ./plugins/builtin-agent-append.ts;
+    };
 
     # use the same opencode package in neovim
     __cfg.neovim.opencodePackage = cfg.package;
