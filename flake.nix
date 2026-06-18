@@ -115,11 +115,20 @@
     inherit (self) outputs;
     systems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
     forAllSystems = nixpkgs.lib.genAttrs systems;
+    permittedInsecurePackages = [ ];
     mkSystem = hostname: cfg:
       nixpkgs.lib.nixosSystem {
         specialArgs = {inherit self inputs outputs hostname;};
         # path to host specific config modules
         modules = [
+          # Temporary: librewolf is marked insecure upstream
+          {
+            home-manager.sharedModules = [
+              {
+                nixpkgs.config.permittedInsecurePackages = permittedInsecurePackages;
+              }
+            ];
+          }
           cfg
         ];
       };
@@ -137,7 +146,13 @@
         pkgs = nixpkgs.legacyPackages.${arch}; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit self inputs outputs;};
         # specific config file
-        modules = [cfg];
+        modules = [
+          # Temporary: librewolf is marked insecure upstream
+          {
+            nixpkgs.config.permittedInsecurePackages = permittedInsecurePackages;
+          }
+          cfg
+        ];
       };
   in {
     # NixOS configuration entrypoint
