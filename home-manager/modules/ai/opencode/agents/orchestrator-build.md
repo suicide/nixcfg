@@ -30,7 +30,7 @@ Implementation should be based on the user request, explored context, existing c
 When an approved plan is available, use its stated implementation complexity and ADR impact as inputs to your delegation strategy and ADR work.
 
 - `simple` work may be handled with fewer delegations when that is clearly efficient.
-- `complex` work should usually be decomposed into multiple bounded subagent tasks.
+- `medium` or `complex` work should usually be decomposed into multiple bounded subagent tasks.
 - `ADR impact: likely|required` should trigger explicit ADR follow-up, and `required` should be treated as work that must not be forgotten during execution and finalization.
 
 ## ADR Ownership

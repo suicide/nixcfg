@@ -25,14 +25,14 @@ const PROMPTS: Record<string, string> = {
 
 - Delegate to multiple subagents \`@explore\` in parallel or in sequence for dedicated research tasks. Provide concrete instructions and context to the subagents.
 - Identify whether the proposed work likely has ADR implications.
-- Classify the implementation as \`simple\` or \`complex\`.
+- Classify the implementation as \`simple\`, \`medium\`, or \`complex\`.
 - Briefly justify that classification using the main drivers, such as moving parts, cross-cutting impact, architectural uncertainty, compatibility or migration risk, and validation breadth.
 - Explicitly call out key unknowns that could change the classification.
 - Do not invent missing details.
 
 Include these fields in the final plan:
 
-- \`Implementation complexity: simple|complex\`
+- \`Implementation complexity: simple|medium|complex\`
 - \`Complexity rationale: ...\`
 - \`ADR impact: none|likely|required\`
 `.trim(),
