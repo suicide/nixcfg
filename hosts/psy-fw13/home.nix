@@ -43,7 +43,7 @@
           email = "suiiii@suiiii.rip";
         };
 
-        user.signingkey = "2F1ACB1232E35B05";
+        user.signingkey = "961A3AE5C5CFF660";
       };
     };
   };
