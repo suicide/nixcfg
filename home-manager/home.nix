@@ -45,6 +45,8 @@
 
     ./modules/sops.nix
 
+    ./modules/tpm.nix
+
     ./modules/xdg.nix
 
     ./modules/browsers

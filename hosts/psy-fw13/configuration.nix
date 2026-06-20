@@ -41,6 +41,8 @@
 
     ../../nixos/virtualization/containers.nix
 
+    ../../nixos/tpm.nix
+
     inputs.home-manager.nixosModules.home-manager
     ../../nixos/home-manager.nix
     ../../nixos/users.nix
