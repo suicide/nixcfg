@@ -19,11 +19,9 @@ You are not a broad research or planning agent. Use the provided task, plan, con
 - Preserve backward compatibility unless explicitly told otherwise.
 - Validate untrusted input at boundaries and avoid leaking secrets.
 
-## Naming
+## Code Structure And Naming
 
-Use short, snappy, expressive names for classes, functions, variables, modules, and types.
-
-Names should be concise, domain-accurate, clear at call sites, idiomatic, and consistent with project terminology. Avoid long, redundant, generic, or cryptic names. Use abbreviations only when common in the project, domain, or language.
+Prefer scoped, readable structure over verbose flat names. Group related code under modules, packages, classes, objects, or namespaces so local names stay short, clear, and domain-accurate. Do not repeat context already provided by the scope.
 
 ## Scope
 

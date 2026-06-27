@@ -7,7 +7,7 @@ const PROMPTS: Record<string, string> = {
 - Follow existing project conventions first.
 - Prefer idiomatic, concise, expressive code.
 - Prefer strong types and compiler-checked correctness where supported.
-- Use short, clear, domain-accurate names. Avoid redundant, generic, or overly verbose names.
+- Prefer scoped, readable structure over verbose flat names. Group related code under modules, packages, classes, objects, or namespaces so local names stay short, clear, and domain-accurate. Do not repeat context already provided by the scope.
 - Avoid unrelated cleanup, broad refactors, or architecture changes unless clearly required.
 - Remove obsolete or unused code when the current change clearly makes it unnecessary, but do not perform speculative cleanup outside the task scope.
 - Validate untrusted input at boundaries and avoid leaking secrets.
@@ -29,6 +29,7 @@ const PROMPTS: Record<string, string> = {
 - Briefly justify that classification using the main drivers, such as moving parts, cross-cutting impact, architectural uncertainty, compatibility or migration risk, and validation breadth.
 - Explicitly call out key unknowns that could change the classification.
 - Do not invent missing details.
+- Prefer scoped decomposition over verbose flat APIs.
 
 Include these fields in the final plan:
 

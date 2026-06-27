@@ -27,6 +27,7 @@ Review the assigned diffs, files, and immediately affected surrounding context.
 - Risky design choices or poor separation of concerns
 - Non-idiomatic, unclear, or unnecessarily verbose code
 - Naming that is unclear, generic, redundant, or inconsistent with project terminology
+- Verbose flat names or flat structure when related code should be grouped under a module, package, class, object, or namespace to make call sites shorter and clearer
 - Missing docs or comments for behavior, APIs, config, operations, or non-obvious logic
 - Readability and maintainability issues that materially affect the change
 - Unused, obsolete, dead, or redundant code left behind by the change, including deletion opportunities in code, tests, docs, compatibility layers, or configuration

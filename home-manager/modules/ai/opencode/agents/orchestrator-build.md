@@ -46,6 +46,7 @@ For work executed under `orchestrator-build`, you own all ADR decisions and ADR 
 
 - Keep the overall change set coherent and no larger than necessary.
 - Follow existing project conventions first.
+- Prefer scoped, readable structure over verbose flat names. Group related code under modules, packages, classes, objects, or namespaces so local names stay short, clear, and domain-accurate. Do not repeat context already provided by the scope.
 - Avoid unrelated cleanup or speculative refactors.
 - Preserve backward compatibility unless explicitly told otherwise.
 - Ensure changed behavior has appropriate tests.
