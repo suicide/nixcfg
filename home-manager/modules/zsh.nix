@@ -17,7 +17,6 @@
           "jeffreytse/zsh-vi-mode"
           "ohmyzsh/ohmyzsh path:plugins/git"
           "ohmyzsh/ohmyzsh path:plugins/extract"
-          "ohmyzsh/ohmyzsh path:plugins/sudo"
         ];
       };
 
@@ -38,6 +37,11 @@
         "l" = "ls -lahg";
 
         "cat" = "bat";
+
+        "rsync-copy" = "rsync -avz --progress -h";
+        "rsync-move" = "rsync -avz --progress -h --remove-source-files";
+        "rsync-update" = "rsync -avzu --progress -h";
+        "rsync-synchronize" = "rsync -avzu --delete --progress -h";
       };
 
       initContent = lib.mkMerge [
