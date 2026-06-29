@@ -65,6 +65,29 @@
           source ${pkgs.oh-my-zsh}/share/oh-my-zsh/lib/git.zsh
         '')
 
+        (lib.mkOrder 550 ''
+          setopt auto_pushd pushd_ignore_dups pushdminus
+
+          alias -- -='cd -'
+          for i in {1..9}; do alias "$i"="cd -$i"; done
+
+          alias md='mkdir -p'
+
+          alias -g ...='../..'
+          alias -g ....='../../..'
+          alias -g .....='../../../..'
+          alias -g ......='../../../../..'
+
+          d() {
+            if [[ -n $1 ]]; then
+              dirs "$@"
+            else
+              dirs -v | head -n 10
+            fi
+          }
+          compdef _dirs d
+        '')
+
         (lib.mkOrder 800 ''
           # Use fzf-tab for interactive completion while preserving zsh's matcher settings.
           source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
