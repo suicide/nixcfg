@@ -14,9 +14,9 @@
       antidote = {
         enable = true;
         plugins = [
-          "jeffreytse/zsh-vi-mode"
-          "ohmyzsh/ohmyzsh path:plugins/git"
-          "ohmyzsh/ohmyzsh path:plugins/extract"
+          "${pkgs.zsh-vi-mode}/share/zsh-vi-mode"
+          "${pkgs.oh-my-zsh}/share/oh-my-zsh/plugins/git"
+          "${pkgs.oh-my-zsh}/share/oh-my-zsh/plugins/extract"
         ];
       };
 
@@ -57,6 +57,12 @@
           }
 
           zvm_after_init_commands+=(__cfg_after_zvm_init)
+        '')
+
+        (lib.mkOrder 548 ''
+          # Oh-my-zsh lib functions required by the git plugin.
+          source ${pkgs.oh-my-zsh}/share/oh-my-zsh/lib/functions.zsh
+          source ${pkgs.oh-my-zsh}/share/oh-my-zsh/lib/git.zsh
         '')
 
         (lib.mkOrder 800 ''
