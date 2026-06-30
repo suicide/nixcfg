@@ -32,6 +32,21 @@
 
       autocd = true;
 
+      # Cache compinit per host and zsh version. In practice this also tends
+      # to invalidate naturally across Nix config changes, because completion
+      # sources in fpath come from versioned Nix store paths that change when
+      # plugin/package inputs change. If completion ever looks stale, remove
+      # ~/.zcompdump-<host>-<zsh_version> and its .zwc to force a rebuild.
+      completionInit = ''
+        autoload -Uz compinit
+        _comp_dumpfile="''${HOME}/.zcompdump-''${HOST}-''${ZSH_VERSION}"
+        compinit -i -d "''${_comp_dumpfile}"
+        if [[ -s "''${_comp_dumpfile}" && ( ! -s "''${_comp_dumpfile}.zwc" || "''${_comp_dumpfile}" -nt "''${_comp_dumpfile}.zwc" ) ]]; then
+          zcompile "''${_comp_dumpfile}"
+        fi
+        unset _comp_dumpfile
+      '';
+
       shellAliases = {
         "ls" = "eza";
         "l" = "ls -lahg";
