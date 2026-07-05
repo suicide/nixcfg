@@ -22,6 +22,8 @@ in {
 
       settings = let
         brightnessctl = lib.getExe pkgs.brightnessctl;
+        cliphist = lib.getExe pkgs.cliphist;
+        wl-copy = lib.getExe' pkgs.wl-clipboard "wl-copy";
         keyboardBrightness =
           if cfg.keyboardBacklight != null
           then [
@@ -38,8 +40,10 @@ in {
           before_sleep_cmd = "loginctl lock-session";
           after_sleep_cmd = "hyprctl dispatch dpms on";
 
-          # avoid starting multiple hyprlock instances.
-          lock_cmd = "lock_cmd = pidof hyprlock || hyprlock";
+          # Wipe clipboard state before locking to avoid secrets persisting
+          # across lock/unlock. cliphist DB is in $XDG_RUNTIME_DIR and also
+          # disappears on logout.
+          lock_cmd = "${cliphist} -db-path \"$XDG_RUNTIME_DIR/cliphist/db\" wipe; ${wl-copy} --clear; ${wl-copy} --primary --clear; pidof hyprlock || hyprlock";
         };
 
         listener =

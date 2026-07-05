@@ -18,8 +18,24 @@
 
       sensibleOnTop = true;
 
-      extraConfig =
+      extraConfig = let
+        wl-copy = lib.getExe' pkgs.wl-clipboard "wl-copy";
+        wl-paste = lib.getExe' pkgs.wl-clipboard "wl-paste";
+        tmux = lib.getExe pkgs.tmux;
+      in
         ''
+          # tmux must not write to the regular clipboard via OSC 52.
+          # Mouse selection in copy-mode should affect only primary selection.
+          set -g set-clipboard off
+
+          # Paste primary selection on middle click
+          unbind -T root MouseDown2Pane
+          bind -T root MouseDown2Pane run-shell "${wl-paste} --primary --no-newline | ${tmux} load-buffer -" \; paste-buffer
+
+          # Copy-mode-vi: y / Enter / drag-end copies selected text to primary selection
+          bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "${wl-copy} --primary"
+          bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "${wl-copy} --primary"
+          bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "${wl-copy} --primary"
         ''
         # override for macos due to sensible plugin
         # see https://github.com/nix-community/home-manager/issues/5952#issuecomment-2410207554

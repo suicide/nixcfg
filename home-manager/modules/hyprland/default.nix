@@ -105,6 +105,8 @@ in {
   config = {
     home.packages = [
       pkgs.wl-clipboard
+      pkgs.wl-clip-persist
+      pkgs.cliphist
     ];
 
     wayland.windowManager.hyprland = lib.mkIf cfg.enable {
@@ -127,10 +129,17 @@ in {
         wpctl = lib.getExe' pkgs.wireplumber "wpctl";
         dunstctl = lib.getExe' pkgs.dunst "dunstctl";
         hyprshot = lib.getExe pkgs.hyprshot;
+        wl-clip-persist = lib.getExe pkgs.wl-clip-persist;
         wl-copy = lib.getExe' pkgs.wl-clipboard "wl-copy";
         wl-paste = lib.getExe' pkgs.wl-clipboard "wl-paste";
+        cliphist = lib.getExe pkgs.cliphist;
         monitors = map parseMonitor cfg.monitors;
-        startupCommands = ["${wl-paste} --watch ${wl-copy} --primary"] ++ cfg.onStartup;
+        startupCommands =
+          [
+            "${wl-clip-persist} --clipboard regular"
+            "${wl-paste} --type text --watch sh -c '${cliphist} -db-path \"$XDG_RUNTIME_DIR/cliphist/db\" store'"
+          ]
+          ++ cfg.onStartup;
         standardWorkspaceBinds =
           map
           (n:
@@ -233,6 +242,8 @@ in {
             (mkMoveBind (lua ''shiftMod .. " + j"'') "down")
             (mkExecBind (lua ''mod .. " + RETURN"'') "kitty")
             (mkExecBind (lua ''mod .. " + D"'') "rofi -show drun -show-icons")
+            (mkExecBind (lua ''mod .. " + V"'') ''${cliphist} -db-path "$XDG_RUNTIME_DIR/cliphist/db" list | rofi -dmenu | ${cliphist} -db-path "$XDG_RUNTIME_DIR/cliphist/db" decode | ${wl-copy}'')
+            (mkExecBind (lua ''shiftMod .. " + V"'') ''${cliphist} -db-path "$XDG_RUNTIME_DIR/cliphist/db" wipe && ${wl-copy} --clear && ${wl-copy} --primary --clear'')
             (mkExecBind (lua ''mod .. " + Q"'') "brave")
             (mkExecBind (lua ''mod .. " + E"'') "brave --incognito")
             (mkExecBind (lua ''shiftMod .. " + E"'') "brave --tor")

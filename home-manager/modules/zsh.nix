@@ -60,6 +60,12 @@
       };
 
       initContent = lib.mkMerge [
+        (lib.mkOrder 539 ''
+          # Disable zsh-vi-mode system clipboard integration.
+          # Clipboard is handled by wl-clipboard/wl-clip-persist/cliphist at the
+          # compositor level; zsh-vi-mode should not interfere.
+          ZVM_SYSTEM_CLIPBOARD_ENABLED=false
+        '')
         (lib.mkOrder 540 ''
           # zsh-vi-mode replaces Ctrl-R in insert mode, so restore the fzf
           # history widget once it finishes initializing.

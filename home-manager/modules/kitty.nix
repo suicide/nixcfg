@@ -11,7 +11,10 @@
       font.name = "NotoMono Nerd Font";
       settings = {
         enable_audio_bell = "no";
-        copy_on_select = "yes";
+        # Do not copy mouse selections to the regular clipboard. On Linux
+        # Wayland/X11 sessions, normal mouse selections still populate the
+        # primary selection through the compositor/display server.
+        copy_on_select = "no";
         auto_reload_config = "-1";
       };
       extraConfig = let
@@ -26,6 +29,14 @@
           # EXTRA config
           include dracula.conf
           symbol_map U+1FBF0-U+1FBF9 Noto Sans Symbols 2
+
+          # Clipboard behavior on Linux Wayland/X11:
+          #   copy_on_select=no             — do not copy selection → regular clipboard
+          #   mouse selection               — primary selection (Linux/Wayland behavior)
+          #   ctrl+shift+c                  — explicit copy to regular clipboard
+          #   ctrl+shift+v                  — paste from regular clipboard
+          #   ctrl+shift+s                  — paste from primary selection
+          # These are kitty defaults; listed here for discoverability.
         ''
         + darwinExtraConfig;
     };
