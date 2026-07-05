@@ -9,19 +9,30 @@
       enable = true;
       shellIntegration.enableZshIntegration = true;
       font.name = "NotoMono Nerd Font";
-      settings = {
-        enable_audio_bell = "no";
-        # Do not copy mouse selections to the regular clipboard. On Linux
-        # Wayland/X11 sessions, normal mouse selections still populate the
-        # primary selection through the compositor/display server.
-        copy_on_select = "no";
+      settings =
+        {
+          enable_audio_bell = "no";
+          # Clipboard behavior:
+          #   Linux: keep mouse selections in primary selection only (not regular
+          #   clipboard). The compositor/display server handles that without kitty.
+          #   macOS: no primary selection exists, so mouse selection copies to the
+          #   system pasteboard (the only clipboard target available).
+          copy_on_select =
+            if pkgs.stdenv.isDarwin
+            then "yes"
+            else "no";
 
-        # Let zsh url-quote-magic handle URL escaping uniformly inside and
-        # outside tmux. Keep confirm for terminal control code safety.
-        paste_actions = "confirm";
+          # Let zsh url-quote-magic handle URL escaping uniformly inside and
+          # outside tmux. Keep confirm for terminal control code safety.
+          paste_actions = "confirm";
 
-        auto_reload_config = "-1";
-      };
+          auto_reload_config = "-1";
+        }
+        // lib.optionalAttrs pkgs.stdenv.isDarwin {
+          # On macOS, tmux OSC 52 clipboard writes should flow through kitty to
+          # the system pasteboard while clipboard reads still require consent.
+          clipboard_control = "write-clipboard read-clipboard-ask";
+        };
       extraConfig = let
         darwinExtraConfig =
           if pkgs.stdenv.isDarwin
@@ -35,16 +46,18 @@
           include dracula.conf
           symbol_map U+1FBF0-U+1FBF9 Noto Sans Symbols 2
 
-          # Clipboard behavior on Linux Wayland/X11:
+          # Clipboard behavior:
+          #   Linux/Wayland: mouse selection populates primary selection;
+          #   tmux writes primary explicitly via wl-clipboard.
+          #   macOS: tmux uses OSC 52; kitty writes to the system pasteboard.
           #   copy_on_select=no             — do not copy selection → regular clipboard
           #   paste_actions=confirm         — let zsh handle URL quoting; confirm
           #                                   dangerous control codes
-          #   mouse selection               — primary selection (Linux/Wayland behavior)
           #   ctrl+shift+c                  — explicit copy to regular clipboard
           #   ctrl+shift+v                  — paste from regular clipboard
-          #   ctrl+shift+s                  — paste from primary selection
-          # These are kitty defaults except paste_actions; listed here for
-          # discoverability.
+          #   ctrl+shift+s                  — paste from primary selection on Linux
+          # These are kitty defaults except paste_actions and Darwin
+          # clipboard_control; listed here for discoverability.
         ''
         + darwinExtraConfig;
     };
