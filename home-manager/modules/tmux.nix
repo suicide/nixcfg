@@ -30,7 +30,7 @@
 
           # Paste primary selection on middle click
           unbind -T root MouseDown2Pane
-          bind -T root MouseDown2Pane run-shell "${wl-paste} --primary --no-newline | ${tmux} load-buffer -" \; paste-buffer
+          bind -T root MouseDown2Pane run-shell "${wl-paste} --primary --no-newline | ${tmux} load-buffer -" \; paste-buffer -p
 
           # Copy-mode-vi: y / Enter / drag-end copies selected text to primary selection
           bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "${wl-copy} --primary"

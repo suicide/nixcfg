@@ -77,7 +77,18 @@
             bindkey -M vicmd '^R' fzf-history-widget
           }
 
-          zvm_after_init_commands+=(__cfg_after_zvm_init)
+          __cfg_enable_paste_quoting() {
+            # Restore URL quoting on paste (like omz lib/misc.zsh).
+            autoload -Uz bracketed-paste-magic
+            zle -N bracketed-paste bracketed-paste-magic
+
+            autoload -Uz url-quote-magic
+            zle -N self-insert url-quote-magic
+
+            zstyle ':bracketed-paste-magic' paste-init backward-extend-paste
+          }
+
+          zvm_after_init_commands+=(__cfg_after_zvm_init __cfg_enable_paste_quoting)
         '')
 
         (lib.mkOrder 548 ''
