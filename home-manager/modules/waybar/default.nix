@@ -70,6 +70,7 @@ in {
             on-click = "activate";
             on-scroll-up = "hyprctl dispatch split-cycleworkspaces -1";
             on-scroll-down = "hyprctl dispatch split-cycleworkspaces +1";
+            tooltip = false;
             # persistent-workspaces = {
             #   "*" = [1 2 3 4 5 6 7 8 9];
             # };
