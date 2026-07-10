@@ -8,6 +8,7 @@
 in {
   config = {
     home.pointerCursor = lib.mkIf (!hyprlandCfg.enable) {
+      enable = true;
       gtk.enable = true;
       x11.enable = true;
       package = pkgs.bibata-cursors;

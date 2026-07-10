@@ -9,6 +9,7 @@ in {
   config = {
     home = lib.mkIf (cfg.enable) {
       pointerCursor = {
+        enable = true;
         package = pkgs.simp1e-cursors;
         name = "Simp1e-Tokyo-Night";
         size = 28;
