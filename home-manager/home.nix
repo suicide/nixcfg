@@ -13,6 +13,8 @@
     # inputs.nix-colors.homeManagerModule
     ./modules/common.nix
 
+    ./modules/nh.nix
+
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
     # ./modules/awesomewm/default.nix
