@@ -113,6 +113,32 @@ in {
     programs.opencode = {
       settings = {
         provider = (import ./ai/mmsai.nix) // (import ./ai/llmchat.nix);
+        agent = let
+          lightweightModel = "github-copilot/gemini-3.5-flash";
+        in {
+          # Built in
+          explore = {
+            model = lightweightModel;
+          };
+          general = {
+            model = "github-copilot/gpt-5.3-codex";
+          };
+
+          # extras
+
+          documentation = {
+            model = lightweightModel;
+          };
+          codereviewer = {
+            model = "github-copilot/claude-opus-4.8";
+            permission = {
+              edit = "deny";
+            };
+          };
+          implementer = {
+            model = "github-copilot/gpt-5.6-luna";
+          };
+        };
       };
     };
   };
