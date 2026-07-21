@@ -62,6 +62,10 @@
         + darwinExtraConfig;
     };
 
+    programs.zsh.shellAliases = {
+      "kssh" = "kitten ssh";
+    };
+
     home.file."${config.home.homeDirectory}/.config/kitty/dracula.conf" = {
       source =
         pkgs.fetchFromGitHub {
