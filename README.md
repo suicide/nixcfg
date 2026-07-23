@@ -110,9 +110,3 @@ gpg --homedir <pathToGpgStore> --pinentry-mode loopback --output <somePath> --ex
 ```shell
 nix-store --gc
 ```
-
-**Run home-manager standalone (legacy):**
-
-```shell
-nix run 'github:nix-community/home-manager' -- switch --flake .#psy@psy-fw13
-```

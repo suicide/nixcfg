@@ -141,19 +141,6 @@
           cfg
         ];
       };
-    mkHome = arch: cfg:
-      home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${arch}; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit self inputs outputs;};
-        # specific config file
-        modules = [
-          # Temporary: librewolf is marked insecure upstream
-          {
-            nixpkgs.config.permittedInsecurePackages = permittedInsecurePackages;
-          }
-          cfg
-        ];
-      };
   in {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
@@ -165,12 +152,6 @@
 
     darwinConfigurations = {
       psy-mac = mkDarwin "psy-mac" ./hosts/psy-mac/configuration.nix;
-    };
-
-    # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#your-username@your-hostname'
-    homeConfigurations = {
-      "psy@psy-fw13" = mkHome "x86_64-linux" ./home-manager/home.nix;
     };
 
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
