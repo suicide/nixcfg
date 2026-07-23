@@ -36,6 +36,7 @@
       casks = [
         "caffeine"
         "google-chrome"
+        "microsoft-teams"
       ];
 
       brews = [];
