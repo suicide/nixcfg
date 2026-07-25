@@ -17,13 +17,10 @@
     ../../nixos/impermanence
     ../../nixos/impermanence/users/psy.nix
 
-    ../../nixos/audio.nix
     ./audio.nix
     ../../nixos/xserver.nix
 
     ../../nixos/network/shares.nix
-
-    ../../nixos/tpm.nix
   ];
 
   config = {

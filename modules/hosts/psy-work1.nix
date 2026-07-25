@@ -28,6 +28,8 @@
       config.internal.modules.nixos.desktop
       config.internal.modules.nixos.powermanagement
       config.internal.modules.nixos.wifi
+      config.internal.modules.nixos.audio
+      config.internal.modules.nixos.tpm
       ../../hosts/psy-work1/configuration.nix
     ];
   };

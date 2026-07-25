@@ -27,6 +27,8 @@
       config.internal.modules.nixos.laptop
       config.internal.modules.nixos.powermanagement
       config.internal.modules.nixos.wifi
+      config.internal.modules.nixos.audio
+      config.internal.modules.nixos.tpm
       ../../hosts/psy-fw13/configuration.nix
     ];
   };
