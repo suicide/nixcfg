@@ -9,14 +9,7 @@
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
 
-    inputs.disko.nixosModules.default
-
     ./sops.nix
-
-    ../../nixos/impermanence
-    ../../nixos/impermanence/users/psy.nix
-
-    ../../nixos/xserver.nix
   ];
 
   config = {

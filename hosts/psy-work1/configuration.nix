@@ -9,16 +9,11 @@
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.asus-rog-strix-x570e
 
-    inputs.disko.nixosModules.default
     # ./disk-config.nix
 
     ./sops.nix
 
-    ../../nixos/impermanence
-    ../../nixos/impermanence/users/psy.nix
-
     ./audio.nix
-    ../../nixos/xserver.nix
   ];
 
   config = {

@@ -31,6 +31,8 @@
       config.internal.modules.nixos.audio
       config.internal.modules.nixos.tpm
       config.internal.modules.nixos.shares
+      config.internal.modules.nixos.impermanence
+      config.internal.modules.nixos.xserver
       ../../hosts/psy-work1/configuration.nix
     ];
   };

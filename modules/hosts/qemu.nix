@@ -20,6 +20,8 @@
       config.internal.modules.nixos.sops
       config.internal.modules.nixos.home-manager
       config.internal.modules.nixos.psy
+      config.internal.modules.nixos.impermanence
+      config.internal.modules.nixos.xserver
       ../../hosts/qemu/configuration.nix
     ];
   };

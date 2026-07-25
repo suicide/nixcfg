@@ -12,13 +12,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
-    inputs.disko.nixosModules.default
     # ./disk-config.nix
-
-    ../../nixos/impermanence
-    ../../nixos/impermanence/users/psy.nix
-
-    ../../nixos/xserver.nix
   ];
 
   config = {
