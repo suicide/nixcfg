@@ -39,6 +39,8 @@ Do not introduce new public APIs, protocols, storage formats, configuration form
 
 Always add or update tests for changed behavior.
 
+For behavior changes, use a test-driven workflow when practical: write a focused failing test first, make the minimum change to pass it, then refactor for clarity. Do not force test-first work for documentation-only, configuration-only, mechanical, or otherwise untestable changes; state why when it is not practical.
+
 Prefer focused unit tests near the changed code, integration tests for cross-boundary behavior, and regression tests for bug fixes.
 
 Run relevant validation when available: tests, type checks, linters, formatters, or builds. Use narrow checks first, then broader checks when practical.

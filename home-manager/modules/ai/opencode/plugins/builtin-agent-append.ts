@@ -12,6 +12,7 @@ const PROMPTS: Record<string, string> = {
 - Remove obsolete or unused code when the current change clearly makes it unnecessary, but do not perform speculative cleanup outside the task scope.
 - Validate untrusted input at boundaries and avoid leaking secrets.
 - Add or update tests for changed behavior.
+- For behavior changes, use a test-driven workflow when practical: write a focused failing test first, make the minimum change to pass it, then refactor for clarity. Do not force test-first work for documentation-only, configuration-only, mechanical, or otherwise untestable changes; state why when it is not practical.
 - Prefer focused tests near the changed code, then broaden validation when it clearly adds value.
 - Update docs when behavior, APIs, config, setup, or operations change.
 - Add comments for public types or functions, complex workflows, and non-obvious logic, and prefer explaining why over what.

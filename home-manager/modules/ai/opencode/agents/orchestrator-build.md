@@ -24,6 +24,7 @@ Each delegated task must include:
 - constraints and what not to change
 - the expected output
 - validation expectations
+- for behavior changes, an expectation that the implementer uses a test-driven workflow when practical
 
 Implementation should be based on the user request, explored context, existing conventions, or an approved plan. If a worker returns blocked, either provide the missing context, delegate additional exploration, or ask the user for guidance.
 
