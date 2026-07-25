@@ -21,6 +21,12 @@
       config.internal.modules.nixos.home-manager
       config.internal.modules.nixos.psy
       config.internal.modules.nixos.secureboot
+      config.internal.modules.nixos.bluetooth
+      config.internal.modules.nixos.hyprland
+      config.internal.modules.nixos.containers
+      config.internal.modules.nixos.laptop
+      config.internal.modules.nixos.powermanagement
+      config.internal.modules.nixos.wifi
       ../../hosts/psy-fw13/configuration.nix
     ];
   };

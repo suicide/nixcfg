@@ -1,0 +1,22 @@
+{...}: {
+  internal.modules = {
+    nixos.laptop = {
+      # enable suspend and hibernate
+      services.logind = {
+        settings.Login = {
+          HandleLidSwitch = "suspend-then-hibernate";
+
+          # power key handling
+          HandlePowerKey = "hibernate";
+          HandlePowerKeyLongPress = "poweroff";
+        };
+      };
+
+      # should switch to hibernate after said time
+      # automatic estimation is the default value otherwise
+      systemd.sleep.settings.Sleep = {
+        HibernateDelaySec = "1h";
+      };
+    };
+  };
+}

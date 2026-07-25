@@ -16,18 +16,10 @@
     ../../nixos/impermanence
     ../../nixos/impermanence/users/psy.nix
 
-    ../../nixos/powermanagement.nix
-    ../../nixos/laptop.nix
-
     ../../nixos/audio.nix
-    ../../nixos/bluetooth.nix
-    ../../nixos/wifi.nix
     ../../nixos/xserver.nix
-    ../../nixos/hyprland.nix
 
     ../../nixos/network/shares.nix
-
-    ../../nixos/virtualization/containers.nix
 
     ../../nixos/tpm.nix
   ];
