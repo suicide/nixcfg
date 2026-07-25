@@ -14,6 +14,7 @@
       config.internal.modules.nixos.sops
       config.internal.modules.nixos.home-manager
       config.internal.modules.nixos.psy
+      config.internal.modules.nixos.secureboot
       ../../hosts/psy-work1/configuration.nix
     ];
   };

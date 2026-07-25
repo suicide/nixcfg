@@ -11,9 +11,6 @@
 
     inputs.disko.nixosModules.default
 
-    inputs.lanzaboote.nixosModules.lanzaboote
-    ../../nixos/secureboot.nix
-
     ./sops.nix
 
     ../../nixos/impermanence
