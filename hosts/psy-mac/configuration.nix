@@ -5,9 +5,6 @@
   ...
 }: {
   imports = [
-    inputs.sops-nix.darwinModules.sops
-    ../../nixos/sops.nix
-
     # ../../nixos/base.nix
     ../../nixos/nix.nix
     # ../../nixos/gc.nix
@@ -18,9 +15,6 @@
     ../../darwin/brew.nix
 
     ../../darwin/colima.nix
-
-    inputs.home-manager.darwinModules.home-manager
-    ../../darwin/home-manager.nix
   ];
 
   config = {

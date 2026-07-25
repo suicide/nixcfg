@@ -10,6 +10,14 @@
       url = "github:nixos/nixpkgs/nixos-unstable";
     };
 
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+    };
+
+    import-tree = {
+      url = "github:vic/import-tree";
+    };
+
     # Home manager
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -105,64 +113,7 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    nix-darwin,
-    home-manager,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-    systems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
-    forAllSystems = nixpkgs.lib.genAttrs systems;
-    permittedInsecurePackages = [];
-    mkSystem = hostname: cfg:
-      nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit self inputs outputs hostname;};
-        # path to host specific config modules
-        modules = [
-          # Temporary: librewolf is marked insecure upstream
-          {
-            home-manager.sharedModules = [
-              {
-                nixpkgs.config.permittedInsecurePackages = permittedInsecurePackages;
-              }
-            ];
-          }
-          cfg
-        ];
-      };
-    mkDarwin = hostname: cfg:
-      nix-darwin.lib.darwinSystem {
-        specialArgs = {inherit self inputs outputs hostname;};
-        system = "aarch64-darwin";
-        # path to host specific config modules
-        modules = [
-          cfg
-        ];
-      };
-  in {
-    # NixOS configuration entrypoint
-    # Available through 'nixos-rebuild --flake .#your-hostname'
-    nixosConfigurations = {
-      psy-fw13 = mkSystem "psy-fw13" ./hosts/psy-fw13/configuration.nix;
-      psy-work1 = mkSystem "psy-work1" ./hosts/psy-work1/configuration.nix;
-      qemu = mkSystem "qemu" ./hosts/qemu/configuration.nix;
-    };
-
-    darwinConfigurations = {
-      psy-mac = mkDarwin "psy-mac" ./hosts/psy-mac/configuration.nix;
-    };
-
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
-
-    # packages
-    packages = forAllSystems (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-      openagents-opencode = pkgs.callPackage ./packages/openagents-opencode {
-        openAgentsControlSrc = inputs.OpenAgentsControl;
-      };
-    });
-  };
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {inherit inputs;}
+    (inputs.import-tree ./modules);
 }

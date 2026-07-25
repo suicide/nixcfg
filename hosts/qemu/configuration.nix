@@ -15,8 +15,6 @@
     inputs.disko.nixosModules.default
     # ./disk-config.nix
 
-    inputs.sops-nix.nixosModules.sops
-
     ../../nixos/impermanence
     ../../nixos/impermanence/users/psy.nix
 
@@ -28,10 +26,6 @@
 
     ../../nixos/firewall.nix
     ../../nixos/xserver.nix
-
-    inputs.home-manager.nixosModules.home-manager
-    ../../nixos/home-manager.nix
-    ../../nixos/users.nix
   ];
 
   config = {

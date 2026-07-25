@@ -14,8 +14,6 @@
     inputs.lanzaboote.nixosModules.lanzaboote
     ../../nixos/secureboot.nix
 
-    inputs.sops-nix.nixosModules.sops
-    ../../nixos/sops.nix
     ./sops.nix
 
     ../../nixos/impermanence
@@ -42,10 +40,6 @@
     ../../nixos/virtualization/containers.nix
 
     ../../nixos/tpm.nix
-
-    inputs.home-manager.nixosModules.home-manager
-    ../../nixos/home-manager.nix
-    ../../nixos/users.nix
   ];
 
   config = {
