@@ -17,8 +17,6 @@
     ../../nixos/impermanence/users/psy.nix
 
     ../../nixos/xserver.nix
-
-    ../../nixos/network/shares.nix
   ];
 
   config = {

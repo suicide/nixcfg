@@ -19,8 +19,6 @@
 
     ./audio.nix
     ../../nixos/xserver.nix
-
-    ../../nixos/network/shares.nix
   ];
 
   config = {

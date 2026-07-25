@@ -30,6 +30,7 @@
       config.internal.modules.nixos.wifi
       config.internal.modules.nixos.audio
       config.internal.modules.nixos.tpm
+      config.internal.modules.nixos.shares
       ../../hosts/psy-work1/configuration.nix
     ];
   };
