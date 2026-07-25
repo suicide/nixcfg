@@ -1,5 +1,6 @@
 {
   self,
+  lib,
   config,
   pkgs,
   inputs,
@@ -11,9 +12,7 @@
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
 
-    # revision
-    system.configurationRevision =
-      builtins.toString
-      (self.shortRev or self.dirtyShortRev or "unknown");
+    # Temporary: keep the system derivation stable while comparing the dendritic refactor.
+    system.configurationRevision = lib.mkForce "refactor-comparison";
   };
 }
