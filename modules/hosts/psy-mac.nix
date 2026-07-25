@@ -12,6 +12,7 @@
     };
     system = "aarch64-darwin";
     modules = [
+      config.internal.modules.darwin.nix
       config.internal.modules.darwin.sops
       config.internal.modules.darwin.home-manager
       config.internal.modules.darwin.psy

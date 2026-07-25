@@ -17,19 +17,12 @@
     ../../nixos/impermanence
     ../../nixos/impermanence/users/psy.nix
 
-    ../../nixos/base.nix
-    ../../nixos/linux-base.nix
-    ../../nixos/boot.nix
-    ../../nixos/gc.nix
-    ../../nixos/nix.nix
-
     ../../nixos/powermanagement.nix
     ../../nixos/desktop.nix
 
     ../../nixos/audio.nix
     ./audio.nix
     ../../nixos/bluetooth.nix
-    ../../nixos/firewall.nix
     ../../nixos/wifi.nix
     ../../nixos/xserver.nix
     ../../nixos/hyprland.nix

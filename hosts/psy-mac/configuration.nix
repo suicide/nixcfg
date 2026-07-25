@@ -5,10 +5,6 @@
   ...
 }: {
   imports = [
-    # ../../nixos/base.nix
-    ../../nixos/nix.nix
-    # ../../nixos/gc.nix
-
     ../../darwin/appearance.nix
     ../../darwin/finder.nix
 
