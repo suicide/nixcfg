@@ -4,15 +4,6 @@
   inputs,
   ...
 }: {
-  imports = [
-    ../../darwin/appearance.nix
-    ../../darwin/finder.nix
-
-    ../../darwin/brew.nix
-
-    ../../darwin/colima.nix
-  ];
-
   config = {
     system.primaryUser = "psy";
 

@@ -16,6 +16,11 @@
       config.internal.modules.darwin.sops
       config.internal.modules.darwin.home-manager
       config.internal.modules.darwin.psy
+      config.internal.modules.darwin.appearance
+      config.internal.modules.darwin.finder
+      config.internal.modules.darwin.brew
+      config.internal.modules.darwin.apps
+      config.internal.modules.darwin.colima
       ../../hosts/psy-mac/configuration.nix
     ];
   };
