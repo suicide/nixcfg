@@ -33,9 +33,6 @@
 
     ./modules/network.nix
 
-    ./modules/sops.nix
-
-    ./modules/browsers/brave.nix
     ./modules/browsers/firefox
     ./modules/browsers/librewolf
 

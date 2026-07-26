@@ -1,4 +1,10 @@
-{lib, ...}: {
+{
+  lib,
+  config,
+  ...
+}: let
+  flakePartsConfig = config;
+in {
   internal.modules = {
     nixos.psy = {
       config,
@@ -6,8 +12,14 @@
       hostname,
       ...
     }: let
-      cfg = config.__cfg;
+      nixosCfg = config;
+      cfg = nixosCfg.__cfg;
     in {
+      imports = [
+        flakePartsConfig.internal.modules.nixos."home-personal-data"
+        flakePartsConfig.internal.modules.nixos."home-credentials"
+        flakePartsConfig.internal.modules.nixos.brave
+      ];
       options.__cfg.mainUser = lib.mkOption {
         type = lib.types.str;
         default = "psy";
@@ -28,6 +40,8 @@
           ../../home-manager/home.nix
           ../../home-manager/users/${cfg.mainUser}
           ../../hosts/${hostname}/home.nix
+          flakePartsConfig.internal.modules.home.sops
+          flakePartsConfig.internal.modules.home.brave
         ];
       };
     };
@@ -40,6 +54,8 @@
       home-manager.users.${config.system.primaryUser}.imports = [
         ../../home-manager/home-darwin.nix
         ../../hosts/${hostname}/home.nix
+        flakePartsConfig.internal.modules.home.sops
+        flakePartsConfig.internal.modules.home.brave
       ];
     };
   };

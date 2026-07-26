@@ -45,8 +45,6 @@
     # ./modules/virtualization/container-tools.nix
     # ./modules/virtualization/podman.nix
 
-    ./modules/sops.nix
-
     ./modules/tpm.nix
 
     ./modules/xdg.nix

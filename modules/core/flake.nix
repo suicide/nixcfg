@@ -6,7 +6,7 @@
   options.internal.modules = lib.mkOption {
     type = lib.types.attrsOf (lib.types.attrsOf lib.types.deferredModule);
     default = {};
-    description = "Reusable NixOS and nix-darwin modules.";
+    description = "Reusable NixOS, nix-darwin, and Home Manager modules.";
   };
 
   config = {
