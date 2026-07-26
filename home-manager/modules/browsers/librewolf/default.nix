@@ -6,8 +6,14 @@
   inputs,
   ...
 }: {
+  options.__cfg.browser.librewolf.foxyproxy.enabledProxy = lib.mkOption {
+    type = lib.types.nullOr lib.types.str;
+    default = null;
+    description = "Title of the FoxyProxy proxy to auto-enable in Librewolf (mode 3, all URLs). null = leave unchanged.";
+  };
+
   config = let
-    extensions = import ../firefox/extensions.nix;
+    extensions = import ../firefox/extensions.nix {enabledProxy = config.__cfg.browser.librewolf.foxyproxy.enabledProxy;};
   in {
     programs.librewolf = {
       enable = true;

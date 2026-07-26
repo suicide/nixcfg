@@ -6,8 +6,14 @@
   inputs,
   ...
 }: {
+  options.__cfg.browser.firefox.foxyproxy.enabledProxy = lib.mkOption {
+    type = lib.types.nullOr lib.types.str;
+    default = null;
+    description = "Title of the FoxyProxy proxy to auto-enable in Firefox (mode 3, all URLs). null = leave unchanged.";
+  };
+
   config = let
-    extensions = import ./extensions.nix;
+    extensions = import ./extensions.nix {enabledProxy = config.__cfg.browser.firefox.foxyproxy.enabledProxy;};
   in {
     programs.firefox = {
       enable = true;

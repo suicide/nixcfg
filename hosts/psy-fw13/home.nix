@@ -34,6 +34,8 @@
         useNvf = true;
         geminiApiKey = "${secrets}/ai/gemini/api_key";
       };
+
+      browser.librewolf.foxyproxy.enabledProxy = "new york 603";
     };
 
     programs.git = {
