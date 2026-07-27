@@ -42,50 +42,8 @@ in {
       };
     };
 
-    __cfg.neovim = let
-      secrets = "${config.home.homeDirectory}/.config/sops-nix/secrets";
-    in {
+    __cfg.neovim = {
       enable = true;
-      useLegacyConfig = false;
-      useNvf = true;
-      geminiApiKey = "${secrets}/ai/gemini/api_key";
-
-      extraConfig = {
-        vim.assistant.codecompanion-nvim = {
-          setupOpts = {
-            adapters = lib.mkForce (
-              lib.mkLuaInline ''
-                {
-                  http = {
-                    devai = function()
-                      return require("codecompanion.adapters").extend("openai_compatible", {
-                        schema = {
-                          model = {
-                            default = "llama-3.3-70b",
-                          },
-                        },
-                        env = {
-                          url = "https://openai-api.mms-at-work.de",
-                        },
-                      })
-                    end,
-
-                  },
-                }
-              ''
-            );
-
-            strategies = {
-              chat = {
-                adapter = lib.mkForce "devai";
-              };
-              inline = {
-                adapter = lib.mkForce "devai";
-              };
-            };
-          };
-        };
-      };
     };
 
     __cfg.opencode = {

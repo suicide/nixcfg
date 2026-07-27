@@ -16,12 +16,12 @@ in {
       };
       useLegacyConfig = lib.mkOption {
         type = lib.types.bool;
-        default = true;
+        default = false;
         description = "Use legacy neovim config";
       };
       useNvf = lib.mkOption {
         type = lib.types.bool;
-        default = false;
+        default = true;
         description = "Use NVF based neovim config";
       };
       extraConfig = lib.mkOption {
