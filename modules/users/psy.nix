@@ -107,45 +107,52 @@ in {
       hostname,
       ...
     }: {
-      home-manager.users.${config.system.primaryUser}.imports = [
-        # Core baseline
-        flakePartsConfig.internal.modules.home.base
+      home-manager.users.${config.system.primaryUser}.imports =
+        [
+          # Core baseline
+          flakePartsConfig.internal.modules.home.base
 
-        # User-specific module registration
-        flakePartsConfig.internal.modules.home.psy
+          # User-specific module registration (macOS overrides only)
+        ]
+        # Mac-specific user profile (home."psy-mac") is opt-in per-host so that
+        # future Darwin hosts can add their own `_sops-darwin.nix` or other
+        # Mac-only overrides without pulling in psy-mac's declarations.
+        ++ lib.optionals (hostname == "psy-mac") [
+          flakePartsConfig.internal.modules.home."psy-mac"
+        ]
+        ++ [
+          # Host-specific overrides
+          ../hosts/_${hostname}/home.nix
 
-        # Host-specific overrides
-        ../hosts/_${hostname}/home.nix
+          # Services (Darwin-compatible subset)
+          flakePartsConfig.internal.modules.home.ssh
+          flakePartsConfig.internal.modules.home.gpg
+          flakePartsConfig.internal.modules.home.nh
+          flakePartsConfig.internal.modules.home.network
+          flakePartsConfig.internal.modules.home.fonts
 
-        # Services (Darwin-compatible subset)
-        flakePartsConfig.internal.modules.home.ssh
-        flakePartsConfig.internal.modules.home.gpg
-        flakePartsConfig.internal.modules.home.nh
-        flakePartsConfig.internal.modules.home.network
-        flakePartsConfig.internal.modules.home.fonts
+          # Darwin-specific applications
+          flakePartsConfig.internal.modules.home."container-tools"
+          flakePartsConfig.internal.modules.home.utm
 
-        # Darwin-specific applications
-        flakePartsConfig.internal.modules.home."container-tools"
-        flakePartsConfig.internal.modules.home.utm
+          # Security / integrations
+          flakePartsConfig.internal.modules.home.sops
+          flakePartsConfig.internal.modules.home.brave
+          flakePartsConfig.internal.modules.home.misc
+          flakePartsConfig.internal.modules.home.firefox
+          flakePartsConfig.internal.modules.home.librewolf
+          flakePartsConfig.internal.modules.home.direnv
+          flakePartsConfig.internal.modules.home.neovim
+          flakePartsConfig.internal.modules.home.opencode
 
-        # Security / integrations
-        flakePartsConfig.internal.modules.home.sops
-        flakePartsConfig.internal.modules.home.brave
-        flakePartsConfig.internal.modules.home.misc
-        flakePartsConfig.internal.modules.home.firefox
-        flakePartsConfig.internal.modules.home.librewolf
-        flakePartsConfig.internal.modules.home.direnv
-        flakePartsConfig.internal.modules.home.neovim
-        flakePartsConfig.internal.modules.home.opencode
-
-        # CLI tools
-        flakePartsConfig.internal.modules.home.git
-        flakePartsConfig.internal.modules.home.tmux
-        flakePartsConfig.internal.modules.home.kitty
-        flakePartsConfig.internal.modules.home.yazi
-        flakePartsConfig.internal.modules.home.mpv
-        flakePartsConfig.internal.modules.home.zsh
-      ];
+          # CLI tools
+          flakePartsConfig.internal.modules.home.git
+          flakePartsConfig.internal.modules.home.tmux
+          flakePartsConfig.internal.modules.home.kitty
+          flakePartsConfig.internal.modules.home.yazi
+          flakePartsConfig.internal.modules.home.mpv
+          flakePartsConfig.internal.modules.home.zsh
+        ];
     };
   };
 }

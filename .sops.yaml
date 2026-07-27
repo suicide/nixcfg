@@ -4,7 +4,7 @@ keys:
 creation_rules:
   # ordering is important here
   # psy-mac has an additional recipient (psy-mms)
-  - path_regex: secrets/hosts/psy-mac\.yaml$
+  - path_regex: secrets/users/psy-mac\.yaml$
     key_groups:
     - age:
       - *psy

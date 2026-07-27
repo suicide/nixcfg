@@ -1,5 +1,6 @@
 {lib, ...}: {
   internal.modules = {
+    # NixOS / Linux user profile
     home.psy = {
       lib,
       pkgs,
@@ -19,6 +20,18 @@
           homeDirectory = lib.mkDefault "/home/psy";
         };
       };
+    };
+
+    # macOS user profile (Darwin-only overrides)
+    home."psy-mac" = {
+      lib,
+      pkgs,
+      config,
+      ...
+    }: {
+      imports = [
+        ./_sops-darwin.nix
+      ];
     };
   };
 }

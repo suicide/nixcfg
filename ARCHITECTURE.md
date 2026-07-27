@@ -10,8 +10,8 @@ custom module system, and the secrets management workflow.
   `_psy-fw13/`). The `_` prefix prevents `import-tree` from auto-discovering
   them; each is imported explicitly by its corresponding entrypoint.
 - **`secrets/`**: Encrypted SOPS secret files, organized by domain:
-  - **`secrets/hosts/`**: Per-host secret files (e.g., `psy-fw13.yaml`, `psy-mac.yaml`).
-  - **`secrets/users/`**: Per-user secret files (e.g., `psy.yaml`).
+  - **`secrets/hosts/`**: Per-host secret files (e.g., `psy-fw13.yaml`).
+  - **`secrets/users/`**: Per-user secret files (e.g., `psy.yaml`, `psy-mac.yaml`).
   - **`secrets/legacy.yaml`**: Unreferenced legacy secret file.
 - **`home-manager/`**: Contains user-level configurations (shell, editors, GUI
   apps) managed by Home Manager.
@@ -24,6 +24,18 @@ custom module system, and the secrets management workflow.
     per-host leaves.
   - **`services/`**: Cross-cutting service integrations such as SOPS.
   - **`users/`**: User modules shared by host configurations.
+    - **`users/psy.nix`**: Registers the shared Linux user profile
+      (`home.psy`) and the mutually exclusive Mac-specific user profile
+      (`home."psy-mac"`). The Mac profile is opt-in per-host so future Darwin
+      hosts can add their own Mac-only overrides without pulling in psy-mac's
+      declarations.
+    - **`users/psy/`**: Leaf modules for user `psy`.
+      - **`users/psy/_sops.nix`**: Shared Linux user SOPS secrets (reads from
+        `secrets/users/psy.yaml`). Every secret explicitly sets `sopsFile`
+        because there is no global `defaultSopsFile`.
+      - **`users/psy/_sops-darwin.nix`**: Mutually exclusive Mac-specific user
+        secrets (reads from `secrets/users/psy-mac.yaml`). Imported only on
+        macOS; the shared declarations in `_sops.nix` do not apply.
 - **`packages/`**: Contains custom package definitions exposed by the flake.
 
 ## Dendritic Flake Structure
