@@ -2,6 +2,9 @@
 
 **Status:** Accepted
 
+**Amended:** 2026-07-27 — clarified the `misc` and persistence-only feature
+module conventions.
+
 ## Context
 
 The configuration is migrating from separate system and Home Manager trees to
@@ -20,6 +23,9 @@ use because of its recursion and bindfs overhead.
   - `modules/services/` contains system and session-service integrations.
   - `modules/home/` contains foundational home-directory structure and
     non-application user data.
+- Use an app-level `misc` module only for simple package declarations that do
+  not require feature-specific configuration. Do not use it as a catch-all for
+  configured applications or services.
 - Register Home Manager modules under `internal.modules.home.<feature>`.
   Platform/user composition selects them explicitly; they are not implicitly
   imported as one global Home Manager profile.
@@ -29,6 +35,9 @@ use because of its recursion and bindfs overhead.
   persistence directory and main user rather than hardcoded values.
 - Keep generic personal data, credentials, and non-application home state in
   `modules/home/` persistence modules.
+- A persistence-only application module is valid when infrequently used
+  software still has important state to retain. Such a module must not install
+  or enable the software merely because it persists its state.
 
 ## Consequences
 
@@ -36,6 +45,8 @@ use because of its recursion and bindfs overhead.
   together, avoiding a central list with unclear ownership.
 - NixOS persistence remains the mechanism for persistent home state; Home
   Manager Impermanence remains disabled.
+- Persistence-only modules retain data independently of whether their related
+  applications are currently installed.
 - Linux and Darwin Home Manager feature lists must remain explicit so
   Linux-only desktop modules are not evaluated on Darwin.
 - Existing Home Manager modules can migrate incrementally without changing

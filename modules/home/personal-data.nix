@@ -18,9 +18,6 @@
               "tmp"
               ".vault"
             ];
-            files = [
-              ".zsh_history"
-            ];
           };
         };
       };
