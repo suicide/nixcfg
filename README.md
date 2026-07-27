@@ -17,11 +17,10 @@ Manager as a module.
 ## Directory Structure
 
 - `flake.nix`: Entry point for all configurations.
-- `hosts/`: Host-specific configurations (e.g., `psy-fw13/`, `psy-mac/`).
-- `nixos/`: Shared system-level modules (systemd, kernel, hardware).
+- `modules/hosts/`: Host entrypoints and private per-host leaves (`_<hostname>/`).
+- `secrets/`: Encrypted SOPS secrets, organized by domain (`hosts/`, `users/`).
 - `home-manager/`: Shared user-level modules (shell, editors, GUI apps).
   - `modules/`: Atomic configuration units.
-  - `users/`: User profiles.
 - `packages/`: Custom package definitions (e.g., `openagents-opencode`).
 - `docs/`: detailed documentation.
 
@@ -79,7 +78,7 @@ Ensure `__cfg.sops.enable = true;` is set in your configuration.
 **Editing secrets:**
 
 ```shell
-nix run nixpkgs#sops -- home-manager/users/psy/secrets.yaml
+nix run nixpkgs#sops -- secrets/users/psy.yaml
 ```
 
 ## Secure Boot

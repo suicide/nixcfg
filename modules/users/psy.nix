@@ -56,7 +56,7 @@ in {
           flakePartsConfig.internal.modules.home.psy
 
           # Host-specific overrides
-          ../../hosts/${hostname}/home.nix
+          ../hosts/_${hostname}/home.nix
 
           # Services
           flakePartsConfig.internal.modules.home.ssh
@@ -115,7 +115,7 @@ in {
         flakePartsConfig.internal.modules.home.psy
 
         # Host-specific overrides
-        ../../hosts/${hostname}/home.nix
+        ../hosts/_${hostname}/home.nix
 
         # Services (Darwin-compatible subset)
         flakePartsConfig.internal.modules.home.ssh

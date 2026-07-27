@@ -3,12 +3,14 @@ keys:
   - &psy-mms age1fyh8reyks259t7k5kcvns0mm8n6vq0qm4eexyljv7m05ju6ztdmsud8c9d
 creation_rules:
   # ordering is important here
-  - path_regex: hosts/psy-mac/secrets.yaml$
+  # psy-mac has an additional recipient (psy-mms)
+  - path_regex: secrets/hosts/psy-mac\.yaml$
     key_groups:
     - age:
       - *psy
       - *psy-mms
-  - path_regex: (hosts(/[a-zA-Z0-9\-]+)?|home-manager/users/[a-zA-Z0-9]+)/secrets.yaml$
+  # General rule for all other secrets in the secrets/ tree
+  - path_regex: secrets/(hosts/[a-zA-Z0-9\-]+\.yaml|users/[a-zA-Z0-9]+\.yaml|legacy\.yaml)$
     key_groups:
     - age:
       - *psy

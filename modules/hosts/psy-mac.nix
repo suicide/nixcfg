@@ -21,7 +21,7 @@
       config.internal.modules.darwin.brew
       config.internal.modules.darwin.apps
       config.internal.modules.darwin.colima
-      ../../hosts/psy-mac/configuration.nix
+      ./_psy-mac/configuration.nix
     ];
   };
 }

@@ -22,7 +22,7 @@
       config.internal.modules.nixos.psy
       config.internal.modules.nixos.impermanence
       config.internal.modules.nixos.xserver
-      ../../hosts/qemu/configuration.nix
+      ./_qemu/configuration.nix
     ];
   };
 }

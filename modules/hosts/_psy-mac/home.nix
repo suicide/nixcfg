@@ -44,7 +44,7 @@ in {
 
     # secrets
     sops = lib.mkIf enableSops {
-      defaultSopsFile = ./secrets.yaml;
+      defaultSopsFile = ../../../secrets/hosts/psy-mac.yaml;
       secrets = {
         "ssh/buildthing/privateKey" = {
           path = "%r/buildthing-private-key";

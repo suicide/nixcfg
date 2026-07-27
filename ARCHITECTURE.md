@@ -5,19 +5,23 @@ custom module system, and the secrets management workflow.
 
 ## Directory Structure
 
-- **`hosts/`**: Contains per-host configurations. Each host (e.g., `psy-fw13`,
-  `psy-mac`) has its own directory with a `configuration.nix`.
-- **`nixos/`**: Contains system-level NixOS modules (kernel, networking,
-  virtualization, system services).
+- **`modules/hosts/`**: Host entrypoints  (e.g., `psy-fw13.nix`, `psy-mac.nix`)
+  and per-host private leaves under `_<hostname>/` directories (e.g.,
+  `_psy-fw13/`). The `_` prefix prevents `import-tree` from auto-discovering
+  them; each is imported explicitly by its corresponding entrypoint.
+- **`secrets/`**: Encrypted SOPS secret files, organized by domain:
+  - **`secrets/hosts/`**: Per-host secret files (e.g., `psy-fw13.yaml`, `psy-mac.yaml`).
+  - **`secrets/users/`**: Per-user secret files (e.g., `psy.yaml`).
+  - **`secrets/legacy.yaml`**: Unreferenced legacy secret file.
 - **`home-manager/`**: Contains user-level configurations (shell, editors, GUI
   apps) managed by Home Manager.
   - **`modules/`**: Atomic Home Manager modules (e.g., `git.nix`, `hyprland/`,
     `neovim/`).
-  - **`users/`**: User definitions (e.g., `psy/`).
 - **`modules/`**: Auto-discovered flake-parts modules. New configuration belongs
   here and is organized by feature, user, or host.
   - **`core/`**: Flake-wide systems, package outputs, and Home Manager wiring.
-  - **`hosts/`**: NixOS and nix-darwin configuration entrypoints.
+  - **`hosts/`**: NixOS and nix-darwin configuration entrypoints and private
+    per-host leaves.
   - **`services/`**: Cross-cutting service integrations such as SOPS.
   - **`users/`**: User modules shared by host configurations.
 - **`packages/`**: Contains custom package definitions exposed by the flake.
@@ -57,7 +61,7 @@ options = {
 };
 ```
 
-In a host config (`hosts/psy-fw13/configuration.nix`):
+In a host config (`modules/hosts/_psy-fw13/configuration.nix`):
 
 ```nix
 __cfg.secureboot.enable = true;
@@ -83,8 +87,9 @@ We use [sops-nix](https://github.com/Mic92/sops-nix) to manage secrets.
 - **Workflow**: Secrets are encrypted using `age` keys.
 - **Key Source**: `age` keys are typically derived from the host's SSH host keys
   (for system secrets) or a user-provided key (for user secrets).
-- **Storage**: Encrypted secrets are stored in `.yaml` files (e.g.,
-  `secrets.yaml` in `hosts/` or `home-manager/users/`).
+- **Storage**: Encrypted secrets are stored in `.yaml` files under `secrets/`,
+  organized by domain: `secrets/hosts/<hostname>.yaml` for per-host secrets and
+  `secrets/users/<username>.yaml` for per-user secrets.
 - **Decryption**: At runtime, SOPS decrypts the secrets using the private key
   available on the system (e.g., in `/root/.config/sops/age/keys.txt` or derived
   from SSH host key).

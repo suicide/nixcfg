@@ -9,7 +9,7 @@
 in {
   config = {
     sops = lib.mkIf cfg.enable {
-      defaultSopsFile = ./secrets.yaml;
+      defaultSopsFile = ../../../secrets/hosts/psy-work1.yaml;
       age.keyFile = "/persist/home/psy/.config/sops/age/keys.txt";
 
       secrets."wireguard/homenet2/configFile" = {};

@@ -2,8 +2,8 @@
 
 **Status:** Accepted
 
-**Amended:** 2026-07-27 — clarified the `misc` and persistence-only feature
-module conventions.
+**Amended:** 2026-07-27 — clarified the `misc`, persistence-only feature
+module, private host-leaf, and encrypted-secrets conventions.
 
 ## Context
 
@@ -16,8 +16,13 @@ use because of its recursion and bindfs overhead.
 
 ## Decision
 
-- Keep `hosts/` as the top-level location for host-local data and generated
-  inputs. Keep `modules/hosts/` for host composition.
+- Keep host composition in public `modules/hosts/*.nix` flake-parts modules.
+  Keep host-local Nix leaves and generated inputs in corresponding private
+  `modules/hosts/_<hostname>/` directories so `import-tree` does not evaluate
+  them as flake-parts modules.
+- Store encrypted SOPS files in a top-level `secrets/` tree, separate from
+  both host configuration and shared modules. Keep SOPS creation rules at the
+  repository root and preserve special recipient rules when files move.
 - Organize shared modules by ownership:
   - `modules/apps/` contains user-facing application modules.
   - `modules/services/` contains system and session-service integrations.
