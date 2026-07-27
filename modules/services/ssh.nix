@@ -26,5 +26,21 @@
         };
       };
     };
+
+    # NixOS persistence is composed with the project user and Impermanence modules
+    nixos.ssh = {config, ...}: {
+      config = {
+        environment.persistence.${config.__cfg.impermanence.persistDir} = {
+          users.${config.__cfg.mainUser} = {
+            directories = [
+              {
+                directory = ".ssh";
+                mode = "0700";
+              }
+            ];
+          };
+        };
+      };
+    };
   };
 }

@@ -28,5 +28,21 @@
         ];
       };
     };
+
+    # NixOS persistence is composed with the project user and Impermanence modules
+    nixos.gpg = {config, ...}: {
+      config = {
+        environment.persistence.${config.__cfg.impermanence.persistDir} = {
+          users.${config.__cfg.mainUser} = {
+            directories = [
+              {
+                directory = ".gnupg";
+                mode = "0700";
+              }
+            ];
+          };
+        };
+      };
+    };
   };
 }
