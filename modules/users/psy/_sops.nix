@@ -10,7 +10,7 @@
 in {
   config = {
     sops = lib.mkIf (cfg.enable) {
-      defaultSopsFile = ./secrets.yaml;
+      defaultSopsFile = ../../../home-manager/users/psy/secrets.yaml;
       secrets = {
         "my_secret/key1" = {
           # sopsFile = ./secrets.yml.enc; # optionally define per-secret files

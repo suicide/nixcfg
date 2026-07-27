@@ -52,8 +52,8 @@ in {
           flakePartsConfig.internal.modules.home.base
           flakePartsConfig.internal.modules.home.linux-base
 
-          # User-specific modules (not yet migrated)
-          ../../home-manager/users/${cfg.mainUser}
+          # User-specific module registration
+          flakePartsConfig.internal.modules.home.psy
 
           # Host-specific overrides
           ../../hosts/${hostname}/home.nix
@@ -110,6 +110,9 @@ in {
       home-manager.users.${config.system.primaryUser}.imports = [
         # Core baseline
         flakePartsConfig.internal.modules.home.base
+
+        # User-specific module registration
+        flakePartsConfig.internal.modules.home.psy
 
         # Host-specific overrides
         ../../hosts/${hostname}/home.nix
