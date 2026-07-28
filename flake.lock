@@ -382,16 +382,16 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1784533848,
-        "narHash": "sha256-1dt2IyLBRn9ji79xxv82/Gh7semHCk8cjajtg72sWGI=",
+        "lastModified": 1785170029,
+        "narHash": "sha256-8CKDx282HhxlD1pwXPnC4uK29Abn1Jsnh7LgPzeIXxI=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "36b2e0cfe0c6094dbc47bd42a437431315bb3087",
+        "rev": "5c9377c15f85c50648f35ca5a213754f95b93ca0",
         "type": "github"
       },
       "original": {
         "owner": "hyprwm",
-        "ref": "v0.56.0",
+        "ref": "v0.56.1",
         "repo": "Hyprland",
         "type": "github"
       }
@@ -475,16 +475,16 @@
         "nix-filter": "nix-filter"
       },
       "locked": {
-        "lastModified": 1784576463,
-        "narHash": "sha256-XVm8Bi8XasjMP2VOisrPAuJvrB6+rQZW+/TL9kr2Ogs=",
+        "lastModified": 1785172485,
+        "narHash": "sha256-uwkgqUhX3+t0KjzlC8IkvGYEk65SfI4syHBmI8yYXAI=",
         "owner": "zjeffer",
         "repo": "split-monitor-workspaces",
-        "rev": "c8a03d993f71a3ae73179ce354e7a54859055f02",
+        "rev": "b28df0d0df6bc8b07389552c38f645bbba13008b",
         "type": "github"
       },
       "original": {
         "owner": "zjeffer",
-        "ref": "v0.56.0",
+        "ref": "v0.56.1",
         "repo": "split-monitor-workspaces",
         "type": "github"
       }
