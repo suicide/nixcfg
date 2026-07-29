@@ -6,8 +6,6 @@ set -euo pipefail
 # `base` defaults to HEAD. `ref` is the current workspace state (staged +
 # unstaged), so each migration is checked before committing it.
 #
-# The temporary override MUST remain in both revisions during this test.
-#
 # Default: when derivations differ, nix-diff is shown for diagnostics and
 # exit is 0 (no building).  Use --closures and/or --strict for deeper checks.
 
