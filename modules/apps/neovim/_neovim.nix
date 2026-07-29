@@ -102,9 +102,9 @@ in {
           name = "neovim-vars-wrapped";
           paths = [nvim];
           buildInputs = [pkgs.makeWrapper];
-          postBuild = ''
+          postBuild = lib.optionalString (cfg.geminiApiKey != null) ''
             wrapProgram $out/bin/nvim \
-              --set GEMINI_API_KEY_FILE "${cfg.geminiApiKey or ""}"
+              --set GEMINI_API_KEY_FILE "${cfg.geminiApiKey}"
           '';
         };
       in {
