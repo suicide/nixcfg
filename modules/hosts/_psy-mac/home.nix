@@ -56,29 +56,30 @@ in {
       settings = {
         provider = (import ./ai/mmsai.nix) // (import ./ai/llmchat.nix);
         agent = let
-          lightweightModel = "github-copilot/gemini-3.5-flash";
+          lightweightModel = "github-copilot/gpt-5.6-luna";
+          mediumWeightModel = "github-copilot/gpt-5.6-terra";
         in {
           # Built in
           explore = {
             model = lightweightModel;
           };
           general = {
-            model = "github-copilot/gpt-5.3-codex";
+            model = lightweightModel;
           };
 
           # extras
 
           documentation = {
-            model = lightweightModel;
+            model = mediumWeightModel;
           };
           codereviewer = {
-            model = "github-copilot/claude-opus-4.8";
+            model = "github-copilot/claude-opus-5";
             permission = {
               edit = "deny";
             };
           };
           implementer = {
-            model = "github-copilot/gpt-5.6-luna";
+            model = lightweightModel;
           };
         };
       };
