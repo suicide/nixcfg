@@ -22,8 +22,12 @@
           enable = true;
 
           theme = {
-            package = pkgs.flat-remix-gtk;
-            name = "Flat-Remix-GTK-Grey-Dark";
+            package = pkgs.catppuccin-gtk.override {
+              variant = "mocha";
+              accents = ["mauve"];
+              size = "standard";
+            };
+            name = "catppuccin-mocha-mauve-standard";
           };
 
           gtk4.theme = null;
