@@ -128,7 +128,9 @@ in {
         playerctl = lib.getExe pkgs.playerctl;
         wpctl = lib.getExe' pkgs.wireplumber "wpctl";
         dunstctl = lib.getExe' pkgs.dunst "dunstctl";
-        hyprshot = lib.getExe pkgs.hyprshot;
+        hyprshot = lib.getExe (pkgs.hyprshot.override {
+          hyprland = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+        });
         wl-clip-persist = lib.getExe pkgs.wl-clip-persist;
         wl-copy = lib.getExe' pkgs.wl-clipboard "wl-copy";
         wl-paste = lib.getExe' pkgs.wl-clipboard "wl-paste";
