@@ -23,6 +23,13 @@
           };
 
           history = {
+            # Store history under ~/.local/state/zsh so impermanence can
+            # bind-mount the containing directory instead of the file itself.
+            # Zsh rewrites the history file via rename(2), which fails when the
+            # file itself is a bind-mounted mount point; binding the directory
+            # allows atomic replacement of the child file.
+            path = "${config.home.homeDirectory}/.local/state/zsh/history";
+
             ignoreSpace = true;
             ignoreDups = true;
             expireDuplicatesFirst = true;
@@ -183,8 +190,8 @@
       config = {
         environment.persistence.${config.__cfg.impermanence.persistDir} = {
           users.${config.__cfg.mainUser} = {
-            files = [
-              ".zsh_history"
+            directories = [
+              ".local/state/zsh"
             ];
           };
         };
