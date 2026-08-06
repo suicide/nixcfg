@@ -10,6 +10,7 @@
       ...
     }: let
       impermanenceCfg = config.__cfg.impermanence;
+      hyprlandPkgs = import ./hyprland/_hyprland-packages.nix {inherit inputs pkgs;};
     in {
       config = {
         # Enable the X11 windowing system.
@@ -59,8 +60,8 @@
           xwayland.enable = true;
           withUWSM = true;
 
-          package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-          portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+          package = hyprlandPkgs.hyprland;
+          portalPackage = hyprlandPkgs.portal;
         };
 
         environment.sessionVariables = lib.mkIf (config.programs.hyprland.enable) {

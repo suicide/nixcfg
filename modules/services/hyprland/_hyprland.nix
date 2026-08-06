@@ -9,6 +9,7 @@
 }: let
   cfg = config.__cfg.hyprland;
   lua = lib.generators.mkLuaInline;
+  hyprlandPkgs = import ./_hyprland-packages.nix {inherit inputs pkgs;};
 
   toWorkspaceKey = n:
     if n == 0
@@ -112,11 +113,11 @@ in {
     wayland.windowManager.hyprland = lib.mkIf cfg.enable {
       enable = true;
       configType = "lua";
-      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-      portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+      package = hyprlandPkgs.hyprland;
+      portalPackage = hyprlandPkgs.portal;
 
       plugins = lib.optionals cfg.displayWorkspaces [
-        inputs.hyprland-split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system}.split-monitor-workspaces
+        hyprlandPkgs.splitMonitorWorkspaces
       ];
 
       # start with uwsm
@@ -128,9 +129,7 @@ in {
         playerctl = lib.getExe pkgs.playerctl;
         wpctl = lib.getExe' pkgs.wireplumber "wpctl";
         dunstctl = lib.getExe' pkgs.dunst "dunstctl";
-        hyprshot = lib.getExe (pkgs.hyprshot.override {
-          hyprland = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-        });
+        hyprshot = lib.getExe hyprlandPkgs.hyprshot;
         wl-clip-persist = lib.getExe pkgs.wl-clip-persist;
         wl-copy = lib.getExe' pkgs.wl-clipboard "wl-copy";
         wl-paste = lib.getExe' pkgs.wl-clipboard "wl-paste";

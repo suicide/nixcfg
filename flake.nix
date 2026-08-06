@@ -55,13 +55,17 @@
     };
 
     # hyprland
+    # pinned to the v0.56.2 release tag. The tag still requires glaze 7...<8 in
+    # CMakeLists.txt and breaks with glaze 8 in nixpkgs; the repo-local patch
+    # modules/services/hyprland/glaze.patch applies the known "drop glaze version
+    # requirement" fix (upstream commit 91f29f23) on top of the tag.
     hyprland = {
-      url = "github:hyprwm/Hyprland/v0.56.1";
+      url = "github:hyprwm/Hyprland/v0.56.2";
       # do not change hyprland's nixpkgs to take advantage of cache and not to mess with build
       # inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland-split-monitor-workspaces = {
-      url = "github:zjeffer/split-monitor-workspaces/v0.56.1";
+      url = "github:zjeffer/split-monitor-workspaces/v0.56.2";
       # url = "github:suicide/split-monitor-workspaces/fix-nix-0.54.3";
       inputs.hyprland.follows = "hyprland";
     };
