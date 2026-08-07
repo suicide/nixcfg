@@ -9,6 +9,9 @@
       config = {
         programs.git = {
           enable = true;
+          package = lib.mkIf pkgs.stdenv.hostPlatform.isLinux (
+            pkgs.git.override {withLibsecret = true;}
+          );
           lfs = {
             enable = true;
           };
@@ -17,6 +20,10 @@
           };
 
           settings = {
+            credential.helper =
+              if pkgs.stdenv.hostPlatform.isDarwin
+              then "osxkeychain"
+              else "libsecret";
             commit.verbose = true;
             tag = {
               gpgSign = false;
