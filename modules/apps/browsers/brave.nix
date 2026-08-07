@@ -1,8 +1,17 @@
 {...}: {
   internal.modules = {
-    home.brave = {config, ...}: {
+    home.brave = {
+      lib,
+      pkgs,
+      ...
+    }: {
       config = {
-        programs.brave.enable = true;
+        programs.brave = {
+          enable = true;
+          commandLineArgs = lib.optionals pkgs.stdenv.hostPlatform.isLinux [
+            "--password-store=gnome-libsecret"
+          ];
+        };
       };
     };
 

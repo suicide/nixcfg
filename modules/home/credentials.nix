@@ -5,6 +5,14 @@
       mainUser = config.__cfg.mainUser;
     in {
       config = {
+        # Unlock Login keyring at greeter auth so Brave/libsecret OSCrypt works
+        # under Hyprland/UWSM (no manual gnome-keyring-daemon exec-once).
+        services.gnome.gnome-keyring.enable = true;
+        security.pam.services = {
+          login.enableGnomeKeyring = true;
+          sddm.enableGnomeKeyring = true;
+        };
+
         environment.persistence.${impermanenceCfg.persistDir} = {
           users.${mainUser} = {
             directories = [

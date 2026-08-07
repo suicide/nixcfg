@@ -1,9 +1,16 @@
 {...}: {
   internal.modules = {
-    home.chromium = {...}: {
+    home.chromium = {
+      lib,
+      pkgs,
+      ...
+    }: {
       config = {
         programs.chromium = {
           enable = true;
+          commandLineArgs = lib.optionals pkgs.stdenv.hostPlatform.isLinux [
+            "--password-store=gnome-libsecret"
+          ];
         };
       };
     };
