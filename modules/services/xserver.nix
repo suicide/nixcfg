@@ -37,6 +37,14 @@
           };
         };
 
+        # Select GNOME Keyring's Secret portal for Hyprland. Its portal file is
+        # otherwise limited to GNOME sessions, leaving Brave OSCryptAsync without
+        # a Secret provider.
+        xdg.portal = {
+          enable = true;
+          config.hyprland."org.freedesktop.impl.portal.Secret" = ["gnome-keyring"];
+        };
+
         environment = {
           systemPackages = with pkgs; [
             catppuccin-sddm
