@@ -13,7 +13,13 @@
           shellWrapperName = "y";
 
           plugins = {
+            git = {
+              package = pkgs.yaziPlugins.git;
+              setup = true;
+              settings.order = 1500;
+            };
             "relative-motions" = pkgs.yaziPlugins.relative-motions;
+            "smart-enter" = pkgs.yaziPlugins.smart-enter;
           };
 
           settings = {
@@ -21,6 +27,18 @@
               show_hidden = true;
               linemode = "size";
             };
+            plugin.prepend_fetchers = [
+              {
+                url = "*";
+                run = "git";
+                group = "git";
+              }
+              {
+                url = "*/";
+                run = "git";
+                group = "git";
+              }
+            ];
           };
           keymap = {
             mgr.prepend_keymap =
@@ -34,6 +52,21 @@
               in
                 map asMotion numKeys)
               ++ [
+                {
+                  on = ["<Enter>"];
+                  run = "plugin smart-enter";
+                  desc = "Open file or enter directory";
+                }
+                {
+                  on = ["l"];
+                  run = "plugin smart-enter";
+                  desc = "Open file or enter directory";
+                }
+                {
+                  on = ["<Right>"];
+                  run = "plugin smart-enter";
+                  desc = "Open file or enter directory";
+                }
                 {
                   # we don't need no trash bin
                   run = "remove --permanently";
