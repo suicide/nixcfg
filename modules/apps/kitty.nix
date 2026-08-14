@@ -20,7 +20,7 @@
               #   macOS: no primary selection exists, so mouse selection copies to the
               #   system pasteboard (the only clipboard target available).
               copy_on_select =
-                if pkgs.stdenv.isDarwin
+                if pkgs.stdenv.hostPlatform.isDarwin
                 then "yes"
                 else "no";
 
@@ -30,14 +30,14 @@
 
               auto_reload_config = "-1";
             }
-            // lib.optionalAttrs pkgs.stdenv.isDarwin {
+            // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
               # On macOS, tmux OSC 52 clipboard writes should flow through kitty to
               # the system pasteboard while clipboard reads still require consent.
               clipboard_control = "write-clipboard read-clipboard-ask";
             };
           extraConfig = let
             darwinExtraConfig =
-              if pkgs.stdenv.isDarwin
+              if pkgs.stdenv.hostPlatform.isDarwin
               then ''
                 macos_option_as_alt = left
               ''

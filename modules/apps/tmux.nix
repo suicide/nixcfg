@@ -21,7 +21,7 @@
           sensibleOnTop = true;
 
           extraConfig =
-            if pkgs.stdenv.isDarwin
+            if pkgs.stdenv.hostPlatform.isDarwin
             then ''
               # macOS has only the system pasteboard, not a separate primary
               # selection. Let tmux use OSC 52 so kitty writes to the pasteboard.
