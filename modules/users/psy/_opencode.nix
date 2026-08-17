@@ -12,8 +12,8 @@ in {
     programs.opencode = {
       settings = {
         agent = let
-          lightweightModel = "opencode-go/deepseek-v4-flash";
-          mediumModel = "opencode-go/mimo-v2.5-pro";
+          lightweightModel = "opencode-go/mimo-v2.5";
+          mediumModel = "openai/gpt-5.6-luna";
           docsModel = "opencode-go/deepseek-v4-pro";
         in {
           # Built in
