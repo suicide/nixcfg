@@ -32,6 +32,9 @@
 
           gtk4.theme = null;
 
+          gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+          gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
+
           iconTheme = {
             package = pkgs.adwaita-icon-theme;
             name = "Adwaita";
@@ -42,6 +45,8 @@
             size = 10;
           };
         };
+
+        dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
       };
     };
   };
