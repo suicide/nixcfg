@@ -13,11 +13,9 @@
           shellWrapperName = "y";
 
           plugins = {
-            git = {
-              package = pkgs.yaziPlugins.git;
-              setup = true;
-              settings.order = 1500;
-            };
+            # Re-add pkgs.yaziPlugins.git (and prepend_fetchers) once nixpkgs
+            # is newer than 0-unstable-2026-08-12; older fetch() never completes
+            # and blocks quit with "Run fetcher 'git' with N target(s)".
             "relative-motions" = pkgs.yaziPlugins.relative-motions;
             "smart-enter" = pkgs.yaziPlugins.smart-enter;
           };
@@ -27,18 +25,6 @@
               show_hidden = true;
               linemode = "size";
             };
-            plugin.prepend_fetchers = [
-              {
-                url = "*";
-                run = "git";
-                group = "git";
-              }
-              {
-                url = "*/";
-                run = "git";
-                group = "git";
-              }
-            ];
           };
           keymap = {
             mgr.prepend_keymap =
