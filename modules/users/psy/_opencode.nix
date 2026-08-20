@@ -12,9 +12,10 @@ in {
     programs.opencode = {
       settings = {
         agent = let
-          lightweightModel = "opencode-go/mimo-v2.5";
+          lightweightModel = "opencode-go/hy3";
+          lightweightModel2 = "opencode-go/muse-spark-1.2-contributor";
           mediumModel = "openai/gpt-5.6-luna";
-          docsModel = "opencode-go/deepseek-v4-pro";
+          docsModel = mediumModel;
         in {
           # Built in
           explore = {
@@ -36,7 +37,7 @@ in {
             };
           };
           implementer = {
-            model = lightweightModel;
+            model = lightweightModel2;
           };
         };
       };
