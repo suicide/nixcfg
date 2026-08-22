@@ -18,6 +18,8 @@
       packages.openagents-opencode = pkgs.callPackage ../../packages/openagents-opencode {
         openAgentsControlSrc = inputs.OpenAgentsControl;
       };
+
+      packages.yt-dlp-streamtape = pkgs.callPackage ../../packages/yt-dlp-streamtape {};
     };
   };
 }
