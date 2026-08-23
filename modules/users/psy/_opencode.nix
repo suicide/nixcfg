@@ -12,17 +12,18 @@ in {
     programs.opencode = {
       settings = {
         agent = let
-          lightweightModel = "opencode-go/hy3";
-          lightweightModel2 = "opencode-go/muse-spark-1.2-contributor";
-          mediumModel = "openai/gpt-5.6-luna";
-          docsModel = mediumModel;
+          exploreModel = "opencode-go/hy3";
+          implementerModel = "opencode-go/mimo-v2.5";
+          generalModel = implementerModel;
+          reviewerModel = "openai/gpt-5.6-luna";
+          docsModel = reviewerModel;
         in {
           # Built in
           explore = {
-            model = lightweightModel;
+            model = exploreModel;
           };
           general = {
-            model = lightweightModel;
+            model = generalModel;
           };
 
           # extras
@@ -31,13 +32,13 @@ in {
             model = docsModel;
           };
           codereviewer = {
-            model = mediumModel;
+            model = reviewerModel;
             permission = {
               edit = "deny";
             };
           };
           implementer = {
-            model = lightweightModel2;
+            model = implementerModel;
           };
         };
       };
