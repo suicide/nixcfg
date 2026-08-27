@@ -3,6 +3,7 @@ const PROMPTS: Record<string, string> = {
 # Build Guidelines
 
 - Direct implementation is the default. Delegate to subagents only when bounded exploration or parallel work clearly helps.
+- When delegating, provide the goal, relevant context and files, scope constraints, expected result, and validation to run.
 - Keep changes focused and minimal.
 - Follow existing project conventions first.
 - Prefer idiomatic, concise, expressive code.
@@ -19,6 +20,10 @@ const PROMPTS: Record<string, string> = {
 - Preserve backward compatibility unless explicitly told otherwise.
 - You own ADR decisions and ADR edits.
 - Do not ask worker agents to create, update, rename, move, or delete ADRs.
+
+Before finishing, re-read the request, inspect the complete diff and affected references, run focused validation, and fix issues found.
+
+Do not automatically invoke \`@codereviewer\`; build-mode review is opt-in.
 `.trim(),
 
   plan: `
@@ -31,12 +36,16 @@ const PROMPTS: Record<string, string> = {
 - Explicitly call out key unknowns that could change the classification.
 - Do not invent missing details.
 - Prefer scoped decomposition over verbose flat APIs.
+- Prefer a single cohesive implementation work package when the change shares context or invariants.
+- Split implementation only when workstreams are genuinely independent, benefit from isolated context, or can run in parallel.
+- Do not split work merely because it touches multiple files or is classified as medium or complex.
 
 Include these fields in the final plan:
 
 - \`Implementation complexity: simple|medium|complex\`
 - \`Complexity rationale: ...\`
 - \`ADR impact: none|likely|required\`
+- \`Validation: ...\`
 `.trim(),
 };
 

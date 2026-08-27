@@ -13,12 +13,16 @@ in {
       settings = {
         agent = let
           exploreModel = "opencode-go/hy3";
-          implementerModel = "opencode-go/mimo-v2.5";
-          generalModel = implementerModel;
+          buildModel = "opencode-go/deepseek-v4-flash";
+          implementerModel = buildModel;
+          generalModel = "opencode-go/mimo-v2.5";
           reviewerModel = "openai/gpt-5.6-luna";
           docsModel = reviewerModel;
         in {
           # Built in
+          build = {
+            model = buildModel;
+          };
           explore = {
             model = exploreModel;
           };

@@ -18,43 +18,31 @@ Review the assigned diffs, files, and immediately affected surrounding context.
 
 ## Review Priorities
 
-- Correctness bugs and regressions
-- Breaking backward compatibility without explicit instruction
-- Security or data-handling risks
-- Weak boundary validation or secret-handling mistakes
-- Missing or weak test coverage
-- Poor use of typing or other compiler-checked guarantees where the project supports them
-- Risky design choices or poor separation of concerns
-- Non-idiomatic, unclear, or unnecessarily verbose code
-- Naming that is unclear, generic, redundant, or inconsistent with project terminology
-- Verbose flat names or flat structure when related code should be grouped under a module, package, class, object, or namespace to make call sites shorter and clearer
-- Missing docs or comments for behavior, APIs, config, operations, or non-obvious logic
-- Readability and maintainability issues that materially affect the change
-- Unused, obsolete, dead, or redundant code left behind by the change, including deletion opportunities in code, tests, docs, compatibility layers, or configuration
-- Whether the change appears to require a new or updated ADR
+- Prioritize correctness and regressions, unmet user requirements, security and data handling, required backward compatibility, materially unsafe or incorrect design, and validation or tests necessary to trust changed behavior.
+- Also note maintainability, naming, docs, cleanup, or alternative designs when useful, but distinguish these from issues that should block completion.
+- Do not block a change merely because another implementation would be cleaner or because optional refactoring could improve it.
+- Every blocking finding must describe a concrete failure mode, unmet requirement, or material risk.
+- Flag whether the change appears to require a new or updated ADR.
 
 ## Review Output
 
 Use this structure for your final response. It replaces any more general default review structure:
 
 ```markdown
-## Summary
-One-sentence overall assessment.
+## Blocking Findings
+Issues that should prevent completion. Write `None` if there are none.
 
-## Findings
-- Ordered by severity.
-- Explain why each finding matters and what should change.
-- Write `None` if there are no findings.
+## Non-blocking Observations
+Optional improvements that should not by themselves cause another implementation cycle. Write `None` if there are none.
+
+## Validation Gaps
+Missing validation necessary to establish correctness. Write `None` if there are none.
 
 ## ADR Notes
-- State whether the change appears to require a new or updated ADR.
-- Write `None` if there are no ADR implications.
+- State whether the change appears to require a new or updated ADR. Write `None` if there are no ADR implications.
 
-## Testing / Validation Review
-- Note missing tests, weak coverage, or validation gaps.
-- Write `None` if there are no notable gaps.
-
-## Action Items
-1. List the highest-priority follow-up actions.
-2. Write `None` if no action is needed.
+## Verdict
+APPROVE or FIX
 ```
+
+Return `FIX` only when Blocking Findings or material Validation Gaps are non-empty.
