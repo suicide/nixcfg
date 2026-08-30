@@ -12,7 +12,7 @@ in {
     programs.opencode = {
       settings = {
         agent = let
-          exploreModel = "opencode-go/hy3";
+          exploreModel = generalModel;
           buildModel = "opencode-go/deepseek-v4-flash";
           implementerModel = buildModel;
           generalModel = "opencode-go/mimo-v2.5";
