@@ -102,6 +102,10 @@
             orchestrator-build = ./agents/orchestrator-build.md;
           };
 
+          commands = {
+            commitmsg = ./commands/commitmsg.md;
+          };
+
           settings = {
             plugin =
               [
