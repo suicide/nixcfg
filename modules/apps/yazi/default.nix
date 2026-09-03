@@ -16,7 +16,13 @@
             # Re-add pkgs.yaziPlugins.git (and prepend_fetchers) once nixpkgs
             # is newer than 0-unstable-2026-08-12; older fetch() never completes
             # and blocks quit with "Run fetcher 'git' with N target(s)".
-            "relative-motions" = pkgs.yaziPlugins.relative-motions;
+            "relative-motions" = pkgs.yaziPlugins.relative-motions.overrideAttrs {
+              # yazi 26.8.15 removed ya.mgr_emit; plugin (2025-07-09) still calls it,
+              # leaving a hung "Run plugin 'relative-motions'" task on every motion.
+              postPatch = ''
+                substituteInPlace main.lua --replace-fail 'ya.mgr_emit' 'ya.emit'
+              '';
+            };
             "smart-enter" = pkgs.yaziPlugins.smart-enter;
           };
 
