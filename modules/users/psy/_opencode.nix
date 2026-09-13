@@ -13,7 +13,7 @@ in {
       settings = {
         agent = let
           exploreModel = generalModel;
-          buildModel = "opencode-go/deepseek-v4-flash";
+          buildModel = "opencode-go/deepseek-v4.1-flash";
           implementerModel = buildModel;
           generalModel = "opencode-go/mimo-v2.5";
           reviewerModel = "openai/gpt-5.6-luna";
