@@ -16,13 +16,13 @@
       config = {
         programs.rofi = {
           enable = true;
-          terminal = "${lib.getExe pkgs.kitty}";
           theme = rofiTheme + "/themes/squared-nord.rasi";
 
           plugins = with pkgs; [
             rofi-calc
           ];
-          extraConfig = {
+          settings = {
+            terminal = "${lib.getExe pkgs.kitty}";
             modi = "drun,calc";
           };
         };
