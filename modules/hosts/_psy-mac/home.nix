@@ -73,7 +73,7 @@ in {
             model = mediumWeightModel;
           };
           codereviewer = {
-            model = "github-copilot/claude-opus-5";
+            model = "github-copilot/kimi-k3";
             permission = {
               edit = "deny";
             };
