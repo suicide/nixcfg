@@ -56,8 +56,8 @@ in {
       settings = {
         provider = (import ./ai/mmsai.nix) // (import ./ai/llmchat.nix);
         agent = let
-          lightweightModel = "github-copilot/gpt-5.6-luna";
-          mediumWeightModel = "github-copilot/gpt-5.6-terra";
+          lightweightModel = "github-copilot/gpt-6-luna";
+          mediumWeightModel = "github-copilot/gpt-6-sol";
         in {
           # Built in
           explore = {
@@ -73,7 +73,7 @@ in {
             model = mediumWeightModel;
           };
           codereviewer = {
-            model = "github-copilot/kimi-k3";
+            model = "github-copilot/grok-4.7";
             permission = {
               edit = "deny";
             };
