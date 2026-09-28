@@ -30,6 +30,13 @@
 
               auto_reload_config = "-1";
             }
+            // lib.optionalAttrs (!pkgs.stdenv.hostPlatform.isDarwin) {
+              # kitty 0.49 persists the maximized state across restarts and asks
+              # the compositor to re-maximize new windows, which breaks tiling
+              # under Hyprland (kovidgoyal/kitty#10442). Disable size/state
+              # restoration on Linux; macOS keeps its native behavior.
+              remember_window_size = "no";
+            }
             // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
               # On macOS, tmux OSC 52 clipboard writes should flow through kitty to
               # the system pasteboard while clipboard reads still require consent.
