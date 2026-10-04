@@ -54,16 +54,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # hyprland
-    hyprland = {
-      url = "github:hyprwm/Hyprland/v0.56.1";
-      # do not change hyprland's nixpkgs to take advantage of cache and not to mess with build
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # Re-add only to build the flake compositor. Do not follow nixpkgs:
+    # v0.56.2 does not build against it, and its glibc will not load system Mesa.
+    # hyprland = {
+    #   url = "github:hyprwm/Hyprland/v0.56.2";
+    # };
+    # Plugin tag is the Hyprland release it was built for. flake = false so this
+    # stays a source tree and does not pull a Hyprland input.
     hyprland-split-monitor-workspaces = {
-      url = "github:zjeffer/split-monitor-workspaces/v0.56.1";
+      url = "github:zjeffer/split-monitor-workspaces/v0.56.2";
       # url = "github:suicide/split-monitor-workspaces/fix-nix-0.54.3";
-      inputs.hyprland.follows = "hyprland";
+      flake = false;
     };
 
     # waybar

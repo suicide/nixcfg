@@ -64,6 +64,28 @@
 
   mkMoveBind = key: direction:
     mkBind key (lua ''hl.dsp.window.move({ direction = "${direction}" })'');
+
+  # Tag on hyprland-split-monitor-workspaces, without the leading v.
+  pluginVersion =
+    lib.removePrefix "v"
+    (
+      builtins.fromJSON (builtins.readFile (inputs.self + "/flake.lock"))
+    ).nodes.hyprland-split-monitor-workspaces.original.ref;
+
+  hyprlandPkg = pkgs.hyprland;
+
+  splitMonitorWorkspaces = pkgs.hyprlandPlugins.mkHyprlandPlugin {
+    pluginName = "split-monitor-workspaces";
+    version = pluginVersion;
+    src = inputs.hyprland-split-monitor-workspaces;
+    nativeBuildInputs = [pkgs.meson pkgs.ninja];
+    buildInputs = [pkgs.pixman];
+    meta = {
+      description = "Per-monitor workspaces for Hyprland";
+      homepage = "https://github.com/zjeffer/split-monitor-workspaces";
+      license = lib.licenses.bsd3;
+    };
+  };
 in {
   imports = [
     ./_cursor.nix
@@ -103,6 +125,11 @@ in {
   };
 
   config = {
+    assertions = lib.optional cfg.displayWorkspaces {
+      assertion = lib.versions.majorMinor hyprlandPkg.version == lib.versions.majorMinor pluginVersion;
+      message = "split-monitor-workspaces is pinned to Hyprland ${pluginVersion}, but pkgs.hyprland is ${hyprlandPkg.version}. Bump the plugin input tag.";
+    };
+
     home.packages = [
       pkgs.wl-clipboard
       pkgs.wl-clip-persist
@@ -112,11 +139,11 @@ in {
     wayland.windowManager.hyprland = lib.mkIf cfg.enable {
       enable = true;
       configType = "lua";
-      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-      portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+      package = hyprlandPkg;
+      portalPackage = pkgs.xdg-desktop-portal-hyprland;
 
       plugins = lib.optionals cfg.displayWorkspaces [
-        inputs.hyprland-split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system}.split-monitor-workspaces
+        splitMonitorWorkspaces
       ];
 
       # start with uwsm
@@ -129,7 +156,7 @@ in {
         wpctl = lib.getExe' pkgs.wireplumber "wpctl";
         dunstctl = lib.getExe' pkgs.dunst "dunstctl";
         hyprshot = lib.getExe (pkgs.hyprshot.override {
-          hyprland = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+          hyprland = hyprlandPkg;
         });
         wl-clip-persist = lib.getExe pkgs.wl-clip-persist;
         wl-copy = lib.getExe' pkgs.wl-clipboard "wl-copy";
