@@ -48,7 +48,8 @@
   border-width: 0px;
 }
 
-#custom-lock{
+#custom-lock,
+#custom-keep-awake{
   background-color: rgba(15,27,53,0.9);
   margin-top: 2px; /* 与屏幕顶部留出距离 */
   margin-left: 6px;
@@ -91,6 +92,7 @@
 #cpu:hover,
 #clock:hover,
 #custom-lock:hover,
+#custom-keep-awake:hover,
 #custom-reboot:hover,
 #custom-power:hover,
 /*#workspaces:hover,*/

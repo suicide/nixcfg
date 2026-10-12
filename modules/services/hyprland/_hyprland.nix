@@ -258,6 +258,7 @@ in {
             (mkBind (lua ''shiftMod .. " + Q"'') (lua "hl.dsp.exit()"))
             (mkBind (lua ''shiftMod .. " + C"'') (lua "hl.dsp.window.close()"))
             (mkExecBind "CTRL + ALT + L" "loginctl lock-session")
+            (mkExecBind "CTRL + ALT + A" "keep-awake toggle")
             (mkBind (lua ''shiftMod .. " + F"'') (lua ''hl.dsp.window.float({ action = "toggle" })''))
             (mkBind (lua ''mod .. " + T"'') (lua ''hl.dsp.window.pin({ action = "toggle" })''))
             (mkBind (lua ''mod .. " + F"'') (lua "hl.dsp.window.fullscreen()"))

@@ -24,11 +24,13 @@
               height = 32;
               spacing = 0;
 
-              modules-left = [
-                "hyprland/workspaces"
-                "tray"
-                "custom/lock"
-              ];
+              modules-left =
+                [
+                  "hyprland/workspaces"
+                  "tray"
+                  "custom/lock"
+                ]
+                ++ lib.optionals config.__cfg.hyprland.enable ["custom/keep-awake"];
 
               modules-center = ["hyprland/window"];
 
@@ -78,6 +80,15 @@
                 on-click = "loginctl lock-session";
                 tooltip = true;
                 tooltip-format = "lock";
+              };
+              "custom/keep-awake" = {
+                format = "{}";
+                exec = "keep-awake status";
+                interval = 2;
+                signal = 8;
+                return-type = "json";
+                on-click = "keep-awake toggle";
+                tooltip = true;
               };
               "custom/reboot" = {
                 format = "<span color='#FFD700'>  </span>";
