@@ -202,6 +202,21 @@ in {
           sopsFile = userSopsFile;
           path = "%r/outterworld3-public-key";
         };
+
+        "nix/github_token" = {
+          sopsFile = userSopsFile;
+        };
+      };
+
+      # User-level nix.conf so `nix develop` can fetch private github: flake
+      # inputs. The token stays out of the Nix store: the rendered file lives
+      # under /run/secrets/rendered and is symlinked here at activation.
+      templates."nix-github-access-tokens" = {
+        content = ''
+          access-tokens = github.com=${config.sops.placeholder."nix/github_token"}
+        '';
+        path = "${config.home.homeDirectory}/.config/nix/nix.conf";
+        mode = "0600";
       };
     };
   };
