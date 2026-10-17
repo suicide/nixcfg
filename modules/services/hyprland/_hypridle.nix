@@ -115,7 +115,7 @@ in {
       in {
         general = {
           before_sleep_cmd = "loginctl lock-session";
-          after_sleep_cmd = "hyprctl dispatch dpms on";
+          after_sleep_cmd = "hyprctl dispatch 'hl.dsp.dpms({ action = \"enable\" })'";
 
           # Wipe clipboard state before locking to avoid secrets persisting
           # across lock/unlock. cliphist DB is in $XDG_RUNTIME_DIR and also
@@ -138,8 +138,8 @@ in {
             }
             {
               timeout = 900;
-              on-timeout = "hyprctl dispatch dpms off";
-              on-resume = "hyprctl dispatch dpms on && ${brightnessctl} -r";
+              on-timeout = "hyprctl dispatch 'hl.dsp.dpms({ action = \"disable\" })'";
+              on-resume = "hyprctl dispatch 'hl.dsp.dpms({ action = \"enable\" })' && ${brightnessctl} -r";
             }
             {
               timeout = 1800;
