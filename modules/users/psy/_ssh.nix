@@ -47,6 +47,12 @@ in {
             User = "git";
           };
 
+          "gitlab.com" = {
+            HostName = "gitlab.com";
+            IdentityFile = "${secrets}/gitlab/privateKey";
+            User = "git";
+          };
+
           "bitbucket.org" = {
             HostName = "bitbucket.org";
             IdentityFile = "${secrets}/bitbucket/privateKey";

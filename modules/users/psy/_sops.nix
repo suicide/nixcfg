@@ -68,6 +68,15 @@ in {
           path = "%r/codeberg-ler-public-key";
         };
 
+        "ssh/gitlab/privateKey" = {
+          sopsFile = userSopsFile;
+          path = "%r/gitlab-private-key";
+        };
+        "ssh/gitlab/publicKey" = {
+          sopsFile = userSopsFile;
+          path = "%r/gitlab-public-key";
+        };
+
         "ssh/bitbucket/privateKey" = {
           sopsFile = userSopsFile;
           path = "%r/bitbucket-private-key";
