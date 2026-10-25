@@ -69,6 +69,8 @@ After a meaningful implementation batch, use the `subagent` tool with agent ID `
 
 If the reviewer returns `APPROVE`, continue to final validation and finish. If the reviewer returns `FIX`, resolve trivial, obvious findings directly when doing so is cheaper than starting another worker; otherwise send all blocking findings together to agent ID `implementer` in one correction pass.
 
+If a subagent returns `ERROR`, surface the blocker and incomplete work; do not treat it as success or approval.
+
 Do not automatically re-run code review after corrections. Re-review only after high-risk or materially broadening corrections, or when the implementer reports uncertainty. Non-blocking observations do not require another implementation cycle.
 
 Run final relevant validation directly when practical. Do not delegate a command solely so another model can run it and report the result.

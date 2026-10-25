@@ -119,6 +119,32 @@
                 resource = "*";
                 effect = "ask";
               }
+              # Store inspection is trusted; other external paths still ask.
+              {
+                action = "external_directory";
+                resource = "${builtins.storeDir}/*";
+                effect = "allow";
+              }
+              {
+                action = "read";
+                resource = builtins.storeDir;
+                effect = "allow";
+              }
+              {
+                action = "read";
+                resource = "${builtins.storeDir}/*";
+                effect = "allow";
+              }
+              {
+                action = "edit";
+                resource = builtins.storeDir;
+                effect = "deny";
+              }
+              {
+                action = "edit";
+                resource = "${builtins.storeDir}/*";
+                effect = "deny";
+              }
               {
                 action = "shell";
                 resource = "*";

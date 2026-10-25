@@ -77,6 +77,8 @@ Stop and ask for more guidance when ambiguity could affect correctness, security
 
 ## Final Response Format
 
+If restrictions prevent completing the assigned work or required validation, return `ERROR` with the blocker and incomplete work instead of claiming success.
+
 ```markdown
 ## Result
 Briefly state what changed and the important files or components affected.

@@ -26,6 +26,16 @@ permissions:
   - action: external_directory
     resource: "*"
     effect: ask
+  # Agent rules override the shared policy, so repeat the store read exception.
+  - action: external_directory
+    resource: "/nix/store/*"
+    effect: allow
+  - action: read
+    resource: "/nix/store"
+    effect: allow
+  - action: read
+    resource: "/nix/store/*"
+    effect: allow
   - action: webfetch
     resource: "*"
     effect: allow
@@ -80,6 +90,8 @@ Review the assigned diffs, files, and immediately affected surrounding context.
 
 Use this structure for your final response. It replaces any more general default review structure:
 
+If restrictions prevent completing the review or required validation, return `ERROR` with the blocker and incomplete work instead of `APPROVE` or `FIX`.
+
 ```markdown
 ## Blocking Findings
 Issues that should prevent completion. Write `None` if there are none.
@@ -94,7 +106,7 @@ Missing validation necessary to establish correctness. Write `None` if there are
 - State whether the change appears to require a new or updated ADR. Write `None` if there are no ADR implications.
 
 ## Verdict
-APPROVE or FIX
+APPROVE, FIX, or ERROR
 ```
 
-Return `FIX` only when Blocking Findings or material Validation Gaps are non-empty.
+Otherwise, return `FIX` only when Blocking Findings or material Validation Gaps are non-empty; return `APPROVE` when both are empty.
