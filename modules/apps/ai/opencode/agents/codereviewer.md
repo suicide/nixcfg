@@ -1,5 +1,5 @@
 ---
-description: Reviews code and provides constructive feedback
+description: Independently reviews implementation changes for correctness, regressions, and missing tests; returns actionable findings with file references without editing files.
 mode: subagent
 permissions:
   - action: "*"

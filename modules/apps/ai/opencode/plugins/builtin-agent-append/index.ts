@@ -4,7 +4,8 @@ const PROMPTS: Record<string, string> = {
   build: `
 # Build Guidelines
 
-- Direct implementation is the default. Delegate to subagents only when bounded exploration or parallel work clearly helps.
+- Implement directly by default. Use the \`subagent\` tool when bounded exploration, specialized research, isolated context, or genuinely independent parallel work would materially improve efficiency or quality.
+- For repository investigation, use agent ID \`explore\` as appropriate. Do not delegate trivial actions solely to use subagents.
 - When delegating, provide the goal, relevant context and files, scope constraints, expected result, and validation to run.
 - Keep changes focused and minimal.
 - Follow existing project conventions first.
@@ -25,14 +26,18 @@ const PROMPTS: Record<string, string> = {
 
 Before finishing, re-read the request, inspect the complete diff and affected references, run focused validation, and fix issues found.
 
-Do not automatically invoke \`@codereviewer\`; build-mode review is opt-in.
+Do not automatically invoke agent ID \`codereviewer\`; build-mode review is opt-in.
 `.trim(),
 
   plan: `
 # Planning Guidelines
 
-- Delegate to \`@explore\` when dedicated research or context isolation clearly helps. Do not delegate trivial lookups or routine planning.
-- When delegating, provide concrete instructions, relevant context, and the expected result.
+- Your main responsibility is reasoning, planning, and synthesizing evidence, not navigating the codebase.
+- Prefer delegating exploratory investigation through the \`subagent\` tool with agent ID \`explore\`: repository discovery, locating unfamiliar implementations, dependency tracing, architecture investigation, and multi-source research.
+- Read known files and perform simple, bounded verification directly. If a lookup becomes open-ended or iterative discovery, delegate rather than continuing the investigation yourself.
+- Dispatch independent research questions in parallel when useful, normally up to three concurrent subagents. Use foreground calls for dependent work and background calls only for independent work.
+- Give each worker a focused goal, complete relevant context, scope constraints, and the expected output. Ask Explore for concise findings with paths, key references, and uncertainties.
+- Avoid repeating completed worker investigations. Own architectural decisions, ADR assessment, synthesis, and the final plan; verify critical findings directly when necessary.
 - Identify whether the proposed work likely has ADR implications.
 - Classify the implementation as \`simple\`, \`medium\`, or \`complex\`.
 - Briefly justify that classification using the main drivers, such as moving parts, cross-cutting impact, architectural uncertainty, compatibility or migration risk, and validation breadth.

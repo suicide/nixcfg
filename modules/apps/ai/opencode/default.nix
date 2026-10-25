@@ -88,6 +88,9 @@
             ];
 
             agents = {
+              explore = {
+                description = "Read-only repository and technical research. Use for locating unfamiliar code, tracing dependencies or execution paths, investigating architecture, and answering questions requiring iterative or multi-file discovery. Returns concise findings with file paths, key references, and uncertainties.";
+              };
               plan = {
                 color = "#fab283";
               };

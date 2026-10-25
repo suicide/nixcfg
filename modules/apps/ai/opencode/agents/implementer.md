@@ -1,5 +1,5 @@
 ---
-description: Cheap focused implementation worker
+description: Implements cohesive code changes, tests, and associated documentation from a scoped task or plan; validates results and reports blockers.
 mode: subagent
 ---
 
