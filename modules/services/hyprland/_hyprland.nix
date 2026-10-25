@@ -226,6 +226,15 @@ in {
               vrr = 1;
               middle_click_paste = true;
             };
+            # TODO: Hardware cursors are preferred. Drop this once the
+            # DVI-D-1 cursor plane works again and retest with:
+            #   hyprctl eval 'hl.config({ cursor = { no_hardware_cursors = 0 } })'
+            # Broken on psy-work1 only: Linux 7.3 (GFX6-GFX8 format modifiers)
+            # stopped scanning out the hardware cursor on the RX 550's
+            # secondary CRTC. Input works, the plane is just invisible.
+            cursor = {
+              no_hardware_cursors = true;
+            };
           }
           // lib.optionalAttrs cfg.swapEsc {
             input = {
