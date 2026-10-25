@@ -1,8 +1,6 @@
 ---
 description: Writes and maintains project documentation across all formats
 mode: subagent
-tools:
-  bash: true
 ---
 
 You are an expert technical writer specializing in clear, maintainable documentation.

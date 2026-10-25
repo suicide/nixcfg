@@ -54,8 +54,8 @@ in {
 
     programs.opencode = {
       settings = {
-        provider = (import ./ai/mmsai.nix) // (import ./ai/llmchat.nix);
-        agent = let
+        providers = (import ./ai/mmsai.nix) // (import ./ai/llmchat.nix);
+        agents = let
           lightweightModel = "github-copilot/gpt-6-luna";
           mediumWeightModel = "github-copilot/gpt-6-sol";
         in {
@@ -74,9 +74,6 @@ in {
           };
           codereviewer = {
             model = "github-copilot/grok-4.7";
-            permission = {
-              edit = "deny";
-            };
           };
           implementer = {
             model = lightweightModel;

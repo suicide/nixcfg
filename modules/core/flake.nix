@@ -1,8 +1,4 @@
-{
-  inputs,
-  lib,
-  ...
-}: {
+{lib, ...}: {
   options.internal.modules = lib.mkOption {
     type = lib.types.attrsOf (lib.types.attrsOf lib.types.deferredModule);
     default = {};
@@ -10,14 +6,10 @@
   };
 
   config = {
-    systems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
+    systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
 
     perSystem = {pkgs, ...}: {
       formatter = pkgs.alejandra;
-
-      packages.openagents-opencode = pkgs.callPackage ../../packages/openagents-opencode {
-        openAgentsControlSrc = inputs.OpenAgentsControl;
-      };
 
       packages.yt-dlp-streamtape = pkgs.callPackage ../../packages/yt-dlp-streamtape {};
     };

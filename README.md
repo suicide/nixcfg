@@ -21,7 +21,7 @@ Manager as a module.
 - `secrets/`: Encrypted SOPS secrets, organized by domain (`hosts/`, `users/`).
 - `home-manager/`: Shared user-level modules (shell, editors, GUI apps).
   - `modules/`: Atomic configuration units.
-- `packages/`: Custom package definitions (e.g., `openagents-opencode`).
+- `packages/`: Custom package definitions.
 - `docs/`: detailed documentation.
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for details on the module system and

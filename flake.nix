@@ -93,19 +93,6 @@
       flake = false;
     };
 
-    # OpenAgentsControl config
-    OpenAgentsControl = {
-      url = "github:darrenhinde/OpenAgentsControl/main";
-      flake = false;
-    };
-
-    # google antigravity auth for opencode
-    # we are not using the actual code, but only extract the latest version from the package.json
-    opencode-antigravity-auth = {
-      url = "github:NoeFabris/opencode-antigravity-auth/main";
-      flake = false;
-    };
-
     # my nvf neovim
     neovim = {
       url = "github:suicide/nvim-nvf";

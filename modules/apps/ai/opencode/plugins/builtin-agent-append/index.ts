@@ -1,3 +1,5 @@
+import { Plugin } from "@opencode/plugin"
+
 const PROMPTS: Record<string, string> = {
   build: `
 # Build Guidelines
@@ -29,7 +31,8 @@ Do not automatically invoke \`@codereviewer\`; build-mode review is opt-in.
   plan: `
 # Planning Guidelines
 
-- Delegate to multiple subagents \`@explore\` in parallel or in sequence for dedicated research tasks. Provide concrete instructions and context to the subagents.
+- Delegate to \`@explore\` when dedicated research or context isolation clearly helps. Do not delegate trivial lookups or routine planning.
+- When delegating, provide concrete instructions, relevant context, and the expected result.
 - Identify whether the proposed work likely has ADR implications.
 - Classify the implementation as \`simple\`, \`medium\`, or \`complex\`.
 - Briefly justify that classification using the main drivers, such as moving parts, cross-cutting impact, architectural uncertainty, compatibility or migration risk, and validation breadth.
@@ -47,18 +50,16 @@ Include these fields in the final plan:
 - \`ADR impact: none|likely|required\`
 - \`Validation: ...\`
 `.trim(),
-};
+}
 
-export default async () => {
-  return {
-    "chat.message": async (input: any, output: any) => {
-      const agent = output.message.agent ?? input.agent;
-      const prompt = agent ? PROMPTS[agent] : undefined;
-      if (!prompt) return;
-
-      output.message.system = [output.message.system, prompt]
-        .filter(Boolean)
-        .join("\n\n");
-    },
-  };
-};
+export default Plugin.define({
+  id: "psy.builtin-agent-append",
+  async setup(ctx) {
+    await ctx.session.hook("context", (event) => {
+      const prompt = PROMPTS[event.agent]
+      if (!prompt) return
+      if (event.system.some((part) => part.text === prompt)) return
+      event.system.push({ type: "text", text: prompt })
+    })
+  },
+})

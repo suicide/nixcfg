@@ -4,34 +4,24 @@
       lib,
       pkgs,
       config,
-      inputs,
       ...
     }: let
       cfg = config.__cfg.opencode;
 
       wrappedOpencode = pkgs.symlinkJoin {
-        name = "opencode-wrapped";
+        name = "opencode-wrapped-${pkgs.opencode.version}";
         paths = [pkgs.opencode];
+
+        # Keep Home Manager's OpenCode version detection and schema validation
+        # working through the wrapper.
+        inherit (pkgs.opencode) version meta passthru;
+
         buildInputs = [pkgs.makeWrapper];
         postBuild = ''
           wrapProgram $out/bin/opencode \
-            --prefix PATH : ${lib.makeBinPath [pkgs.gh]} \
-            ${""}
+            --prefix PATH : ${lib.makeBinPath [pkgs.gh]}
         '';
       };
-
-      wrappedOpenagentsPackage = pkgs.symlinkJoin {
-        name = "openagents-opencode-wrapped";
-        paths = [inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.openagents-opencode];
-        buildInputs = [pkgs.makeWrapper];
-        postBuild = ''
-          wrapProgram $out/bin/openagents-opencode \
-            ${""}
-        '';
-      };
-      antigravityAuthPackageJson = builtins.fromJSON (
-        builtins.readFile "${inputs.opencode-antigravity-auth}/package.json"
-      );
     in {
       options = {
         __cfg.opencode = {
@@ -40,26 +30,10 @@
             default = true;
             description = "Enable opencode";
           };
-          openagents = {
-            enable = lib.mkOption {
-              type = lib.types.bool;
-              default = true;
-              description = "Enable openagents-opencode parallel installation";
-            };
-          };
           package = lib.mkOption {
             type = lib.types.package;
             default = wrappedOpencode;
             description = "The opencode package to use";
-          };
-          provider = {
-            google-antigravity = {
-              enable = lib.mkOption {
-                type = lib.types.bool;
-                default = false;
-                description = "Enable google antigravity oauth provider";
-              };
-            };
           };
           mcp = {
             searxng = {
@@ -95,6 +69,8 @@
           enable = cfg.enable;
           package = cfg.package;
 
+          validateFiles.config = true;
+
           agents = {
             codereviewer = ./agents/codereviewer.md;
             documentation = ./agents/documentation.md;
@@ -107,61 +83,72 @@
           };
 
           settings = {
-            plugin =
-              [
-                "./plugins/builtin-agent-append.ts"
-              ]
-              ++ lib.optionals cfg.provider.google-antigravity.enable
-              [
-                "${antigravityAuthPackageJson.name}@${antigravityAuthPackageJson.version}" # allow auth with google antigravity oauth
-              ];
+            plugins = [
+              (toString ./plugins/builtin-agent-append)
+            ];
 
-            agent = {
+            agents = {
               plan = {
-                color = "primary";
+                color = "#fab283";
               };
               build = {
-                color = "secondary";
+                color = "#5c9cf5";
               };
               orchestrator-build = {
-                color = "accent";
+                color = "#9d7cd8";
               };
             };
 
-            mcp = {
+            mcp.servers = {
               searxng = lib.mkIf cfg.mcp.searxng.enable {
                 type = "remote";
                 url = cfg.mcp.searxng.url;
-                enabled = true;
               };
               grep_app = lib.mkIf cfg.mcp.grepApp.enable {
                 type = "remote";
                 url = cfg.mcp.grepApp.url;
-                enabled = true;
               };
             };
 
-            permission = {
-              bash = {
-                # "git add*" = "deny";
-                # "git commit*" = "deny";
-                "git push*" = "deny";
-                # "git fetch*" = "deny";
-                # "git pull*" = "deny";
-                # "git reset*" = "deny";
-                # "git merge*" = "deny";
-                # "git rebase*" = "deny";
+            permissions = [
+              {
+                action = "external_directory";
+                resource = "*";
+                effect = "ask";
+              }
+              {
+                action = "shell";
+                resource = "*";
+                effect = "ask";
+              }
+              {
+                action = "shell";
+                resource = "git status *";
+                effect = "allow";
+              }
+              {
+                action = "shell";
+                resource = "git log *";
+                effect = "allow";
+              }
+              {
+                action = "shell";
+                resource = "git diff *";
+                effect = "allow";
+              }
+              {
+                action = "shell";
+                resource = "gh *";
+                effect = "allow";
+              }
+              {
+                action = "shell";
+                resource = "git push *";
+                effect = "ask";
+              }
+            ];
 
-                "git status" = "allow";
-                "git log" = "allow";
-                "git diff" = "allow";
-                "gh *" = "allow";
-              };
-            };
-
-            provider = {
-              google = lib.mkIf cfg.provider.google-antigravity.enable (import ./providers/_google.nix);
-            };
+            experimental.todo = true;
           };
 
           context = ''
@@ -174,13 +161,8 @@
           '';
         };
 
-        home.packages = lib.mkIf cfg.openagents.enable [wrappedOpenagentsPackage];
-
-        xdg.configFile."opencode/plugins/builtin-agent-append.ts" = {
-          source = ./plugins/builtin-agent-append.ts;
-        };
-
-        # use the same opencode package in neovim
+        # Keep sharing the package with neovim. The packaged opencode.nvim still
+        # targets the V1 server API and needs a separate migration.
         __cfg.neovim.opencodePackage = cfg.package;
       };
     };

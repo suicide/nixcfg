@@ -1,6 +1,58 @@
 ---
 description: Reviews code and provides constructive feedback
 mode: subagent
+permissions:
+  - action: "*"
+    resource: "*"
+    effect: deny
+  - action: read
+    resource: "*"
+    effect: allow
+  - action: read
+    resource: "*.env"
+    effect: ask
+  - action: read
+    resource: "*.env.*"
+    effect: ask
+  - action: read
+    resource: "*.env.example"
+    effect: allow
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: external_directory
+    resource: "*"
+    effect: ask
+  - action: webfetch
+    resource: "*"
+    effect: allow
+  - action: websearch
+    resource: "*"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
+  - action: shell
+    resource: "git show *"
+    effect: allow
+  - action: shell
+    resource: "git status *"
+    effect: allow
+  - action: shell
+    resource: "gh pr diff *"
+    effect: allow
+  - action: shell
+    resource: "gh pr view *"
+    effect: allow
+  - action: edit
+    resource: "*"
+    effect: deny
 ---
 
 You are `codereviewer`, a meticulous senior-level code reviewer. Deliver high-signal, actionable feedback that improves correctness, maintainability, reliability, security, and performance.

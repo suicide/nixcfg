@@ -1,17 +1,10 @@
-{
-  lib,
-  pkgs,
-  config,
-  ...
-}: let
-  secrets = "~/.config/sops-nix/secrets";
-in {
+{config, ...}: {
   config = {
     __cfg.opencode = {};
 
     programs.opencode = {
       settings = {
-        agent = let
+        agents = let
           exploreModel = generalModel;
           buildModel = "opencode-go/deepseek-v4.1-flash";
           implementerModel = buildModel;
@@ -37,9 +30,6 @@ in {
           };
           codereviewer = {
             model = reviewerModel;
-            permission = {
-              edit = "deny";
-            };
           };
           implementer = {
             model = implementerModel;

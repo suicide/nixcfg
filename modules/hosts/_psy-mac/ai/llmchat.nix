@@ -1,11 +1,11 @@
 {
   llmchat = {
-    "npm" = "@ai-sdk/openai-compatible";
-    "name" = "LLM Chat";
-    "options" = {
-      "baseURL" = "https://llmchat.telekom.de/api";
+    name = "LLM Chat";
+    package = "aisdk:@ai-sdk/openai-compatible";
+    settings = {
+      baseURL = "https://llmchat.telekom.de/api";
     };
-    "models" = {
+    models = {
       "WARN-GLOBAL_gemini-3-flash-preview" = {
         name = "WARN-GLOBAL_gemini-3-flash-preview";
       };

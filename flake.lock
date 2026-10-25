@@ -1,22 +1,5 @@
 {
   "nodes": {
-    "OpenAgentsControl": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1792443119,
-        "narHash": "sha256-fzjRzT5qLatMGhrlj5g213W0wYv0e7UykPHCkdr+VZM=",
-        "owner": "darrenhinde",
-        "repo": "OpenAgentsControl",
-        "rev": "1ed1dd88d14ce0a4e32b458b6817cdda6f6b1590",
-        "type": "github"
-      },
-      "original": {
-        "owner": "darrenhinde",
-        "ref": "main",
-        "repo": "OpenAgentsControl",
-        "type": "github"
-      }
-    },
     "brew-src": {
       "flake": false,
       "locked": {
@@ -587,23 +570,6 @@
         "type": "github"
       }
     },
-    "opencode-antigravity-auth": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1792678688,
-        "narHash": "sha256-kCvnh4dlr4t4Npw8m5cu2Dtcud0cFLmIwBmeeL0Gt1I=",
-        "owner": "NoeFabris",
-        "repo": "opencode-antigravity-auth",
-        "rev": "f212f7eb01aa904b5985895cf93f6d3074c5bc6d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NoeFabris",
-        "ref": "main",
-        "repo": "opencode-antigravity-auth",
-        "type": "github"
-      }
-    },
     "pre-commit": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -628,7 +594,6 @@
     },
     "root": {
       "inputs": {
-        "OpenAgentsControl": "OpenAgentsControl",
         "disko": "disko",
         "firefox-addons": "firefox-addons",
         "flake-parts": "flake-parts",
@@ -644,7 +609,6 @@
         "nix-homebrew": "nix-homebrew",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_4",
-        "opencode-antigravity-auth": "opencode-antigravity-auth",
         "sops-nix": "sops-nix",
         "waybar": "waybar"
       }
