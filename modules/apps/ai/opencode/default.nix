@@ -1,4 +1,24 @@
 {lib, ...}: {
+  perSystem = {pkgs, ...}: let
+    permissions = import ./_permissions.nix;
+    testConfig = pkgs.writeText "opencode-permissions.json" (builtins.toJSON {
+      permissions = permissions.shared;
+      agents = {
+        codereviewer.permissions = permissions.nonEditing;
+        explore.permissions = permissions.nonEditing;
+      };
+      experimental.subagent_depth = 2;
+    });
+  in {
+    checks.opencode-permissions =
+      pkgs.runCommand "opencode-permissions" {
+        nativeBuildInputs = [pkgs.python3];
+      } ''
+        python ${./tests/permissions.py} < ${testConfig}
+        touch "$out"
+      '';
+  };
+
   internal.modules = {
     home.opencode = {
       lib,
@@ -7,6 +27,7 @@
       ...
     }: let
       cfg = config.__cfg.opencode;
+      permissions = import ./_permissions.nix;
 
       wrappedOpencode = pkgs.symlinkJoin {
         name = "opencode-wrapped-${pkgs.opencode.version}";
@@ -88,8 +109,10 @@
             ];
 
             agents = {
+              codereviewer.permissions = permissions.nonEditing;
               explore = {
                 description = "Read-only repository and technical research. Use for locating unfamiliar code, tracing dependencies or execution paths, investigating architecture, and answering questions requiring iterative or multi-file discovery. Returns concise findings with file paths, key references, and uncertainties.";
+                permissions = permissions.nonEditing;
               };
               plan = {
                 color = "#fab283";
@@ -113,71 +136,12 @@
               };
             };
 
-            permissions = [
-              {
-                action = "external_directory";
-                resource = "*";
-                effect = "ask";
-              }
-              # Store inspection is trusted; other external paths still ask.
-              {
-                action = "external_directory";
-                resource = "${builtins.storeDir}/*";
-                effect = "allow";
-              }
-              {
-                action = "read";
-                resource = builtins.storeDir;
-                effect = "allow";
-              }
-              {
-                action = "read";
-                resource = "${builtins.storeDir}/*";
-                effect = "allow";
-              }
-              {
-                action = "edit";
-                resource = builtins.storeDir;
-                effect = "deny";
-              }
-              {
-                action = "edit";
-                resource = "${builtins.storeDir}/*";
-                effect = "deny";
-              }
-              {
-                action = "shell";
-                resource = "*";
-                effect = "ask";
-              }
-              {
-                action = "shell";
-                resource = "git status *";
-                effect = "allow";
-              }
-              {
-                action = "shell";
-                resource = "git log *";
-                effect = "allow";
-              }
-              {
-                action = "shell";
-                resource = "git diff *";
-                effect = "allow";
-              }
-              {
-                action = "shell";
-                resource = "gh *";
-                effect = "allow";
-              }
-              {
-                action = "shell";
-                resource = "git push *";
-                effect = "ask";
-              }
-            ];
+            permissions = permissions.shared;
 
-            experimental.todo = true;
+            experimental = {
+              todo = true;
+              subagent_depth = 2;
+            };
           };
 
           context = ''

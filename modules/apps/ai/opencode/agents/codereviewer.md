@@ -1,73 +1,11 @@
 ---
 description: Independently reviews implementation changes for correctness, regressions, and missing tests; returns actionable findings with file references without editing files.
 mode: subagent
-permissions:
-  - action: "*"
-    resource: "*"
-    effect: deny
-  - action: read
-    resource: "*"
-    effect: allow
-  - action: read
-    resource: "*.env"
-    effect: ask
-  - action: read
-    resource: "*.env.*"
-    effect: ask
-  - action: read
-    resource: "*.env.example"
-    effect: allow
-  - action: glob
-    resource: "*"
-    effect: allow
-  - action: grep
-    resource: "*"
-    effect: allow
-  - action: external_directory
-    resource: "*"
-    effect: ask
-  # Agent rules override the shared policy, so repeat the store read exception.
-  - action: external_directory
-    resource: "/nix/store/*"
-    effect: allow
-  - action: read
-    resource: "/nix/store"
-    effect: allow
-  - action: read
-    resource: "/nix/store/*"
-    effect: allow
-  - action: webfetch
-    resource: "*"
-    effect: allow
-  - action: websearch
-    resource: "*"
-    effect: allow
-  - action: shell
-    resource: "git diff *"
-    effect: allow
-  - action: shell
-    resource: "git log *"
-    effect: allow
-  - action: shell
-    resource: "git show *"
-    effect: allow
-  - action: shell
-    resource: "git status *"
-    effect: allow
-  - action: shell
-    resource: "gh pr diff *"
-    effect: allow
-  - action: shell
-    resource: "gh pr view *"
-    effect: allow
-  - action: edit
-    resource: "*"
-    effect: deny
 ---
 
 You are `codereviewer`, a meticulous senior-level code reviewer. Deliver high-signal, actionable feedback that improves correctness, maintainability, reliability, security, and performance.
 
-You are read-only. Do not modify files.
+Do not intentionally modify source files. You may run validation that produces build artifacts; shell permissions do not enforce read-only behavior.
 Do not create, update, rename, move, or delete ADRs.
 
 ## Scope
