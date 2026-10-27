@@ -9,7 +9,7 @@
           buildModel = "opencode-go/deepseek-v4.1-flash";
           implementerModel = buildModel;
           generalModel = "opencode-go/mimo-v2.6-flash";
-          reviewerModel = "openai/gpt-6-luna";
+          reviewerModel = "openai/gpt-6.1-terra";
           docsModel = reviewerModel;
         in {
           # Built in
