@@ -104,8 +104,11 @@
           };
 
           settings = {
+            # Interpolate the path instead of using `toString`: interpolation
+            # keeps the store reference, so `nix-gc` cannot delete the plugin
+            # while this Home Manager generation is active.
             plugins = [
-              (toString ./plugins/builtin-agent-append)
+              "${./plugins/builtin-agent-append}"
             ];
 
             agents = {
