@@ -7,13 +7,28 @@
       pkgs,
       config,
       ...
-    }: {
+    }: let
+      # TODO: remove this override once upstream Waybar's nix/default.nix vendors
+      # libcava for the wrap-git revision again, or once we can go back to nixpkgs.
+      # Waybar master (fdd668c8) switched subprojects/libcava.wrap from wrap-file
+      # to wrap-git, but the flake still copies the cava 1.0.0 tarball to
+      # subprojects/cava-1.0.0. Meson then finds nothing, tries to clone, and
+      # Nix forbids wrap downloads, so configure dies even though cava is optional.
+      # This bar has no cava module, so drop the feature instead of vendoring it.
+      waybarPackage =
+        inputs.waybar.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs
+        (old: {
+          mesonFlags =
+            lib.filter (flag: !(lib.hasPrefix "-Dcava=" flag)) (old.mesonFlags or [])
+            ++ ["-Dcava=disabled"];
+        });
+    in {
       options = {};
 
       config = {
         programs.waybar = {
           enable = true;
-          package = inputs.waybar.packages.${pkgs.stdenv.hostPlatform.system}.default;
+          package = waybarPackage;
           systemd.enable = true;
           style = ./style.css;
 
