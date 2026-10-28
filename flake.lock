@@ -61,11 +61,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1792814573,
-        "narHash": "sha256-7+ojfPKvE9KK61UE4mKK4VrDXXwkGgKbch3Gx9YvFZY=",
+        "lastModified": 1793160255,
+        "narHash": "sha256-F1waPip2dUnsWIHveBjgacmUVmSJZChnhShWGNmSoYo=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "59de78807c1f0e7746285a4479ce961f05bb8ad2",
+        "rev": "ed9233d15254387c12c5c53939ce2162712cf5fb",
         "type": "gitlab"
       },
       "original": {
@@ -192,11 +192,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792818371,
-        "narHash": "sha256-yhEZAzZRNvzYpoAlyFY3wM75V9BmkIXJIueof8S5gOg=",
+        "lastModified": 1793193205,
+        "narHash": "sha256-X6xa6sGA7RnJQuZGbFMC+K+KToWAlBDCCjJXfTwEPsw=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "2cd3234928f60bbff695a7ee56115ef7799c47cd",
+        "rev": "095fef2f265c3c0da4fe315efba8f8a04495ab34",
         "type": "github"
       },
       "original": {
@@ -230,11 +230,11 @@
     "homebrew-cask": {
       "flake": false,
       "locked": {
-        "lastModified": 1792882846,
-        "narHash": "sha256-79nbsB8abNEHjZWyqbjiUdjnWgnIlyn+6kcA3eZwb48=",
+        "lastModified": 1793224691,
+        "narHash": "sha256-bOiQC0AHw1uS/0mBnRlWJZAbZ0ZV4Dkbcg4fVnW3wA0=",
         "owner": "homebrew",
         "repo": "homebrew-cask",
-        "rev": "2e8434ae636a84bae8a4ff1a24ad8ec7394eec55",
+        "rev": "e64e5ba8fc3097c1b77b2c50c17a2d56bf25cfc1",
         "type": "github"
       },
       "original": {
@@ -246,11 +246,11 @@
     "homebrew-core": {
       "flake": false,
       "locked": {
-        "lastModified": 1792884008,
-        "narHash": "sha256-MQK57pVpdCYfIeqxocA9aU/InpU002udapnWLK1h8Jg=",
+        "lastModified": 1793224384,
+        "narHash": "sha256-XljGEGJvjWA88Zq0RKmKV0ye6mT1hYZU2GoYtNJdrvE=",
         "owner": "homebrew",
         "repo": "homebrew-core",
-        "rev": "2ab25a6d60af62cd34818e0161a720460806593d",
+        "rev": "3228f32a7739826919d5ce788cc661abc34dd9d3",
         "type": "github"
       },
       "original": {
@@ -457,11 +457,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1792697326,
-        "narHash": "sha256-2UBK0jdmPANGaeAIoVOZY+hSPB2Gy13ZuZeSxP3vF8k=",
+        "lastModified": 1793054847,
+        "narHash": "sha256-mhud3nRH8RoP0h9MydfkJ8mISpj+QE/S//wOt9bNgC0=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "1b418b8f203e49a92f250f8babdd19af1b6f7a7f",
+        "rev": "8ba09466dc929acf5c8bb3e0cc40f472a7df3630",
         "type": "github"
       },
       "original": {
@@ -533,11 +533,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1792773339,
-        "narHash": "sha256-rZLrzrC6i+jnTAlvPZHogKDulY7WWDEv9hJeHieO7Zw=",
+        "lastModified": 1793110635,
+        "narHash": "sha256-dhoW6VgFWlaodSY5jrBn+CF2FLmaUvDVgM7+C7T2+NM=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "3ec636362e1816bc2f0888fa0fa2c69f1bc9e504",
+        "rev": "31ecbaca1bdefa45dffc409f0250bd8039ea0010",
         "type": "github"
       },
       "original": {
@@ -641,11 +641,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792809984,
-        "narHash": "sha256-KV+CaZX7QS0hcdKxwGKehDb1jmUgx6lbkTPpaoIW5Nw=",
+        "lastModified": 1793052255,
+        "narHash": "sha256-Y/JIHTnMlOabDfyaSBubWGLDIVGihLEUuoMhFvQKaDo=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "442449fa7b1fe6c692d0103ac9fc8f9e82931cf3",
+        "rev": "60182817ee048ac94b4c68ea76d5ef2e8aac730d",
         "type": "github"
       },
       "original": {
@@ -662,11 +662,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792445369,
-        "narHash": "sha256-mBDWjeeIuFfDZQuBxHu+EpbJ+GMbbSxpRz0WVM2N+ZI=",
+        "lastModified": 1793198875,
+        "narHash": "sha256-CZR26099bnlOWgLpMOPwdpmocSAGetbepjkP661qml4=",
         "owner": "Alexays",
         "repo": "Waybar",
-        "rev": "c15ec02ede4343592a59eb5c2ff4443c9c045f7c",
+        "rev": "f6f73c81818b0a6753c1efb68e0fae2149eac028",
         "type": "github"
       },
       "original": {
