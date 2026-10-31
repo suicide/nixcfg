@@ -215,14 +215,21 @@ in {
         "nix/github_token" = {
           sopsFile = userSopsFile;
         };
+
+        "nix/gitlab_token" = {
+          sopsFile = userSopsFile;
+        };
       };
 
-      # User-level nix.conf so `nix develop` can fetch private github: flake
-      # inputs. The token stays out of the Nix store: the rendered file lives
-      # under /run/secrets/rendered and is symlinked here at activation.
-      templates."nix-github-access-tokens" = {
+      # User-level nix.conf so `nix develop` and `nix flake update` can fetch
+      # private flake inputs and stay under the forge API rate limits. Tokens
+      # stay out of the Nix store: the rendered file lives under
+      # /run/secrets/rendered and is symlinked here at activation.
+      # GitLab requires the `PAT:` type prefix; without it nix warns
+      # "Unrecognized GitLab token type" and sends a broken header.
+      templates."nix-access-tokens" = {
         content = ''
-          access-tokens = github.com=${config.sops.placeholder."nix/github_token"}
+          access-tokens = github.com=${config.sops.placeholder."nix/github_token"} gitlab.com=PAT:${config.sops.placeholder."nix/gitlab_token"}
         '';
         path = "${config.home.homeDirectory}/.config/nix/nix.conf";
         mode = "0600";
