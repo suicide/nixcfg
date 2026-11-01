@@ -59,10 +59,10 @@
     # hyprland = {
     #   url = "github:hyprwm/Hyprland/v0.56.2";
     # };
-    # Plugin tag is the Hyprland release it was built for. flake = false so this
+    # Lua package tag is the Hyprland release it targets. flake = false so this
     # stays a source tree and does not pull a Hyprland input.
     hyprland-split-monitor-workspaces = {
-      url = "github:zjeffer/split-monitor-workspaces/v0.56.2";
+      url = "github:zjeffer/split-monitor-workspaces/v0.57.0";
       # url = "github:suicide/split-monitor-workspaces/fix-nix-0.54.3";
       flake = false;
     };
