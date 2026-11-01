@@ -56,9 +56,6 @@
   mkExecBind = key: command:
     mkBind key (lua "hl.dsp.exec_cmd(${builtins.toJSON command})");
 
-  mkPluginBind = key: action: arg:
-    mkBind key (lua "function() return smw.${action}(${arg}) end");
-
   mkFocusBind = key: direction:
     mkBind key (lua ''hl.dsp.focus({ direction = "${direction}" })'');
 
@@ -74,18 +71,9 @@
 
   hyprlandPkg = pkgs.hyprland;
 
-  splitMonitorWorkspaces = pkgs.hyprlandPlugins.mkHyprlandPlugin {
-    pluginName = "split-monitor-workspaces";
-    version = pluginVersion;
-    src = inputs.hyprland-split-monitor-workspaces;
-    nativeBuildInputs = [pkgs.meson pkgs.ninja];
-    buildInputs = [pkgs.pixman];
-    meta = {
-      description = "Per-monitor workspaces for Hyprland";
-      homepage = "https://github.com/zjeffer/split-monitor-workspaces";
-      license = lib.licenses.bsd3;
-    };
-  };
+  # v0.57 replaced the C++ plugin with a Lua package. The .so is a deprecation
+  # stub and no longer registers config keys or dispatchers.
+  splitMonitorWorkspacesLua = "${inputs.hyprland-split-monitor-workspaces}/lua/?.lua";
 in {
   imports = [
     ./_cursor.nix
@@ -142,10 +130,6 @@ in {
       package = hyprlandPkg;
       portalPackage = pkgs.xdg-desktop-portal-hyprland;
 
-      plugins = lib.optionals cfg.displayWorkspaces [
-        splitMonitorWorkspaces
-      ];
-
       # start with uwsm
       # https://wiki.hypr.land/Useful-Utilities/Systemd-start/#installation
       systemd.enable = false;
@@ -176,7 +160,7 @@ in {
             (lua ''mod .. " + ${toWorkspaceKey n}"'')
             (
               if cfg.displayWorkspaces
-              then lua "function() return smw.workspace(${toString (toWorkspaceNumber n)}) end"
+              then lua ''smw.workspace("${toString (toWorkspaceNumber n)}")''
               else lua "hl.dsp.focus({ workspace = ${toString (toWorkspaceNumber n)} })"
             )) [1 2 3 4 5 6 7 8 9 0];
         moveWorkspaceBinds =
@@ -186,7 +170,7 @@ in {
             (lua ''shiftMod .. " + ${toWorkspaceKey n}"'')
             (
               if cfg.displayWorkspaces
-              then lua "function() return smw.move_to_workspace(${toString (toWorkspaceNumber n)}) end"
+              then lua ''smw.move_to_workspace("${toString (toWorkspaceNumber n)}")''
               else lua ''hl.dsp.window.move({ workspace = "${toString (toWorkspaceNumber n)}" })''
             )) [1 2 3 4 5 6 7 8 9 0];
       in {
@@ -198,8 +182,23 @@ in {
           _var = "SUPER + SHIFT";
         };
 
+        # Locals are emitted before binds. Publish _G.smw for waybar's hyprctl eval.
         smw = lib.mkIf cfg.displayWorkspaces {
-          _var = lua "hl.plugin.split_monitor_workspaces";
+          _var = lua ''
+            (function()
+              package.path = package.path .. ";" .. ${builtins.toJSON splitMonitorWorkspacesLua}
+              local smw = require("split-monitor-workspaces")
+              smw.setup({
+                workspace_count = 10,
+                -- disabled, otherwise waybar shows all predefined workspaces even if empty
+                enable_persistent_workspaces = false,
+                enable_notifications = false,
+                keep_focused = true,
+              })
+              _G.smw = smw
+              return smw
+            end)()
+          '';
         };
 
         monitor = monitors;
@@ -239,12 +238,6 @@ in {
           // lib.optionalAttrs cfg.swapEsc {
             input = {
               kb_options = "caps:swapescape";
-            };
-          }
-          // lib.optionalAttrs cfg.displayWorkspaces {
-            plugin.split_monitor_workspaces = {
-              # disabled, otherwise waybar shows all predefined workspaces even if empty
-              enable_persistent_workspaces = 0;
             };
           };
 
@@ -318,7 +311,8 @@ in {
           ++ standardWorkspaceBinds
           ++ moveWorkspaceBinds
           ++ lib.optionals cfg.displayWorkspaces [
-            (mkPluginBind (lua ''mod .. " + O"'') "change_monitor" ''"next"'')
+            # change_monitor was removed with the C++ plugin.
+            (mkBind (lua ''mod .. " + O"'') (lua ''hl.dsp.window.move({ monitor = "+1" })''))
           ];
       };
     };

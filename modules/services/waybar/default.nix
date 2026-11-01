@@ -84,8 +84,15 @@
                 all-outputs = false;
                 format = "{icon}";
                 on-click = "activate";
-                on-scroll-up = "hyprctl dispatch split-cycleworkspaces -1";
-                on-scroll-down = "hyprctl dispatch split-cycleworkspaces +1";
+                # split-cycleworkspaces belonged to the removed C++ plugin.
+                on-scroll-up =
+                  if config.__cfg.hyprland.displayWorkspaces
+                  then "hyprctl eval 'smw.cycle_workspaces(\"-1\")()'"
+                  else "hyprctl dispatch 'hl.dsp.focus({ workspace = \"m-1\" })'";
+                on-scroll-down =
+                  if config.__cfg.hyprland.displayWorkspaces
+                  then "hyprctl eval 'smw.cycle_workspaces(\"+1\")()'"
+                  else "hyprctl dispatch 'hl.dsp.focus({ workspace = \"m+1\" })'";
                 tooltip = false;
 
                 format-icons = lib.listToAttrs (lib.map generateAttr numbers);
