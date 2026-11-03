@@ -104,7 +104,7 @@ in {
       content = ''
         Host outterworld
           HostName ${config.sops.placeholder."ssh/outterworld/host"}
-          User ubuntu
+          User debian
           IdentityFile ${secrets}/outterworld/privateKey
           LocalForward 6443 localhost:6443
       '';
@@ -117,7 +117,7 @@ in {
         Host outterworld2
           HostName ${config.sops.placeholder."ssh/outterworld2/host"}
           Port 22
-          User ubuntu
+          User debian
           IdentityFile ${secrets}/outterworld2/privateKey
           LocalForward 6443 localhost:6443
       '';
