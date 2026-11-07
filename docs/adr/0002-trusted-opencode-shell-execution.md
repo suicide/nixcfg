@@ -4,6 +4,10 @@
 
 **Date:** 2026-10-26
 
+**Amended by:** [ADR 0003](0003-risk-based-opencode-reviews.md) moves common
+restriction reporting into selectively injected instructions and extends the
+reviewer roles; the trusted-shell permission policy remains unchanged.
+
 ## Context
 
 The OpenCode V2 migration made shell execution approval-controlled by default.

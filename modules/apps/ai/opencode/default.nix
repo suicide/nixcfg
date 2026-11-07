@@ -5,6 +5,8 @@
       permissions = permissions.shared;
       agents = {
         codereviewer.permissions = permissions.nonEditing;
+        domainreviewer.permissions = permissions.nonEditing;
+        productreviewer.permissions = permissions.nonEditing;
         explore.permissions = permissions.nonEditing;
       };
       experimental.subagent_depth = 2;
@@ -102,6 +104,8 @@
 
           agents = {
             codereviewer = ./agents/codereviewer.md;
+            domainreviewer = ./agents/domainreviewer.md;
+            productreviewer = ./agents/productreviewer.md;
             documentation = ./agents/documentation.md;
             implementer = ./agents/implementer.md;
             orchestrator-build = ./agents/orchestrator-build.md;
@@ -121,6 +125,8 @@
 
             agents = {
               codereviewer.permissions = permissions.nonEditing;
+              domainreviewer.permissions = permissions.nonEditing;
+              productreviewer.permissions = permissions.nonEditing;
               explore = {
                 description = "Read-only repository and technical research. Use for locating unfamiliar code, tracing dependencies or execution paths, investigating architecture, and answering questions requiring iterative or multi-file discovery. Returns concise findings with file paths, key references, and uncertainties.";
                 permissions = permissions.nonEditing;

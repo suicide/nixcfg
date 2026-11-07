@@ -1,5 +1,9 @@
 import buildGuidelines from "./prompts/build-guidelines.md" with { type: "text" }
 import planGuidelines from "./prompts/plan-guidelines.md" with { type: "text" }
+import localSafety from "./prompts/local-safety.md" with { type: "text" }
+import engineeringPrinciples from "./prompts/engineering-principles.md" with { type: "text" }
+import implementationMethod from "./prompts/implementation-method.md" with { type: "text" }
+import reviewContract from "./prompts/review-contract.md" with { type: "text" }
 
 export interface Instruction {
   readonly text: string
@@ -24,6 +28,10 @@ function loadInstruction(name: string, source: string): Instruction {
  * routed to multiple agents without duplicating prompt text.
  */
 export const INSTRUCTIONS = {
+  "local-safety": loadInstruction("local-safety", localSafety),
+  "engineering-principles": loadInstruction("engineering-principles", engineeringPrinciples),
+  "implementation-method": loadInstruction("implementation-method", implementationMethod),
+  "review-contract": loadInstruction("review-contract", reviewContract),
   "build-guidelines": loadInstruction("build-guidelines", buildGuidelines),
   "plan-guidelines": loadInstruction("plan-guidelines", planGuidelines),
 } as const satisfies Readonly<Record<string, Instruction>>
@@ -35,8 +43,14 @@ type InstructionID = keyof typeof INSTRUCTIONS
  * needs it; unknown agents deliberately receive no additional instructions.
  */
 export const AGENT_INSTRUCTIONS = {
-  build: ["build-guidelines"],
-  plan: ["plan-guidelines"],
+  build: ["local-safety", "engineering-principles", "implementation-method", "build-guidelines"],
+  plan: ["local-safety", "plan-guidelines"],
+  implementer: ["local-safety", "engineering-principles", "implementation-method"],
+  "orchestrator-build": ["local-safety", "engineering-principles"],
+  codereviewer: ["local-safety", "engineering-principles", "review-contract"],
+  domainreviewer: ["local-safety", "review-contract"],
+  productreviewer: ["local-safety", "review-contract"],
+  documentation: ["local-safety"],
 } as const satisfies Readonly<Record<string, readonly InstructionID[]>>
 
 /** Resolve an agent's instruction blocks, rejecting invalid routing entries. */

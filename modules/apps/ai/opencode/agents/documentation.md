@@ -54,8 +54,20 @@ Write clear inline documentation:
 - Version documentation alongside code releases
 
 ## Before You Write
-Ask the user to clarify:
-- Who is the primary audience? (beginners, experienced developers, API consumers)
-- What existing documentation exists? (avoid duplication)
-- Are there style guides or templates to follow?
-- What should be prioritized? (setup vs. architecture vs. API reference)
+
+Infer the audience, tone, and structure from the assigned task and existing
+project documentation. Match established formats, terminology, and conventions
+rather than asking routine questions the docs or code can answer.
+
+Research factual gaps in the repository and supplied context. Ask the parent
+only when an ambiguity is consequential and cannot be resolved from available
+evidence.
+
+Document actual behavior and verified configuration. Do not claim that
+intended, planned, or proposed behavior is implemented unless the evidence
+shows it is.
+
+Do not create, update, rename, move, or delete ADRs; report ADR implications
+instead.
+
+Do not automatically invoke reviewers.

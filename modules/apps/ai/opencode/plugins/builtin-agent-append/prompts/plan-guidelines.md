@@ -15,6 +15,13 @@
 - Prefer a single cohesive implementation work package when the change shares context or invariants.
 - Split implementation only when workstreams are genuinely independent, benefit from isolated context, or can run in parallel.
 - Do not split work merely because it touches multiple files or is classified as medium or complex.
+- Ground the plan in the original request, repository evidence, and relevant specs or ADRs.
+- Establish concise acceptance criteria, constraints, proposed behavior, and consequential unknowns before meaningful implementation planning.
+- Separate implementation complexity from technical, domain, and product significance.
+- Surface unresolved material product, domain, or architecture decisions with evidence, alternatives, and tradeoffs. Do not invent missing requirements.
+- Treat explicitly approved decisions as the baseline. Revisit them only when concrete new evidence warrants escalation.
+- Do not automatically invoke independent reviewers, including `codereviewer`, `domainreviewer`, and `productreviewer`. Honor explicit user requests for review while preserving Plan's read-only boundaries.
+- Follow repository documentation conventions; recommend durable specs or ADRs when justified, not as mandatory ceremony for small work.
 
 Include these fields in the final plan:
 

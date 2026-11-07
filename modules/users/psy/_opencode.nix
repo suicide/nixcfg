@@ -31,6 +31,12 @@
           codereviewer = {
             model = reviewerModel;
           };
+          domainreviewer = {
+            model = reviewerModel;
+          };
+          productreviewer = {
+            model = reviewerModel;
+          };
           implementer = {
             model = implementerModel;
           };

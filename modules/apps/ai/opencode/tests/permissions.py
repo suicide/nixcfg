@@ -33,6 +33,8 @@ EXPLORE = [
     *BASE[1:],
     {"action": "subagent", "resource": "*", "effect": "deny"},
 ]
+REVIEWERS = ("codereviewer", "domainreviewer", "productreviewer")
+NON_EDITING = ("explore", *REVIEWERS)
 
 
 def matches(pattern, value):
@@ -71,7 +73,8 @@ class Permissions(unittest.TestCase):
             "general",
             "implementer",
             "orchestrator-build",
-            "codereviewer",
+            *REVIEWERS,
+            "documentation",
         ):
             for command in commands:
                 with self.subTest(agent=agent, command=command):
@@ -156,7 +159,7 @@ class Permissions(unittest.TestCase):
         self.assert_shell(["git stash push -m example", "git log --grep=push"], "ask")
 
     def test_boundaries(self):
-        for agent in ("build", "explore", "codereviewer"):
+        for agent in ("build", *NON_EDITING):
             for action, resource, expected in [
                 ("external_directory", "/nix/store/*", "allow"),
                 ("external_directory", "/nix/store/example-source/*", "allow"),
@@ -175,7 +178,7 @@ class Permissions(unittest.TestCase):
                     )
 
     def test_non_editing_agents(self):
-        for agent in ("explore", "codereviewer"):
+        for agent in NON_EDITING:
             self.assertIn("permissions", CONFIG["agents"][agent])
             rules = self.rules(agent)
             with self.subTest(agent=agent, action="edit"):
@@ -202,7 +205,7 @@ class Permissions(unittest.TestCase):
 
     def test_shared_shell_order(self):
         shared = [r for r in CONFIG["permissions"] if r["action"] == "shell"]
-        for agent in ("explore", "codereviewer"):
+        for agent in NON_EDITING:
             rules = [
                 r
                 for r in CONFIG["agents"][agent]["permissions"]

@@ -58,6 +58,7 @@ in {
         agents = let
           lightweightModel = "github-copilot/gpt-6-luna";
           mediumWeightModel = "github-copilot/gpt-6-sol";
+          reviewerModel = "github-copilot/grok-4.7";
         in {
           # Built in
           explore = {
@@ -73,7 +74,13 @@ in {
             model = mediumWeightModel;
           };
           codereviewer = {
-            model = "github-copilot/grok-4.7";
+            model = reviewerModel;
+          };
+          domainreviewer = {
+            model = reviewerModel;
+          };
+          productreviewer = {
+            model = reviewerModel;
           };
           implementer = {
             model = lightweightModel;

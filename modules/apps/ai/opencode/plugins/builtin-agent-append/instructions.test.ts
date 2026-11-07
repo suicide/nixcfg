@@ -74,19 +74,33 @@ test("prompt files load as rendered Markdown", () => {
   }
 })
 
-test("configured native agents receive only their own nonempty block", () => {
-  const build = applyAgentInstructionsToNewSystem("build")
-  const plan = applyAgentInstructionsToNewSystem("plan")
+const expectedRouting = {
+  build: ["local-safety", "engineering-principles", "implementation-method", "build-guidelines"],
+  plan: ["local-safety", "plan-guidelines"],
+  implementer: ["local-safety", "engineering-principles", "implementation-method"],
+  "orchestrator-build": ["local-safety", "engineering-principles"],
+  codereviewer: ["local-safety", "engineering-principles", "review-contract"],
+  domainreviewer: ["local-safety", "review-contract"],
+  productreviewer: ["local-safety", "review-contract"],
+  documentation: ["local-safety"],
+} as const
 
-  assert.equal(build.length, 1)
-  assert.equal(plan.length, 1)
-  assert.equal(build[0].text, INSTRUCTIONS["build-guidelines"].text)
-  assert.equal(plan[0].text, INSTRUCTIONS["plan-guidelines"].text)
-  assert.notEqual(build[0].text, plan[0].text)
+test("routes role-appropriate canonical blocks in stable order", () => {
+  assert.deepEqual(AGENT_INSTRUCTIONS, expectedRouting)
+
+  for (const [agent, ids] of Object.entries(expectedRouting)) {
+    const system: ContextPart[] = [{ type: "text", text: "native instructions" }]
+    applyAgentInstructions(agent, system)
+    applyAgentInstructions(agent, system)
+    assert.deepEqual(system.map((part) => part.text), [
+      "native instructions",
+      ...ids.map((id) => INSTRUCTIONS[id].text),
+    ])
+  }
 })
 
 test("routing has no duplicate blocks and only configured agents", () => {
-  assert.deepEqual(Object.keys(AGENT_INSTRUCTIONS), ["build", "plan"])
+  assert.deepEqual(Object.keys(AGENT_INSTRUCTIONS), Object.keys(expectedRouting))
 
   for (const ids of Object.values(AGENT_INSTRUCTIONS)) {
     assert.equal(new Set(ids).size, ids.length)
@@ -95,6 +109,30 @@ test("routing has no duplicate blocks and only configured agents", () => {
 
 test("agents without routing receive no instructions", () => {
   assert.deepEqual(applyAgentInstructionsToNewSystem("explore"), [])
+  assert.deepEqual(applyAgentInstructionsToNewSystem("unknown"), [])
+  assert.deepEqual(applyAgentInstructionsToNewSystem("compaction"), [])
+})
+
+test("native agents keep independent review explicit-only for every lens", () => {
+  for (const id of ["build-guidelines", "plan-guidelines"] as const) {
+    const text = INSTRUCTIONS[id].text
+    assert.match(text, /Do not automatically invoke independent reviewers/)
+    for (const reviewer of ["codereviewer", "domainreviewer", "productreviewer"]) {
+      assert.ok(text.includes(`\`${reviewer}\``))
+    }
+    assert.match(text, /explicit.*(?:request|review)/i)
+  }
+})
+
+test("reviewers receive the same verdict contract without implementation methods", () => {
+  for (const agent of ["codereviewer", "domainreviewer", "productreviewer"]) {
+    const texts = applyAgentInstructionsToNewSystem(agent).map((part) => part.text)
+    assert.equal(texts.filter((text) => text === INSTRUCTIONS["review-contract"].text).length, 1)
+    assert.ok(!texts.includes(INSTRUCTIONS["implementation-method"].text))
+  }
+  for (const verdict of ["PASS", "ADVISORY", "BLOCKED", "INSUFFICIENT_CONTEXT"]) {
+    assert.ok(INSTRUCTIONS["review-contract"].text.includes(verdict))
+  }
 })
 
 function applyAgentInstructionsToNewSystem(agent: string): ContextPart[] {

@@ -21,14 +21,18 @@ executable allowlist. Exceptions are raw-text accident guardrails, not a
 sandbox or an exhaustive classification of mutations. In particular, wrappers
 and scripts can bypass them; saved approvals can bypass `ask`.
 
-Plan/explore remain read-oriented, and the reviewer must not intentionally
-edit source. Reviewer/explore allow tools by default, including MCP, skills,
-Code Mode, and subagent delegation; direct edit/write/patch operations are
+Plan/explore remain read-oriented, and technical/domain/product reviewers must
+not intentionally edit source. Reviewers/explore allow tools by default, including
+MCP, skills, Code Mode, and subagent delegation; direct edit/write/patch operations are
 denied. One level of nested delegation is enabled (`subagent_depth = 2`).
 Shell and MCP access are not read-only containment. Explicit restriction-error
 reporting is retained.
 External directories still ask, except Nix-store reads; direct store edits
 remain denied.
+
+Review selection and local-only instruction policy are described in the
+[workflow guide](opencode-workflow.md). All three reviewers share the same
+nonediting rules; their shell/MCP access remains trusted, not sandboxed.
 
 ## Evidence
 
