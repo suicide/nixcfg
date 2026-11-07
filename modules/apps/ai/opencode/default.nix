@@ -17,6 +17,14 @@
         python ${./tests/permissions.py} < ${testConfig}
         touch "$out"
       '';
+
+    checks.opencode-plugin-instructions =
+      pkgs.runCommand "opencode-plugin-instructions" {
+        nativeBuildInputs = [pkgs.bun];
+      } ''
+        bun test ${./plugins/builtin-agent-append}/instructions.test.ts
+        touch "$out"
+      '';
   };
 
   internal.modules = {
