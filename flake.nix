@@ -62,7 +62,7 @@
     # Lua package tag is the Hyprland release it targets. flake = false so this
     # stays a source tree and does not pull a Hyprland input.
     hyprland-split-monitor-workspaces = {
-      url = "github:zjeffer/split-monitor-workspaces/v0.57.0";
+      url = "github:zjeffer/split-monitor-workspaces/v0.57.2";
       # url = "github:suicide/split-monitor-workspaces/fix-nix-0.54.3";
       flake = false;
     };
