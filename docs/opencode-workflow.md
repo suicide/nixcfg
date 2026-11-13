@@ -16,7 +16,14 @@ The orchestrator reuses approved plans. It researches factual gaps but stops on
 unresolved material product/domain/architecture decisions. Confirmed technical
 blockers within scope can be corrected autonomously, with at most two correction
 rounds by default and earlier escalation on repetition or lack of progress.
-Reviewers do not edit code or own implementation decisions.
+Reviewers do not edit code or own implementation decisions. They may delegate
+focused research only to the existing Explore agent, which cannot delegate
+further. Small/local questions stay with the reviewer; normally one investigation
+is sufficient, with a second only for an independent question. Brief Explore with
+the question, context, scope, and expected evidence. Reviewers verify consequential
+findings against primary sources and own their verdicts; Explore supplies
+evidence, not another reviewer's judgment or a replacement review. Trusted shell
+access remains unchanged and is not read-only containment.
 
 No agent automatically commits, pushes, creates PRs, or merges. Explicit user
 authorization is separate from permission approval. Preserve dirty user work.
@@ -87,6 +94,11 @@ prompt, actual tool calls, decisions, final status, and validation evidence.
 | Meaningful product/scope change | Product review selected when warranted |
 | Significant interface/type/dependency decision | Technical critique before implementation when unsettled/material |
 | Seeded domain defect and technical defect | Relevant independent reviewers identify evidenced failure modes |
+| Domain reviewer encounters an unclear invariant | Bounded Explore investigation finds code/test/spec evidence; reviewer checks primary evidence and reports the seeded real defect |
+| Technical reviewer needs affected callers across components | Focused Explore caller tracing supplies references; reviewer verifies consequential findings without its own open-ended search |
+| Trivial or sufficiently grounded review | No Explore worker launched |
+| Orchestrator → reviewer → Explore | Nested tool calls work at depth 2; Explore returns concise references and uncertainties, reviewer returns its own evidence-backed verdict |
+| Reviewer attempts another agent; Explore attempts any child | Reviewer → implementer/reviewer/orchestrator/unknown denied; Explore → any agent denied; direct edits still denied and trusted-shell guardrails preserved |
 | Missing product/domain/architecture decision | No implementation before escalation; clear alternatives and decision needed |
 | Missing factual detail or straightforward technical defect | Research/correction proceeds autonomously |
 | Approved design and no new evidence | Baseline preserved without redundant review |

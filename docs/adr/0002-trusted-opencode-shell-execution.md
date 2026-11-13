@@ -6,7 +6,8 @@
 
 **Amended by:** [ADR 0003](0003-risk-based-opencode-reviews.md) moves common
 restriction reporting into selectively injected instructions and extends the
-reviewer roles; the trusted-shell permission policy remains unchanged.
+reviewer roles, and narrows reviewer/research delegation; the trusted-shell
+permission policy remains unchanged.
 
 ## Context
 
@@ -25,10 +26,11 @@ without continually growing. Project/host sandboxing is a separate effort.
   operations; they are not comprehensive security controls.
 - Define the ordered policy once in the application's private
   `_permissions.nix`. Reviewer/explore allow tools by default, including MCP,
-  skills, Code Mode, and delegation, then reapply shared guardrails and deny
-  direct edits. Do not preserve the migration's blanket tool denials.
+  skills, and Code Mode, then reapply shared guardrails and deny direct edits.
+  ADR 0003's delegation amendment restricts reviewer children to Explore and
+  makes Explore a leaf. Do not preserve the migration's blanket tool denials.
 - Allow one level of nested delegation (`subagent_depth = 2`) so these
-  subagents can delegate without permitting unbounded delegation chains.
+  reviewers can delegate research to Explore without unbounded chains.
 - Keep external-directory approval and read-only Nix-store tool access.
 - Preserve direct-edit restrictions for research/review roles. Read-oriented
   instructions guide shell use but do not contain shell writes or execution.

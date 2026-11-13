@@ -88,8 +88,28 @@ let
   ];
 
   shared = sensitiveReads ++ directories ++ shell;
+
+  noDelegation = [
+    {
+      action = "subagent";
+      resource = "*";
+      effect = "deny";
+    }
+  ];
 in {
   inherit shared;
+
+  # Append after nonEditing: the last matching rule wins.
+  reviewerDelegation =
+    noDelegation
+    ++ [
+      {
+        action = "subagent";
+        resource = "explore";
+        effect = "allow";
+      }
+    ];
+  researchDelegation = noDelegation;
 
   # Override Explore's built-in tool denials, then restore shared guardrails.
   # Only direct edits are blocked; shell/MCP execution is not containment.

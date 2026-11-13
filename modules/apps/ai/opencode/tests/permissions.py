@@ -184,7 +184,6 @@ class Permissions(unittest.TestCase):
             with self.subTest(agent=agent, action="edit"):
                 self.assertEqual(effect(rules, "edit", "project/file"), "deny")
             for action in (
-                "subagent",
                 "execute",
                 "question",
                 "skill",
@@ -202,6 +201,48 @@ class Permissions(unittest.TestCase):
 
     def test_nested_delegation(self):
         self.assertEqual(CONFIG["experimental"]["subagent_depth"], 2)
+        for reviewer in REVIEWERS:
+            with self.subTest(reviewer=reviewer):
+                self.assertEqual(
+                    effect(self.rules("orchestrator-build"), "subagent", reviewer),
+                    "allow",
+                )
+                self.assertEqual(
+                    effect(self.rules(reviewer), "subagent", "explore"), "allow"
+                )
+
+    def test_reviewer_delegation_is_research_only(self):
+        for reviewer in REVIEWERS:
+            for target in (
+                "implementer",
+                *REVIEWERS,
+                "orchestrator-build",
+                "general",
+                "documentation",
+                "build",
+                "plan",
+                "unknown",
+                "explore/unknown",
+            ):
+                with self.subTest(reviewer=reviewer, target=target):
+                    self.assertEqual(
+                        effect(self.rules(reviewer), "subagent", target), "deny"
+                    )
+
+    def test_explore_is_a_leaf(self):
+        for target in (
+            "explore",
+            *REVIEWERS,
+            "implementer",
+            "orchestrator-build",
+            "general",
+            "documentation",
+            "unknown",
+        ):
+            with self.subTest(target=target):
+                self.assertEqual(
+                    effect(self.rules("explore"), "subagent", target), "deny"
+                )
 
     def test_shared_shell_order(self):
         shared = [r for r in CONFIG["permissions"] if r["action"] == "shell"]

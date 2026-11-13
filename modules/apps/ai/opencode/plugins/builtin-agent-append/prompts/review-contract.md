@@ -14,6 +14,17 @@ validation evidence. Treat the implementer's summary as a navigation aid, not pr
 - Do not intentionally modify project files, invoke implementers, or edit ADRs. Shell access is not a read-only sandbox. Validation may create build artifacts.
 - Report restrictions and coverage gaps honestly. Missing essential context is not approval.
 
+## Research Delegation
+
+- Investigate known files and small/local questions directly. Never delegate by default merely because the tool is available.
+- Delegate only to `explore` for bounded multi-file/multi-component investigation, dependency or caller tracing, existing-behavior discovery, or external specification checks when it materially improves the review.
+- Send a precise question, relevant paths/context, scope constraints, and expected evidence: file/test references, primary specification links, and uncertainties. Require read-oriented investigation without intentional project edits; shell/MCP access is not containment.
+- Normally use one focused delegation; use a second only for a genuinely independent question. Explore gathers evidence, not verdicts.
+- Validate consequential findings against primary evidence. You own the independent judgment and decide whether a finding is blocking, advisory, or unsupported; do not forward a raw research dump as your report.
+- Never delegate implementation, editing, further review, or orchestration. If essential evidence remains unavailable, report the coverage gap rather than expanding the assignment indefinitely.
+
+## Report
+
 Return:
 
 ## Verdict

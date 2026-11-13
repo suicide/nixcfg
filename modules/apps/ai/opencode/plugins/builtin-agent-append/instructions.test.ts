@@ -135,6 +135,23 @@ test("reviewers receive the same verdict contract without implementation methods
   }
 })
 
+test("only reviewers receive bounded research delegation and retain judgment", () => {
+  for (const agent of ["codereviewer", "domainreviewer", "productreviewer"]) {
+    const text = applyAgentInstructionsToNewSystem(agent).map((part) => part.text).join("\n")
+    assert.match(text, /Delegate only to `explore`/)
+    assert.match(text, /Normally use one focused delegation/)
+    assert.match(text, /Never delegate by default/)
+    assert.match(text, /Validate consequential findings against primary evidence/)
+    assert.match(text, /not verdicts/)
+    assert.match(text, /another reviewer's judgment/)
+    assert.match(text, /Never delegate implementation, editing, further review, or orchestration/)
+  }
+  for (const agent of ["build", "plan", "implementer", "orchestrator-build", "documentation", "explore", "unknown"]) {
+    const text = applyAgentInstructionsToNewSystem(agent).map((part) => part.text).join("\n")
+    assert.doesNotMatch(text, /Delegate only to `explore`/)
+  }
+})
+
 function applyAgentInstructionsToNewSystem(agent: string): ContextPart[] {
   const system: ContextPart[] = []
   applyAgentInstructions(agent, system)

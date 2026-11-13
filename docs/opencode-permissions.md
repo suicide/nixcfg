@@ -23,8 +23,13 @@ and scripts can bypass them; saved approvals can bypass `ask`.
 
 Plan/explore remain read-oriented, and technical/domain/product reviewers must
 not intentionally edit source. Reviewers/explore allow tools by default, including
-MCP, skills, Code Mode, and subagent delegation; direct edit/write/patch operations are
-denied. One level of nested delegation is enabled (`subagent_depth = 2`).
+MCP, skills, and Code Mode; direct edit/write/patch operations are denied.
+Reviewer delegation overlays deny all subagent targets, then allow only the exact
+`explore` agent ID. Explore's final overlay denies all subagent targets, making it
+a leaf. One level of nested delegation is enabled (`subagent_depth = 2`) for
+`orchestrator-build → reviewer → explore`; the depth setting alone is not the
+delegation policy. All overlays follow the broad nonediting allowance because
+the last matching V2 permission rule wins.
 Shell and MCP access are not read-only containment. Explicit restriction-error
 reporting is retained.
 External directories still ask, except Nix-store reads; direct store edits
@@ -91,3 +96,11 @@ reviewer direct edits remain denied. Use the saved-permission API to confirm
 the clean project has no approvals masking the outcome. Do not delete existing
 project approvals to perform a test. Record remaining prompts and known
 wrapper gaps separately from successful direct-command guardrails.
+
+For reviewer research, verify effective rules for all three reviewers: launching
+`explore` is allowed; launching implementers, other reviewers, the orchestrator,
+or unknown agents is denied. Explore must deny every child target, including
+itself. Observe a real orchestrator → reviewer → Explore call chain at depth 2;
+the Python matcher checks permissions and the configured depth, not runtime tool
+availability or depth enforcement. Keep trusted shell/MCP access unchanged;
+these checks do not establish read-only containment.

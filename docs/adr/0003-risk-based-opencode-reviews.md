@@ -4,6 +4,8 @@
 
 **Date:** 2026-11-07
 
+**Amended:** 2026-11-13 — bounded reviewer → Explore research delegation.
+
 ## Context
 
 Independent review should catch consequential technical, domain, and product
@@ -34,6 +36,16 @@ prompts also makes the quality bar difficult to maintain consistently.
   conventions without mandatory documentation ceremony for small tasks.
 - Keep work local unless separately authorized: no automatic commits, pushes,
   PR creation, or merges, and no discarding unrelated changes.
+- Allow reviewers to delegate only focused investigative work to the existing
+  `explore` agent. Deny other reviewer child targets and all Explore delegation
+  with final permission overlays; retain `subagent_depth = 2` for the
+  orchestrator → reviewer → Explore chain. This narrows ADR 0002's broad
+  reviewer/research delegation allowance, without changing trusted shell access.
+- Keep known-file/local investigation direct; normally one research delegation,
+  a second only for an independent question. Explore supplies evidence, not
+  verdicts. Reviewers verify consequential evidence, retain independent judgment,
+  and must not use research to obtain another reviewer's judgment or delegate
+  implementation, editing, further review, or orchestration.
 
 ADR 0002's trusted-shell policy remains unchanged and extends to all reviewers.
 A narrower reviewer shell policy was considered but is not introduced: project

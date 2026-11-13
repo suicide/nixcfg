@@ -4,10 +4,10 @@
     testConfig = pkgs.writeText "opencode-permissions.json" (builtins.toJSON {
       permissions = permissions.shared;
       agents = {
-        codereviewer.permissions = permissions.nonEditing;
-        domainreviewer.permissions = permissions.nonEditing;
-        productreviewer.permissions = permissions.nonEditing;
-        explore.permissions = permissions.nonEditing;
+        codereviewer.permissions = permissions.nonEditing ++ permissions.reviewerDelegation;
+        domainreviewer.permissions = permissions.nonEditing ++ permissions.reviewerDelegation;
+        productreviewer.permissions = permissions.nonEditing ++ permissions.reviewerDelegation;
+        explore.permissions = permissions.nonEditing ++ permissions.researchDelegation;
       };
       experimental.subagent_depth = 2;
     });
@@ -124,12 +124,12 @@
             ];
 
             agents = {
-              codereviewer.permissions = permissions.nonEditing;
-              domainreviewer.permissions = permissions.nonEditing;
-              productreviewer.permissions = permissions.nonEditing;
+              codereviewer.permissions = permissions.nonEditing ++ permissions.reviewerDelegation;
+              domainreviewer.permissions = permissions.nonEditing ++ permissions.reviewerDelegation;
+              productreviewer.permissions = permissions.nonEditing ++ permissions.reviewerDelegation;
               explore = {
                 description = "Read-only repository and technical research. Use for locating unfamiliar code, tracing dependencies or execution paths, investigating architecture, and answering questions requiring iterative or multi-file discovery. Returns concise findings with file paths, key references, and uncertainties.";
-                permissions = permissions.nonEditing;
+                permissions = permissions.nonEditing ++ permissions.researchDelegation;
               };
               plan = {
                 color = "#fab283";
