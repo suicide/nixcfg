@@ -28,6 +28,14 @@
               profile-restore = "copy";
               target-trc = "bt.1886";
             };
+
+            # mpv 0.42 pseudo-gui sets idle=yes, so the window stays open after
+            # playback. Restore the previous quit-on-end behavior for GUI launches.
+            # https://github.com/mpv-player/mpv/commit/c0c758434211649e4abe81d571c329fff8c7123f
+            quit-when-finished = {
+              profile-cond = "p['player-operation-mode'] == 'pseudo-gui'";
+              idle = "once";
+            };
           };
 
           scripts =
