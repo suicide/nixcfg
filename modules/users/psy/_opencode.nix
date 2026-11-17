@@ -5,10 +5,11 @@
     programs.opencode = {
       settings = {
         agents = let
+          deepseekFlash = "opencode-go/deepseek-v4.1-flash";
           exploreModel = generalModel;
-          buildModel = "opencode-go/deepseek-v4.1-flash";
+          buildModel = deepseekFlash;
           implementerModel = buildModel;
-          generalModel = "opencode-go/mimo-v2.6-flash";
+          generalModel = buildModel;
           reviewerModel = "openai/gpt-6.1-terra";
           docsModel = reviewerModel;
         in {
