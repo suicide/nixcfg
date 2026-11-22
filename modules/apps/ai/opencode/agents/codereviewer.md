@@ -14,3 +14,5 @@ Review through this technical lens:
 - interfaces and compatibility
 - dependency choices and design simplicity
 - realistic tests and validation coverage
+- comment accuracy and necessity: flag narration, stale claims, and prose excusing avoidable workarounds; prefer enforceable types, tests, lint, or root-cause fixes when appropriate
+- preserve valid comments about non-obvious rationale, safety invariants, external constraints, public API contracts, required tool directives, and legal/license notices; keep stylistic preferences advisory
