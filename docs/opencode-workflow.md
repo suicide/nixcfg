@@ -9,8 +9,17 @@ and [permissions](opencode-permissions.md) for the trusted-shell boundary.
   explicitly requested; no automatic review gate.
 - **Build:** direct implementation with self-validation. Independent reviews
   only when explicitly requested.
-- **orchestrator-build:** delegates cohesive implementation and selects
+- **orchestrator-build:** delegates bounded cohesive packages and selects
   independent technical, domain, and product reviews according to risk.
+
+Small changes stay in one execution without a required handoff or review.
+Substantial changes can use several packages under one approved design: order
+dependencies, serialize conflicting writes or shared-resource mutations, and keep
+unblocked work moving. Verify a representative slice before repeating a novel or
+high-risk pattern, and investigate expensive failures with focused checks before
+retrying. On a stall or interruption, preserve work in progress and hand off the
+actual repo state, checks, remaining work, and next action. Agree on a task-local
+handoff path for multi-session work; `long-running-work` is optional if available.
 
 The orchestrator reuses approved plans. It researches factual gaps but stops on
 unresolved material product/domain/architecture decisions. Confirmed technical
@@ -90,6 +99,9 @@ prompt, actual tool calls, decisions, final status, and validation evidence.
 | Explicit review request in Plan/Build | Requested reviewer runs; Plan remains nonediting |
 | Native and custom agent context | Intended blocks appear once; native content preserved; Explore has no coding methods |
 | Orchestrator low-risk mechanical change | Unhelpful reviews skipped with reasons |
+| Large cohesive change with dependent and independent packages | Prerequisites finish before dependents; independent work continues on a blocker; shared mutations are serialized |
+| Stalled or interrupted worker with dirty work | `PARTIAL` records state, evidence, remaining work and next action; a fresh worker can resume |
+| Repeated expensive validation failure | Focused diagnosis or a cheaper reliable check before retrying; no unchanged blind retries |
 | Small critical authorization/calculation change | Domain significance recognized despite small diff |
 | Meaningful product/scope change | Product review selected when warranted |
 | Significant interface/type/dependency decision | Technical critique before implementation when unsettled/material |
