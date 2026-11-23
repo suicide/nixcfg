@@ -21,6 +21,10 @@ retrying. On a stall or interruption, preserve work in progress and hand off the
 actual repo state, checks, remaining work, and next action. Agree on a task-local
 handoff path for multi-session work; `long-running-work` is optional if available.
 
+`long-running-work` is installed by Home Manager from the pinned
+[`suicide/skills`](https://github.com/suicide/skills) flake input at
+`~/.config/opencode/skills/long-running-work`. No manual install is required.
+
 The orchestrator reuses approved plans. It researches factual gaps but stops on
 unresolved material product/domain/architecture decisions. Confirmed technical
 blockers within scope can be corrected autonomously, with at most two correction

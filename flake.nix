@@ -93,6 +93,11 @@
       flake = false;
     };
 
+    agent-skills = {
+      url = "github:suicide/skills";
+      flake = false;
+    };
+
     # my nvf neovim
     neovim = {
       url = "github:suicide/nvim-nvf";

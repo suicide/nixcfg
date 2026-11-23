@@ -34,6 +34,7 @@
       lib,
       pkgs,
       config,
+      inputs,
       ...
     }: let
       cfg = config.__cfg.opencode;
@@ -170,6 +171,8 @@
             Use Nix for any missing tool: `nix run nixpkgs#tool` or add to flake.
           '';
         };
+
+        xdg.configFile."opencode/skills/long-running-work".source = "${inputs.agent-skills}/skills/long-running-work";
 
         # Keep sharing the package with neovim. The packaged opencode.nvim still
         # targets the V1 server API and needs a separate migration.

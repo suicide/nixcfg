@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "agent-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1795372424,
+        "narHash": "sha256-jOMsZMp2d3pDm2TIG6fYKPzUDL+7eZwqnctVdS5xD4Q=",
+        "owner": "suicide",
+        "repo": "skills",
+        "rev": "2d0fc124f862b56757af0bc7097c9f9ef4498078",
+        "type": "github"
+      },
+      "original": {
+        "owner": "suicide",
+        "repo": "skills",
+        "type": "github"
+      }
+    },
     "brew-src": {
       "flake": false,
       "locked": {
@@ -594,6 +610,7 @@
     },
     "root": {
       "inputs": {
+        "agent-skills": "agent-skills",
         "disko": "disko",
         "firefox-addons": "firefox-addons",
         "flake-parts": "flake-parts",
