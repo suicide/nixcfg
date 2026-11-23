@@ -20,12 +20,10 @@ Create and maintain documentation files including:
 - **SETUP.md** or **INSTALLATION.md** - Detailed installation and configuration steps
 
 ### Code Documentation
-Write clear inline documentation:
-- **Function/Method comments** - Purpose, parameters, return values, examples, edge cases
-- **Class documentation** - Responsibility, usage patterns, properties, methods overview
-- **Complex logic comments** - Explain *why*, not just *what*; reference related code sections
-- **Type hints and JSDoc/docstrings** - Use language-native documentation standards
-- **Deprecation notices** - Mark deprecated code with clear migration paths
+Document public contracts and non-obvious behavior when readers need context the
+code and types do not provide. Use language-native documentation conventions
+for that context, including migration guidance for deprecated APIs. Do not add
+boilerplate comments for every symbol or restate signatures and obvious behavior.
 
 ## Writing Standards
 
@@ -50,7 +48,6 @@ Write clear inline documentation:
 ### Maintenance
 - Keep documentation in sync with code changes
 - Update examples when APIs change
-- Flag sections needing updates with TODO comments
 - Version documentation alongside code releases
 
 ## Before You Write
