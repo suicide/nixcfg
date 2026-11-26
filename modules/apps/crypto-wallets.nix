@@ -8,6 +8,7 @@
               ".electrum"
               ".bitmonero"
               ".monero"
+              ".sparrow"
             ];
           };
         };
